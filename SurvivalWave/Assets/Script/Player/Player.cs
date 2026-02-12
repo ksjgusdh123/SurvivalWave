@@ -1,17 +1,15 @@
+using Unity.VisualScripting.InputSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class Player : MonoBehaviour
 {
-    PlayerAnimation anim;
     void Start()
     {
-        anim = GetComponent<PlayerAnimation>();
     }
 
     void Update()
     {
-        anim.UpdateSpeed(Time.deltaTime);
     }
-
-
 }

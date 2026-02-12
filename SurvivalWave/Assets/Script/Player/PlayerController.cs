@@ -49,39 +49,8 @@ public class PlayerController : MonoBehaviour
         bool isGrounded = characterController.isGrounded;
         bool isJump = inputHandler.isJump;
 
-        if (PlayerState.Landing != state)
-        {
-            move = new Vector3(inputHandler.moveInput.x, 0, inputHandler.moveInput.y);
-            if (Vector3.zero != move)
-            {
-                Quaternion targetRot = Quaternion.LookRotation(move);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
-                ChangeState(TransitionState.Move);
-            }
-            else
-            {
-                ChangeState(TransitionState.Stop);
-            }
-        }
-
-        if(isGrounded)
-        {
-            if(velocity.y < 0f)
-            {
-                velocity.y = -2f;
-            }
-
-            if(isJump)
-            {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-                inputHandler.ConsumeJump();
-                ChangeState(TransitionState.JumpPressed);
-            }
-            else if (!wasGrounded)
-            {
-                ChangeState(TransitionState.Landed);
-            }
-        }
+        HandleMove(ref move);
+        HandleJump(isGrounded, isJump);
 
         velocity.y += gravity * Time.deltaTime;
 
@@ -120,6 +89,53 @@ public class PlayerController : MonoBehaviour
             if (transitionDic.TryGetValue(transitionState, out var nextState))
             {
                 state = nextState;
+            }
+        }
+    }
+
+    void HandleMove(ref Vector3 move)
+    {
+        if (PlayerState.Landing != state)
+        {
+            move = new Vector3(inputHandler.moveInput.x, 0, inputHandler.moveInput.y);
+            if (Vector3.zero != move)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(move);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+                ChangeState(TransitionState.Move);
+            }
+            else
+            {
+                ChangeState(TransitionState.Stop);
+            }
+        }
+    }
+
+    void HandleJump(bool isGrounded, bool isJump)
+    {
+        if (isGrounded)
+        {
+            if (velocity.y < 0f)
+            {
+                velocity.y = -2f;
+            }
+
+            if (isJump && PlayerState.Landing != state && PlayerState.Jumping != state)
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                inputHandler.ConsumeJump();
+                ChangeState(TransitionState.JumpPressed);
+            }
+            else if (!wasGrounded)
+            {
+                ChangeState(TransitionState.Landed);
+            }
+        }
+        else
+        {
+            if (wasGrounded)
+            {
+                ChangeState(TransitionState.Falling);
             }
         }
     }

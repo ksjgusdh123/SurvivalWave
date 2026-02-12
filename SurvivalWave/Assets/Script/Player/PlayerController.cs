@@ -6,7 +6,8 @@ using UnityEngine.Windows;
 public class PlayerController : MonoBehaviour
 {
     public float currentSpeed { get; private set; }
-    public bool isJump { get; private set; }
+    public float yVelocity { get; private set; }
+    public bool wasGrounded { get; private set; }
 
     public float gravity = -9.8f;
     public float rotationSpeed = 10.0f;
@@ -17,7 +18,6 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
 
     Vector3 velocity;
-    bool wasGrounded;
 
     void Start()
     {
@@ -36,14 +36,15 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
         }
 
-        if(!wasGrounded && isGrounded)
+        if (isGrounded && velocity.y < 0f)
         {
-            inputHandler.isJump = false;
+            velocity.y = -2f;
         }
 
-        if(inputHandler.isJump && isGrounded)
+        if (inputHandler.isJump && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            inputHandler.ConsumeJump();
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -52,6 +53,6 @@ public class PlayerController : MonoBehaviour
 
         currentSpeed = move.magnitude * speed;
         wasGrounded = isGrounded;
-        isJump = inputHandler.isJump;
+        yVelocity = velocity.y;
     }
 }

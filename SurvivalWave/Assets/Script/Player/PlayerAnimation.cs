@@ -8,7 +8,8 @@ public class PlayerAnimation : MonoBehaviour
     PlayerController PlayerController;
 
     static readonly int moveSpeed = Animator.StringToHash("Speed");
-    static readonly int isJump = Animator.StringToHash("isJump");
+    static readonly int isGrounded = Animator.StringToHash("isGrounded");
+    static readonly int yVelocity = Animator.StringToHash("yVelocity");
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class PlayerAnimation : MonoBehaviour
     void Update()
     {
         animator.SetFloat(moveSpeed, PlayerController.currentSpeed);
-        animator.SetBool(isJump, PlayerController.isJump);
+        animator.SetFloat(yVelocity, PlayerController.yVelocity);
+        animator.SetBool(isGrounded, PlayerController.wasGrounded);
     }
 }

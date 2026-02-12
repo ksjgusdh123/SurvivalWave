@@ -14,6 +14,14 @@ public class PlayerInputHandler : MonoBehaviour
     void OnJump(InputValue value)
     {
         Debug.Log("Jump");
-        isJump = value.isPressed;
+        if(value.isPressed)
+        {
+            isJump = true;
+        }
+    }
+
+    public void ConsumeJump()
+    {
+        isJump = false;
     }
 }

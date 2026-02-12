@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     PlayerController PlayerController;
 
     static readonly int moveSpeed = Animator.StringToHash("Speed");
+    static readonly int isJump = Animator.StringToHash("isJump");
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void Update()
     {
-        animator.SetFloat(moveSpeed, PlayerController.CurrentSpeed);
+        animator.SetFloat(moveSpeed, PlayerController.currentSpeed);
+        animator.SetBool(isJump, PlayerController.isJump);
     }
 }

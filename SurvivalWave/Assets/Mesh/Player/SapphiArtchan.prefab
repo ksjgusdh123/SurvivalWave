@@ -4594,6 +4594,9 @@ GameObject:
   - component: {fileID: 7254078175902131438}
   - component: {fileID: 2797477649616375341}
   - component: {fileID: 9017765500435380911}
+  - component: {fileID: 1989587398353630603}
+  - component: {fileID: 4420517297379622492}
+  - component: {fileID: 6473133539543911540}
   m_Layer: 0
   m_Name: SapphiArtchan
   m_TagString: Untagged
@@ -4652,7 +4655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8a6148a5ce05e49b0e95b0a0d2dae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  speed: 300
 --- !u!114 &2797477649616375341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4695,6 +4697,57 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!143 &1989587398353630603
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172388}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.8
+  m_Radius: 0.38
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.88, z: 0}
+--- !u!114 &4420517297379622492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25705ef6c629104399a65a8e7169393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  rotationSpeed: 5
+  speed: 3
+--- !u!114 &6473133539543911540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4f7edef8531e6448fb7ede2f29ab1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
 --- !u!1 &172742
 GameObject:
   m_ObjectHideFlags: 0

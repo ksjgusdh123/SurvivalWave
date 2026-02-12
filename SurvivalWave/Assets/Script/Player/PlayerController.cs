@@ -5,12 +5,19 @@ using UnityEngine.Windows;
 
 public class PlayerController : MonoBehaviour
 {
-    public float CurrentSpeed { get; private set; }
+    public float currentSpeed { get; private set; }
+    public bool isJump { get; private set; }
 
+    public float gravity = -9.8f;
+    public float rotationSpeed = 10.0f;
     public float speed = 3.0f;
+    public float jumpHeight = 2f;
 
     PlayerInputHandler inputHandler;
     CharacterController characterController;
+
+    Vector3 velocity;
+    bool wasGrounded;
 
     void Start()
     {
@@ -20,9 +27,31 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector3 move = new Vector3(inputHandler.MoveInput.x, 0, inputHandler.MoveInput.y);
-        characterController.Move(move * speed * Time.deltaTime);
+        Vector3 move = new Vector3(inputHandler.moveInput.x, 0, inputHandler.moveInput.y);
+        bool isGrounded = characterController.isGrounded;
 
-        CurrentSpeed = move.magnitude * speed;
+        if(Vector3.zero != move)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(move);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+        }
+
+        if(!wasGrounded && isGrounded)
+        {
+            inputHandler.isJump = false;
+        }
+
+        if(inputHandler.isJump && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+        Vector3 finalMove = move * speed + velocity;
+        characterController.Move(finalMove * Time.deltaTime);
+
+        currentSpeed = move.magnitude * speed;
+        wasGrounded = isGrounded;
+        isJump = inputHandler.isJump;
     }
 }

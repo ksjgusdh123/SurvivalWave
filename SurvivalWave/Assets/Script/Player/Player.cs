@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting.InputSystem;
 using UnityEngine;
@@ -10,12 +11,21 @@ public class Player : MonoBehaviour
     public float maxHp { get; private set; } = 100f;
 
     PlayerController controller;
+    Renderer[] renderers;
+    WaitForSeconds blinkWait;
+    WaitForSeconds invincibleFinish;
+
+    [SerializeField] float blinkWaitTime = 0.3f; 
+    [SerializeField] float invincibleFinishTime = 1f; 
     bool isInvincible;
 
 
     void Start()
     {
         controller = GetComponent<PlayerController>();
+        renderers = GetComponentsInChildren<Renderer>();
+        blinkWait = new WaitForSeconds(blinkWaitTime);
+        invincibleFinish = new WaitForSeconds(invincibleFinishTime);
     }
 
     void Update()
@@ -38,5 +48,37 @@ public class Player : MonoBehaviour
         }
         isInvincible = true;    
         return true;
+    }
+
+    public void FinishDamaged()
+    {
+        StartCoroutine(Blink());
+        StartCoroutine(FinishInvincible());
+    }
+
+    IEnumerator FinishInvincible()
+    {
+        yield return invincibleFinish;
+
+        isInvincible = false;
+        SetVisible(true);
+    }
+
+    IEnumerator Blink()
+    {
+        while(isInvincible)
+        {
+            SetVisible(false);
+            yield return blinkWait;
+
+            SetVisible(true);
+            yield return blinkWait;
+        }   
+    }
+
+    void SetVisible(bool value)
+    {
+        foreach (var r in renderers)
+            r.enabled = value;
     }
 }

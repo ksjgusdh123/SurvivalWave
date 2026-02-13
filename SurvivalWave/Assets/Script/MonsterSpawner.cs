@@ -1,7 +1,5 @@
-using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.PlayerSettings;
 
 public class MonsterSpawner : MonoBehaviour
 {
@@ -24,6 +22,8 @@ public class MonsterSpawner : MonoBehaviour
         player = Player.playerTransform;
         spawnTimer = spawnInterval;
         difficultyTimer = difficultyInterval;
+
+        SpawnGroup();
     }
 
     void Update()
@@ -66,5 +66,67 @@ public class MonsterSpawner : MonoBehaviour
 
         float offset = monster.transform.position.y - col.bounds.min.y;
         monster.transform.position += Vector3.up * offset;
+    }
+
+    public void SpawnGroup()
+    {
+        if (null == monsterPrefab) return;
+
+        Vector3 centerPos;
+
+        if (!TryPickGroupCenterOnNavMesh(player.position, out centerPos)) return;
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (TryPickPointNearCenterOnNavMesh(centerPos, out Vector3 pos))
+            {
+                var m = Instantiate(monsterPrefab, pos, Quaternion.identity);
+
+                var col = m.GetComponent<Collider>();
+                if (col != null)
+                {
+                    float offset = m.transform.position.y - col.bounds.min.y;
+                    m.transform.position += Vector3.up * offset;
+                }
+            }
+        }
+    }
+
+    bool TryPickGroupCenterOnNavMesh(Vector3 playerPos, out Vector3 center)
+    {
+        Vector2 dir = Random.insideUnitCircle;
+        float dist = Random.Range(minSpawnRadius, maxSpawnRadius);
+        Vector3 guess = new Vector3(playerPos.x + dir.x * dist, playerPos.y, playerPos.z + dir.y * dist);
+
+        if (NavMesh.SamplePosition(guess, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+        {
+            center = hit.position;
+            return true;
+        }
+
+        center = default;
+        return false;
+    }
+
+    bool TryPickPointNearCenterOnNavMesh(Vector3 center, out Vector3 pos)
+    {
+        Vector2 radius = Random.insideUnitCircle * 4f;
+        Vector3 spawnPos = new Vector3(center.x + radius.x, center.y, center.z + radius.y);
+        int monsterLayerMask = LayerMask.GetMask("Monster");
+
+        for (int i = 0; i < 5; ++i)
+        {
+            if (NavMesh.SamplePosition(spawnPos, out NavMeshHit hit, 3f, NavMesh.AllAreas))
+            {
+                //if (!Physics.CheckSphere(hit.position, 1f, monsterLayerMask))
+                {
+                    pos = hit.position;
+                    return true;
+                }
+            }
+        }
+
+        pos = default;
+        return false;
     }
 }

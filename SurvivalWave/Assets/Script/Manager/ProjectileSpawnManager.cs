@@ -1,19 +1,30 @@
+using System.Collections.Generic;
 using UnityEngine;
+
+public enum SkillType
+{ 
+    RandomShot,
+    Homing,
+    Max
+}
+
 
 public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
 {
-    [SerializeField] GameObject randomProjectilePrefab;
-    [SerializeField] GameObject homingProjectilePrefab;
+    [SerializeField] List<GameObject> ProjectilePrefab = new List<GameObject>();
 
     protected override void Awake()
     {
-        randomProjectilePrefab = Resources.Load<GameObject>("Prefab/Projectile/Player/RandomProjectile");
-        homingProjectilePrefab = Resources.Load<GameObject>("Prefab/Projectile/Player/HomingProjectile");
+        int cnt = (int)SkillType.Max;
+        for (int i = 0; i < cnt; ++i)
+        {
+            ProjectilePrefab.Add(Resources.Load<GameObject>($"Prefab/Projectile/Player/{((SkillType)i).ToString()}"));
+        }
     }
 
     public void SpawnRandomShot(Vector3 spawnPos, Vector3 dir, float speed, float maxDist)
     {
-        GameObject go = Instantiate(randomProjectilePrefab, spawnPos, Quaternion.identity);
+        GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.RandomShot], spawnPos, Quaternion.identity);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
         pb.Init(new RandomMove(dir, maxDist, spawnPos), speed);
@@ -21,7 +32,7 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
 
     public void SpawnHoming(Vector3 spawnPos, Transform target, float speed)
     {
-        GameObject go = Instantiate(homingProjectilePrefab, spawnPos, Quaternion.identity);
+        GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.Homing], spawnPos, Quaternion.identity);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
         pb.Init(new HomingMove(target), speed);

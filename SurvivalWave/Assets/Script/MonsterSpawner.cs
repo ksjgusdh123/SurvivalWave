@@ -1,15 +1,20 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum MonsterType
+{
+
+}
+
 public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField] float maxSpawnRadius = 200f;
     [SerializeField] float minSpawnRadius = 50f;
-    [SerializeField] GameObject monsterPrefab;
+    [SerializeField] GameObject[] monsterPrefab;
 
     Transform player;
 
-    float spawnInterval = 1f;
+    [SerializeField] float spawnInterval = 1f;
     float difficultyInterval = 10f;
     [SerializeField] float minSpawnInterval = 0.3f;
 
@@ -22,8 +27,6 @@ public class MonsterSpawner : MonoBehaviour
         player = Player.playerTransform;
         spawnTimer = spawnInterval;
         difficultyTimer = difficultyInterval;
-
-        SpawnGroup();
     }
 
     void Update()
@@ -58,7 +61,7 @@ public class MonsterSpawner : MonoBehaviour
             spawnPos = navHit.position;
         }
 
-        GameObject monster = Instantiate(monsterPrefab, spawnPos, Quaternion.identity);
+        GameObject monster = Instantiate(monsterPrefab[0], spawnPos, Quaternion.identity);
         if (null == monster) return;
 
         Collider col = monster.GetComponent<Collider>();
@@ -80,7 +83,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             if (TryPickPointNearCenterOnNavMesh(centerPos, out Vector3 pos))
             {
-                var m = Instantiate(monsterPrefab, pos, Quaternion.identity);
+                var m = Instantiate(monsterPrefab[0], pos, Quaternion.identity);
 
                 var col = m.GetComponent<Collider>();
                 if (col != null)

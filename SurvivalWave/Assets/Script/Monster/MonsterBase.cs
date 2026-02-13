@@ -5,6 +5,9 @@ public class MonsterBase : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] float Damage = 10f;
+
+    Stat stat;
+
     NavMeshAgent agent;
 
     bool isCollision;
@@ -12,11 +15,17 @@ public class MonsterBase : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        stat = GetComponent<Stat>();
         player = Player.playerTransform;
     }
 
     void Update()
     {
+        if(stat.hp <= 0f)
+        {
+            Destroy(gameObject);
+        }
+
         agent.SetDestination(player.position);
     }
 
@@ -24,7 +33,7 @@ public class MonsterBase : MonoBehaviour
     {
         if (!other.CompareTag("Player") || isCollision) return;
 
-        Player player = other.GetComponent<Player>();
+        PlayerStat player = other.GetComponent<PlayerStat>();
         if (null == player || !player.TakeDamage(Damage)) return;
             
         

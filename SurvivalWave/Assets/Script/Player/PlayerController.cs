@@ -6,7 +6,9 @@ public enum PlayerState
     Run,
     Jumping,
     Falling,
-    Landing
+    Landing,
+    Damaged,
+    Die,
 }
 
 public enum TransitionState
@@ -15,7 +17,8 @@ public enum TransitionState
     Stop,
     JumpPressed,
     Falling,
-    Landed
+    Landed,
+    Damaged,
 }
 
 public class PlayerController : MonoBehaviour
@@ -70,16 +73,20 @@ public class PlayerController : MonoBehaviour
         stateTransitionDic[PlayerState.Idle][TransitionState.Move] = PlayerState.Run;
         stateTransitionDic[PlayerState.Idle][TransitionState.JumpPressed] = PlayerState.Jumping;
         stateTransitionDic[PlayerState.Idle][TransitionState.Falling] = PlayerState.Falling;
+        stateTransitionDic[PlayerState.Idle][TransitionState.Damaged] = PlayerState.Damaged;
 
         stateTransitionDic[PlayerState.Run][TransitionState.Falling] = PlayerState.Falling;
         stateTransitionDic[PlayerState.Run][TransitionState.JumpPressed] = PlayerState.Jumping;
         stateTransitionDic[PlayerState.Run][TransitionState.Stop] = PlayerState.Idle;
+        stateTransitionDic[PlayerState.Run][TransitionState.Damaged] = PlayerState.Damaged;
 
         stateTransitionDic[PlayerState.Jumping][TransitionState.Landed] = PlayerState.Landing;
 
         stateTransitionDic[PlayerState.Falling][TransitionState.Landed] = PlayerState.Landing;
 
         stateTransitionDic[PlayerState.Landing][TransitionState.Stop] = PlayerState.Idle;
+
+        stateTransitionDic[PlayerState.Damaged][TransitionState.Stop] = PlayerState.Idle;
     }
 
     void ChangeState(TransitionState transitionState)
@@ -95,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
     void HandleMove(ref Vector3 move)
     {
-        if (PlayerState.Landing != state)
+        if (PlayerState.Landing != state && PlayerState.Damaged != state)
         {
             move = new Vector3(inputHandler.moveInput.x, 0, inputHandler.moveInput.y);
             if (Vector3.zero != move)
@@ -120,7 +127,7 @@ public class PlayerController : MonoBehaviour
                 velocity.y = -2f;
             }
 
-            if (isJump && PlayerState.Landing != state && PlayerState.Jumping != state)
+            if (isJump && PlayerState.Landing != state && PlayerState.Jumping != state && PlayerState.Damaged != state)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 inputHandler.ConsumeJump();
@@ -140,7 +147,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Damaged()
+    {
+        ChangeState(TransitionState.Damaged);
+    }
+
     public void FinishLanded()
+    {
+        ChangeState(TransitionState.Stop);
+    }
+    public void FinishDamaged()
     {
         ChangeState(TransitionState.Stop);
     }

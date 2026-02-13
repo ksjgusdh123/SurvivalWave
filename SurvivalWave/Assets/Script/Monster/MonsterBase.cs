@@ -1,16 +1,33 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterBase : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] Transform player;
+    NavMeshAgent agent;
+
+    bool isCollision;
+
     void Start()
     {
-        
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        agent.SetDestination(player.position);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collision");
+        if (!other.CompareTag("Player") || isCollision) return;
+
+        Player player = other.GetComponent<Player>();
+        if (null == player || !player.TakeDamage(10f)) return;
+            
         
+        isCollision = true;
+        Destroy(gameObject);
     }
 }

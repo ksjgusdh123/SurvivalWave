@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class PlayerSkillBase : IPlayerSkill
 {
-    protected Transform owner;
+    protected Transform ownerFirePosition;
     protected float cooldown;
     float timer;
 
@@ -14,7 +14,10 @@ public abstract class PlayerSkillBase : IPlayerSkill
 
     public void OnEquip(GameObject ownerObj)
     {
-        owner = ownerObj.transform;
+        var player = ownerObj.GetComponent<Player>();
+        if (null == player) return;
+
+        ownerFirePosition = player.firePosition;
     }
 
     public void TickEvent(float deltaTime)

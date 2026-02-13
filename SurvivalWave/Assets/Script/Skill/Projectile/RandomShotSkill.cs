@@ -16,7 +16,7 @@ public class RandomShotSkill : PlayerSkillBase
 
     protected override bool TryFire()
     {
-        Vector3 pos = owner.position;
+        Vector3 pos = ownerFirePosition.position;
         Vector2 distance = Random.insideUnitCircle;
 
         Vector3 spawnPos = pos + new Vector3(distance.x, 0f, distance.y) * spawnRadius;

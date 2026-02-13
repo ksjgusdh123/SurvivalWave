@@ -15,10 +15,10 @@ public class HomingSkill : PlayerSkillBase
 
     protected override bool TryFire()
     {
-        Transform target = Utility.GetNearestMonster(owner.position, searchRadius);
+        Transform target = Utility.GetNearestMonster(ownerFirePosition.position, searchRadius);
         if (target == null) return false;
 
-        ProjectileSpawnManager.GetInstance().SpawnHoming(owner.position, target, projectileSpeed, 1f);
+        ProjectileSpawnManager.GetInstance().SpawnHoming(ownerFirePosition.position, target, projectileSpeed, 1f);
         return true;
     }
 

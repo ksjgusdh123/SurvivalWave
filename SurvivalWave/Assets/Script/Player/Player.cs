@@ -8,11 +8,13 @@ using UnityEngine.Windows;
 public class Player : MonoBehaviour
 {
     public static Transform playerTransform;
+    public Transform firePosition { get; private set; }
     PlayerSkillHandler skillHandler;
 
     private void Awake()
     {
         playerTransform = transform;
+        firePosition = transform.Find("FirePosition");
     }
     void Start()
     {

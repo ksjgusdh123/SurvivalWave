@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class MonsterBase : MonoBehaviour
 {
     [SerializeField] Transform player;
+    [SerializeField] float Damage = 10f;
     NavMeshAgent agent;
 
     bool isCollision;
@@ -11,6 +12,7 @@ public class MonsterBase : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        player = Player.playerTransform;
     }
 
     void Update()
@@ -18,13 +20,12 @@ public class MonsterBase : MonoBehaviour
         agent.SetDestination(player.position);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Collision");
         if (!other.CompareTag("Player") || isCollision) return;
 
         Player player = other.GetComponent<Player>();
-        if (null == player || !player.TakeDamage(10f)) return;
+        if (null == player || !player.TakeDamage(Damage)) return;
             
         
         isCollision = true;

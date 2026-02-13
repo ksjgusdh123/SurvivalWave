@@ -7,6 +7,7 @@ using UnityEngine.Windows;
 
 public class Player : MonoBehaviour
 {
+    public static Transform playerTransform;
     public float hp { get; private set; } = 100f;
     public float maxHp { get; private set; } = 100f;
 
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        playerTransform = transform;
         controller = GetComponent<PlayerController>();
         renderers = GetComponentsInChildren<Renderer>();
         blinkWait = new WaitForSeconds(blinkWaitTime);

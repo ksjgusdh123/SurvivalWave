@@ -645,7 +645,7 @@ PrefabInstance:
       addedObject: {fileID: 1634029993}
     - targetCorrespondingSourceObject: {fileID: 172388, guid: 7dc923b4c4812f147ba42a507e5507bd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1634029994}
+      addedObject: {fileID: 1634030002}
   m_SourcePrefab: {fileID: 100100000, guid: 7dc923b4c4812f147ba42a507e5507bd, type: 3}
 --- !u!4 &1620761241 stripped
 Transform:
@@ -671,7 +671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStat
   blinkWaitTime: 0.3
   invincibleFinishTime: 1
---- !u!114 &1634029994
+--- !u!114 &1634030002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -680,11 +680,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1634029985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b31c7630729954643b9243f6e593d352, type: 3}
+  m_Script: {fileID: 11500000, guid: de78a5a0f0046d24a89ef5ef530ce9fe, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  projectilePrefab: {fileID: 3413058469044989098, guid: 867dd149522571a4a8000512fb2dc43b, type: 3}
-  spawnInterval: 1
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSkillHandler
 --- !u!1 &1654865348 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2952867256385852646, guid: 80b4dc0dbcc71dd41acc297ce23e569e, type: 3}

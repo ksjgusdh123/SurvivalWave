@@ -8,6 +8,7 @@ using UnityEngine.Windows;
 public class Player : MonoBehaviour
 {
     public static Transform playerTransform;
+    PlayerSkillHandler skillHandler;
 
     private void Awake()
     {
@@ -15,6 +16,9 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        skillHandler = GetComponent<PlayerSkillHandler>();
+
+        skillHandler.AddSkill(new RandomShotSkill(1f, 2f, 10f, 40f));
     }
 
     void Update()

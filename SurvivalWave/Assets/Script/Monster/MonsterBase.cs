@@ -22,22 +22,33 @@ public class MonsterBase : MonoBehaviour
     {
         if(stat.hp <= 0f)
         {
-            Destroy(gameObject);
+            if (!agent.isStopped)
+            {
+                agent.isStopped = true;
+                agent.ResetPath();
+            }
             return;
         }
+
+        if (!agent || !agent.isActiveAndEnabled) return;
+        if (!agent.isOnNavMesh) return;
 
         agent.SetDestination(player.position);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.CompareTag("Player") || isCollision) return;
+        if (!other.CompareTag("Player") || isCollision || stat.hp <= 0) return;
 
         PlayerStat player = other.GetComponent<PlayerStat>();
         if (null == player || !player.TakeDamage(stat.attack)) return;
             
         
         isCollision = true;
+    }
+
+    void EndDieAnimation()
+    {
         Destroy(gameObject);
     }
 }

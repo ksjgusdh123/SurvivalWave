@@ -61,7 +61,7 @@ public class MonsterSpawner : MonoBehaviour
             spawnPos = navHit.position;
         }
 
-        GameObject monster = Instantiate(monsterPrefab[0], spawnPos, Quaternion.identity);
+        GameObject monster = Instantiate(monsterPrefab[Random.Range(0, 2)], spawnPos, Quaternion.identity);
         if (null == monster) return;
 
         Collider col = monster.GetComponent<Collider>();

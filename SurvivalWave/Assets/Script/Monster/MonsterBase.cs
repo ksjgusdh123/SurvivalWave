@@ -4,7 +4,6 @@ using UnityEngine.AI;
 public class MonsterBase : MonoBehaviour
 {
     [SerializeField] Transform player;
-    [SerializeField] float Damage = 10f;
 
     Stat stat;
 
@@ -24,6 +23,7 @@ public class MonsterBase : MonoBehaviour
         if(stat.hp <= 0f)
         {
             Destroy(gameObject);
+            return;
         }
 
         agent.SetDestination(player.position);
@@ -34,7 +34,7 @@ public class MonsterBase : MonoBehaviour
         if (!other.CompareTag("Player") || isCollision) return;
 
         PlayerStat player = other.GetComponent<PlayerStat>();
-        if (null == player || !player.TakeDamage(Damage)) return;
+        if (null == player || !player.TakeDamage(stat.attack)) return;
             
         
         isCollision = true;

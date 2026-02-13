@@ -13,6 +13,8 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
 {
     [SerializeField] List<GameObject> ProjectilePrefab = new List<GameObject>();
 
+    PlayerStat playerStat;
+
     protected override void Awake()
     {
         int cnt = (int)SkillType.Max;
@@ -22,19 +24,28 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         }
     }
 
-    public void SpawnRandomShot(Vector3 spawnPos, Vector3 dir, float speed, float maxDist)
+    public void RegisterPlayerStat(PlayerStat stat)
+    {
+        playerStat = stat;
+    }
+    public void SpawnRandomShot(Vector3 spawnPos, Vector3 dir, float speed, float maxDist, float dmgRatio)
     {
         GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.RandomShot], spawnPos, Quaternion.identity);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
-        pb.Init(new RandomMove(dir, maxDist, spawnPos), speed);
+        pb.Init(new RandomMove(dir, maxDist, spawnPos), speed, CalculateFinalDamage(dmgRatio));
     }
 
-    public void SpawnHoming(Vector3 spawnPos, Transform target, float speed)
+    public void SpawnHoming(Vector3 spawnPos, Transform target, float speed, float dmgRatio)
     {
         GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.Homing], spawnPos, Quaternion.identity);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
-        pb.Init(new HomingMove(target), speed);
+        pb.Init(new HomingMove(target), speed, CalculateFinalDamage(dmgRatio));
+    }
+
+    float CalculateFinalDamage(float ratio)
+    {
+        return ratio * playerStat.attack;
     }
 }

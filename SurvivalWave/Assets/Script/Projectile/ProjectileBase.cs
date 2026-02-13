@@ -3,12 +3,14 @@ using UnityEngine;
 public class ProjectileBase : MonoBehaviour
 {
     [SerializeField] public float speed { get; private set; } = 10f;
+    float finalDamag;
     protected IProjectileMove move;
 
-    public void Init(IProjectileMove type, float speed)
+    public void Init(IProjectileMove type, float speed, float dmg)
     {
         move = type;
         this.speed = speed;
+        finalDamag = dmg;
     }
 
     void Update()
@@ -19,5 +21,15 @@ public class ProjectileBase : MonoBehaviour
     public void DestroyProjectile()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (LayerMask.NameToLayer("Monster") != other.gameObject.layer) return;
+
+        Stat stat = other.GetComponent<Stat>();
+        if (null == stat || !stat.TakeDamage(finalDamag)) return;
+
+        DestroyProjectile();
     }
 }

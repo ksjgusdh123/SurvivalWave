@@ -18,7 +18,7 @@ public class HomingSkill : PlayerSkillBase
         Transform target = Utility.GetNearestMonster(owner.position, searchRadius);
         if (target == null) return false;
 
-        ProjectileSpawnManager.GetInstance().SpawnHoming(owner.position, target, projectileSpeed);
+        ProjectileSpawnManager.GetInstance().SpawnHoming(owner.position, target, projectileSpeed, 1f);
         return true;
     }
 

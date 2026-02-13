@@ -11,9 +11,14 @@ public class HomingMove : IProjectileMove
     }
     public void Move(ProjectileBase projectile)
     {
-        if (homingTarget == null) return;
+        if (homingTarget == null)
+        {
+            projectile.DestroyProjectile();
+            return;
+        }
 
         Vector3 dir = (homingTarget.position - projectile.transform.position).normalized;
         projectile.transform.position += dir * projectile.speed * Time.deltaTime;
     }
+
 }

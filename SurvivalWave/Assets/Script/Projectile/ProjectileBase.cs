@@ -14,4 +14,9 @@ public class ProjectileBase : MonoBehaviour
     {
         move?.Move(this);
     }
+
+    public void DestroyProjectile()
+    {
+        Destroy(gameObject);
+    }
 }

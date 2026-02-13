@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0f)
         {
-            SpawnHomingMoveProjectile();
+            SpawnRandomMoveProjectile();
             spawnTimer = spawnInterval;
         }
     }

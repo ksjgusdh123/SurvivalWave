@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0f)
         {
-            SpawnRandomMoveProjectile();
+            SpawnHomingMoveProjectile();
             spawnTimer = spawnInterval;
         }
     }
@@ -44,10 +44,36 @@ public class PlayerAttack : MonoBehaviour
             Vector3 direction = (spawnPos - playerPos).normalized;
             randomProj.InitRandomDirection(direction);
         }
-        //if (null == pb) return;
-        //RandomMove move = projectile.GetComponent<RandomMove>();
-        //if (null == move) return;
+    }
 
-        //move.InitRandomDirection(direction);
+    void SpawnHomingMoveProjectile()
+    {
+        int mask = LayerMask.GetMask("Monster");
+        Vector3 center = player.position;
+        Collider[] hits = Physics.OverlapSphere(center, 50f, mask);
+
+        Transform nearest = null;
+        float minDist = float.MaxValue;
+
+        foreach (var hit in hits)
+        {
+            float dist = (hit.transform.position - center).sqrMagnitude;
+
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = hit.transform;
+            }
+        }
+
+        if (null == nearest) return;
+
+        GameObject projectile = Instantiate(projectilePrefab, center, Quaternion.identity);
+        if (null == projectile) return;
+        ProjectileBase pb = projectile.GetComponent<ProjectileBase>();
+        if(pb is PlayerHomingProjectile homingProj)
+        {
+            homingProj.InitHomingTarget(nearest);
+        }
     }
 }

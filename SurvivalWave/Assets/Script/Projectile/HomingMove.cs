@@ -5,11 +5,10 @@ public class HomingMove : IProjectileMove
 {
     Transform homingTarget;
 
-    public void SetHomingTarget(Transform target)
+    public HomingMove(Transform target)
     {
         homingTarget = target;
     }
-
     public void Move(ProjectileBase projectile)
     {
         if (homingTarget == null) return;

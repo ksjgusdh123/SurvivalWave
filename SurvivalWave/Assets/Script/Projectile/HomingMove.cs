@@ -4,7 +4,7 @@ using static UnityEngine.GraphicsBuffer;
 public class HomingMove : IProjectileMove
 {
     Transform homingTarget;
-
+    float currentSpeed = 0f;
     public HomingMove(Transform target)
     {
         homingTarget = target;
@@ -16,9 +16,12 @@ public class HomingMove : IProjectileMove
             projectile.DestroyProjectile();
             return;
         }
+        currentSpeed += 3f * Time.deltaTime;
+        currentSpeed = Mathf.Min(currentSpeed, projectile.speed);
 
         Vector3 dir = (homingTarget.position - projectile.transform.position).normalized;
-        projectile.transform.position += dir * projectile.speed * Time.deltaTime;
+        projectile.transform.position += dir * currentSpeed * Time.deltaTime;
+        projectile.transform.Rotate(Vector3.forward * 360f * Time.deltaTime);
     }
 
 }

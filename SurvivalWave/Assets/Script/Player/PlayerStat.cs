@@ -14,6 +14,9 @@ public class PlayerStat : Stat
     bool isInvincible;
 
     float exp;
+    [SerializeField] float maxExp = 100;
+    int level = 1;
+    int maxLevel = 30;
 
 
     void Start()
@@ -84,6 +87,12 @@ public class PlayerStat : Stat
     public void GainExp(float amount)
     {
         exp += amount;
+        if(exp >= maxExp && maxLevel > level)
+        {
+            exp -= maxExp;
+            maxExp = ((level - 1) * 50)  + 100;
+            UIManager.GetInstance().Show(EUIType.LevelUp);
+        }
     }
 
 }

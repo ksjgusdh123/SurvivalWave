@@ -1,10 +1,13 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class LevelUpUI : UIBase
 {
+    Animator animator;
     [SerializeField] private SelectSkill[] options;
+
     LevelUpUI()
     {
         type = EUIType.LevelUp;
@@ -12,6 +15,7 @@ public class LevelUpUI : UIBase
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         for (int i = 0; i < options.Length; ++i)
         {
             options[i].ConnetEvent(OnPickSkill);
@@ -38,6 +42,7 @@ public class LevelUpUI : UIBase
         Time.timeScale = 0f;
         base.Show();
         ShowOptions();
+        animator.Play("OpenAnim", 0, 0f);
     }
 
     public override void Hide()

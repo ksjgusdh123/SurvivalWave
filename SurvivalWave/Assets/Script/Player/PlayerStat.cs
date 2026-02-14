@@ -90,7 +90,7 @@ public class PlayerStat : Stat
         if(exp >= maxExp && maxLevel > level)
         {
             exp -= maxExp;
-            maxExp = ((level - 1) * 50)  + 100;
+            maxExp = 1; // ((level - 1) * 50)  + 100;
             UIManager.GetInstance().Show(EUIType.LevelUp);
         }
     }

@@ -72,10 +72,10 @@ public class PlayerController : MonoBehaviour
 
         stateTransitionDic[PlayerState.Idle][TransitionState.Move] = PlayerState.Run;
         stateTransitionDic[PlayerState.Idle][TransitionState.JumpPressed] = PlayerState.Jumping;
-        stateTransitionDic[PlayerState.Idle][TransitionState.Falling] = PlayerState.Falling;
+        //stateTransitionDic[PlayerState.Idle][TransitionState.Falling] = PlayerState.Falling;
         stateTransitionDic[PlayerState.Idle][TransitionState.Damaged] = PlayerState.Damaged;
 
-        stateTransitionDic[PlayerState.Run][TransitionState.Falling] = PlayerState.Falling;
+        //stateTransitionDic[PlayerState.Run][TransitionState.Falling] = PlayerState.Falling;
         stateTransitionDic[PlayerState.Run][TransitionState.JumpPressed] = PlayerState.Jumping;
         stateTransitionDic[PlayerState.Run][TransitionState.Stop] = PlayerState.Idle;
         stateTransitionDic[PlayerState.Run][TransitionState.Damaged] = PlayerState.Damaged;

@@ -50,7 +50,34 @@ public class MonsterBase : MonoBehaviour
 
     void EndDieAnimation()
     {
-        GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/Item/Exp"), transform.position, Quaternion.identity);
+        Vector3 spawnPos = transform.position + new Vector3(0f, 1f, 0f);
+
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/Item/Exp"), spawnPos, Quaternion.identity);
+        Exp exp = go.GetComponent<Exp>();
+        Renderer renderer = go.GetComponent<Renderer>();
+
+        GetRandomExp(exp, renderer);
         Destroy(gameObject);
+    }
+
+    void GetRandomExp(Exp exp, Renderer renderer)
+    {
+        float rand = Random.Range(0f, 10f);
+
+        if (rand < 8f)
+        {
+            renderer.material.color = Color.green;
+            exp.amount = 1f;
+        }
+        else if (rand < 9.5f)
+        {
+            renderer.material.color = Color.blue;
+            exp.amount = 10f;
+        }
+        else
+        {
+            renderer.material.color = Color.red;
+            exp.amount = 30f;
+        }
     }
 }

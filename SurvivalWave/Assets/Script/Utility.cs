@@ -15,6 +15,8 @@ public static class Utility
 
             if (dist < minDist)
             {
+                if (hit.gameObject.GetComponent<Stat>().hp <= 0) continue;
+
                 minDist = dist;
                 nearest = hit.transform;
             }

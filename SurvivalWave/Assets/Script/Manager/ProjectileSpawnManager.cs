@@ -30,7 +30,9 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
     }
     public void SpawnRandomShot(Vector3 spawnPos, Vector3 dir, float speed, float maxDist, float dmgRatio)
     {
-        GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.RandomShot], spawnPos, Quaternion.identity);
+        Quaternion rot = Quaternion.LookRotation(dir);
+
+        GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.RandomShot], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
         pb.Init(new RandomMove(dir, maxDist, spawnPos), speed, CalculateFinalDamage(dmgRatio));
@@ -38,7 +40,12 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
 
     public void SpawnHoming(Vector3 spawnPos, Transform target, float speed, float dmgRatio)
     {
-        GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.Homing], spawnPos, Quaternion.identity);
+        if (target == null) return;
+
+        Vector3 dir = (target.position - spawnPos).normalized;
+        Quaternion rot = Quaternion.LookRotation(dir);
+
+        GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.Homing], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
         pb.Init(new HomingMove(target), speed, CalculateFinalDamage(dmgRatio));

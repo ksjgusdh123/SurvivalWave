@@ -7,7 +7,7 @@ public class HomingSkill : PlayerSkillBase
     float projectileSpeed;
 
     public HomingSkill(float cooldown, float searchRadius, float projectileSpeed)
-        : base(cooldown)
+        : base((int)ESkillType.Homing, cooldown)
     {
         this.searchRadius = searchRadius;
         this.projectileSpeed = projectileSpeed;
@@ -18,7 +18,7 @@ public class HomingSkill : PlayerSkillBase
         Transform target = Utility.GetNearestMonster(ownerFirePosition.position, searchRadius);
         if (target == null) return false;
 
-        ProjectileSpawnManager.GetInstance().SpawnHoming(ownerFirePosition.position, target, projectileSpeed, 1f);
+        ProjectileSpawnManager.GetInstance().SpawnHoming(ownerFirePosition.position, target, projectileSpeed, damageRatio);
         return true;
     }
 

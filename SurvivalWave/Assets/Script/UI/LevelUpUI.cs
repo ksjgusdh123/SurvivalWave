@@ -28,6 +28,8 @@ public class LevelUpUI : UIBase
     }
     void OnPickSkill(int skillId)
     {
+        GameManager.GetInstance().PickLevelUpUI(skillId);
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
         UIManager.GetInstance().Show(EUIType.Main);
     }
 

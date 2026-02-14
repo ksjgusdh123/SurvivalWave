@@ -7,7 +7,7 @@ public class RandomShotSkill : PlayerSkillBase
     float maxDist;
 
     public RandomShotSkill(float cooldown, float sr, float speed, float md)
-        : base(cooldown)
+        : base((int)ESkillType.RandomShot ,cooldown)
     {
         spawnRadius = sr;
         projectileSpeed = speed;

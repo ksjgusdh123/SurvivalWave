@@ -20,4 +20,29 @@ public class PlayerSkillHandler : MonoBehaviour
             skills[i].TickEvent(deltaTime);
         }
     }
+
+    public void LevelUp(int skillId)
+    {
+        foreach (var skill in skills)
+        {
+            if(skillId == skill.skillId)
+            {
+                skill.LevelUp();
+                return;
+            }
+        }
+
+        switch ((ESkillType)skillId)
+        {
+            case ESkillType.RandomShot:
+                AddSkill(new RandomShotSkill(1f, 2f, 10f, 40f));
+                break;
+            case ESkillType.Homing:
+                AddSkill(new HomingSkill(1f, 20f, 10f));
+                break;
+            default:
+                Debug.Log("Not Yet");
+                break;
+        }
+    }
 }

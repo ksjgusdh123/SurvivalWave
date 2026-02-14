@@ -2,6 +2,12 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ESkillType
+{
+    RandomShot,
+    Homing
+}
+
 public class SkillDataManager : Singleton<SkillDataManager>
 {
     List<SkillData> datas = new List<SkillData>();
@@ -50,5 +56,10 @@ public class SkillDataManager : Singleton<SkillDataManager>
         }
 
         return result;
+    }
+
+    public SkillData GetSkillData(ESkillType type)
+    {
+        return datas[(int)type];
     }
 }

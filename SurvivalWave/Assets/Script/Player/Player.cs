@@ -29,4 +29,12 @@ public class Player : MonoBehaviour
     void Update()
     {
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<IPickupable>(out IPickupable pickupable))
+        {
+            pickupable.OnGain(gameObject);
+        }
+    }
 }

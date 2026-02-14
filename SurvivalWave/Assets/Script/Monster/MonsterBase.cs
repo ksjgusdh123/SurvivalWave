@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class MonsterBase : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class MonsterBase : MonoBehaviour
 
     void EndDieAnimation()
     {
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/Item/Exp"), transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

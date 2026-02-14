@@ -13,6 +13,9 @@ public class PlayerStat : Stat
     [SerializeField] float invincibleFinishTime = 1f;
     bool isInvincible;
 
+    float exp;
+
+
     void Start()
     {
         controller = GetComponent<PlayerController>();
@@ -76,6 +79,11 @@ public class PlayerStat : Stat
         {
             r.enabled = value;
         }
+    }
+
+    public void GainExp(float amount)
+    {
+        exp += amount;
     }
 
 }

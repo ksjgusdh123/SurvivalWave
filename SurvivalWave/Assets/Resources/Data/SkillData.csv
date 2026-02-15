@@ -1,6 +1,6 @@
-skillId,skillName,description,launchTime,damageRatio,decreaseLaunchTime,increaseDamageRatio
-0,random,increase _%\nincrease2 _%,1,1,0.2,0.5
-1,homing,increase _%\nincrease2 _%,1,1,0.2,0.5
-2,boomerang,increase _%\nincrease2 _%,1,1,0.2,0.5
-3,strength,increase _%,0,0,0,0.2
-4,4,increase _%\nincrease2 _%,1,1,0.2,0.5
+﻿skillId,skillName,description,launchTime,damageRatio,decreaseLaunchTime,increaseDamageRatio
+0,random,랜덤한 방향으로 총알을 발사한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5
+1,homing,적을 추적하는 미사일을 발사한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5
+2,boomerang,부메랑을 투척한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5
+3,strength,공격력이 _%증가,0,0,0,0.2
+4,4,\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5

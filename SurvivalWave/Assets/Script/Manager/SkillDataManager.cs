@@ -35,7 +35,7 @@ public class SkillDataManager : Singleton<SkillDataManager>
 
             skill.skillId = int.Parse(values[0]);
             skill.skillName = values[1];
-            skill.description = values[2];
+            skill.description = values[2];  
             skill.launchInterval = float.Parse(values[3]);
             skill.damageRatio = float.Parse(values[4]);
             skill.decreaseLaunchInterval = float.Parse(values[5]);

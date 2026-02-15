@@ -25,7 +25,7 @@ public class MonsterBase : MonoBehaviour
     {
         if(stat.hp <= 0f)
         {
-            if (!agent.isStopped)
+            if (!agent.isStopped)   
             {
                 agent.isStopped = true;
                 agent.ResetPath();

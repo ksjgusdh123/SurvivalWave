@@ -9,6 +9,7 @@ public enum PlayerState
     Landing,
     Damaged,
     Die,
+    Air
 }
 
 public enum TransitionState
@@ -37,11 +38,11 @@ public class PlayerController : MonoBehaviour
 
     Vector3 velocity;
 
-    Dictionary<PlayerState, Dictionary<TransitionState ,PlayerState>> stateTransitionDic = new Dictionary<PlayerState, Dictionary<TransitionState, PlayerState>>();
+    Dictionary<PlayerState, Dictionary<TransitionState, PlayerState>> stateTransitionDic = new Dictionary<PlayerState, Dictionary<TransitionState, PlayerState>>();
 
     void Start()
     {
-        inputHandler = GetComponent<PlayerInputHandler>();        
+        inputHandler = GetComponent<PlayerInputHandler>();
         characterController = GetComponent<CharacterController>();
         InitStateTransitionDic();
     }
@@ -55,12 +56,17 @@ public class PlayerController : MonoBehaviour
         HandleMove(ref move);
         HandleJump(isGrounded, isJump);
 
-        velocity.y += gravity * Time.deltaTime;
+        if (PlayerState.Falling != state)
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
 
         Vector3 finalMove = move * speed + velocity;
         characterController.Move(finalMove * Time.deltaTime);
 
         wasGrounded = isGrounded;
+
+        if (isJump) inputHandler.ConsumeJump();
     }
 
     void InitStateTransitionDic()
@@ -81,6 +87,7 @@ public class PlayerController : MonoBehaviour
         stateTransitionDic[PlayerState.Run][TransitionState.Damaged] = PlayerState.Damaged;
 
         stateTransitionDic[PlayerState.Jumping][TransitionState.Landed] = PlayerState.Landing;
+        stateTransitionDic[PlayerState.Jumping][TransitionState.Falling] = PlayerState.Falling;
 
         stateTransitionDic[PlayerState.Falling][TransitionState.Landed] = PlayerState.Landing;
 
@@ -140,10 +147,12 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (wasGrounded)
+            if (isJump && PlayerState.Falling == state)
             {
-                ChangeState(TransitionState.Falling);
+                velocity.y = -2f;
+                inputHandler.ConsumeJump();
             }
+            //ChangeState(TransitionState.Falling);
         }
     }
 
@@ -159,5 +168,10 @@ public class PlayerController : MonoBehaviour
     public void FinishDamaged()
     {
         ChangeState(TransitionState.Stop);
+    }
+    public void EndReadyAir()
+    {
+        ChangeState(TransitionState.Falling);
+        velocity.y = 0f;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class BoomerangMove : IProjectileMove
 {
     float maxDist = 6f;
-    float returnRadius = 1.6f;
+    float returnRadius = 0.6f;
 
     Vector3 startPos;
     Vector3 dir;
@@ -14,10 +14,11 @@ public class BoomerangMove : IProjectileMove
     {
         dir.y = 0f;
         dir.Normalize();
-        this.maxDist = maxDist;
+        this.maxDist = maxDist * maxDist;
         this.dir = dir;
         owner = Player.playerTransform;
         startPos = owner.position;
+        startPos.y = 1f;
     }
 
     public void Move(ProjectileBase projectile)
@@ -28,7 +29,12 @@ public class BoomerangMove : IProjectileMove
         {
             projectile.transform.position += dir * projectile.speed * Time.deltaTime;
 
-            if (Vector3.Distance(startPos, projectile.transform.position) >= maxDist)
+            Vector2 a = new Vector2(startPos.x, startPos.z);
+            Vector2 b = new Vector2(projectile.transform.position.x, projectile.transform.position.z);
+
+            float finalDist = (a - b).sqrMagnitude;
+
+            if (finalDist >= maxDist)
                 returning = true;
         }
         else
@@ -38,7 +44,12 @@ public class BoomerangMove : IProjectileMove
             toOwner.Normalize();
             projectile.transform.position += toOwner * projectile.speed * Time.deltaTime;
 
-            if (Vector3.Distance(owner.position, projectile.transform.position) <= returnRadius)
+            Vector2 a = new Vector2(owner.position.x, owner.position.z);
+            Vector2 b = new Vector2(projectile.transform.position.x, projectile.transform.position.z);
+
+            float finalDist = (a - b).sqrMagnitude;
+
+            if (finalDist <= returnRadius)
             {
                 projectile.isPenetration = false;
                 projectile.DestroyProjectile();

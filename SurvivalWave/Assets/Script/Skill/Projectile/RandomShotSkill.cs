@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RandomShotSkill : PlayerSkillBase
+public class RandomShotSkill : PlayerProjectileSkillBase
 {
     float spawnRadius;
     float projectileSpeed;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 
-public class HomingSkill : PlayerSkillBase
+public class HomingSkill : PlayerProjectileSkillBase
 {
     float searchRadius;
     float projectileSpeed;

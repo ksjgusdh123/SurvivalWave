@@ -1,33 +1,16 @@
 using UnityEngine;
 
-public class StrengthSkill : PlayerSkillBase
+public class StrengthSkill : PlayerAbilitySkillBase
 {
     float abilityRatio = 1f;
     public StrengthSkill()
-       : base((int)SkillItemType.Strength, 0f)
+       : base((int)SkillItemType.Strength)
     {
     }
-
-    public override void OnEquip(GameObject ownerObj)
-    {
-        ApplyAbility();
-    }
-
-    protected override bool TryFire()
-    {
-        return true;
-    }
-
-    public override void LevelUp()
+    public override void UpgradeStat()
     {
         var data = SkillDataManager.GetInstance().GetSkillData((SkillItemType)skillId);
         abilityRatio = ++level * data.increaseDamageRatio + 1f;
-        ApplyAbility();
-    }
-
-    public virtual void ApplyAbility()
-    {
-        // GameManager
         GameManager.GetInstance().UpgradeAbility(StatType.Attack, abilityRatio);
     }
 }

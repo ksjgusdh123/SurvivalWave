@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BoomerangSkill : PlayerSkillBase
+public class BoomerangSkill : PlayerProjectileSkillBase
 {
     float spawnRadius;
     float projectileSpeed;

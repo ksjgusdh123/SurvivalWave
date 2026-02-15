@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ESkillType
+public enum SkillItemType
 {
     RandomShot,
     Homing,
@@ -59,7 +59,7 @@ public class SkillDataManager : Singleton<SkillDataManager>
         return result;
     }
 
-    public SkillData GetSkillData(ESkillType type)
+    public SkillData GetSkillData(SkillItemType type)
     {
         return datas[(int)type];
     }

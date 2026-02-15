@@ -32,12 +32,12 @@ public class PlayerSkillHandler : MonoBehaviour
             }
         }
 
-        switch ((ESkillType)skillId)
+        switch ((SkillItemType)skillId)
         {
-            case ESkillType.RandomShot:
+            case SkillItemType.RandomShot:
                 AddSkill(new RandomShotSkill(1f, 2f, 10f, 40f));
                 break;
-            case ESkillType.Homing:
+            case SkillItemType.Homing:
                 AddSkill(new HomingSkill(1f, 20f, 10f));
                 break;
             default:

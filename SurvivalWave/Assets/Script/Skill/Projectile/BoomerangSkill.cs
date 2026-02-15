@@ -7,7 +7,7 @@ public class BoomerangSkill : PlayerSkillBase
     float maxDist;
 
     public BoomerangSkill(float cooldown, float sr, float speed, float md)
-    : base((int)ESkillType.Boomerang, cooldown)
+    : base((int)SkillItemType.Boomerang, cooldown)
     {
         spawnRadius = sr;
         projectileSpeed = speed;

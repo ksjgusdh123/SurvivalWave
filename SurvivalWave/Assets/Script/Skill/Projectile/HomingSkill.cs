@@ -7,7 +7,7 @@ public class HomingSkill : PlayerSkillBase
     float projectileSpeed;
 
     public HomingSkill(float cooldown, float searchRadius, float projectileSpeed)
-        : base((int)ESkillType.Homing, cooldown)
+        : base((int)SkillItemType.Homing, cooldown)
     {
         this.searchRadius = searchRadius;
         this.projectileSpeed = projectileSpeed;

@@ -3,7 +3,7 @@ using UnityEngine;
 public class BoomerangMove : IProjectileMove
 {
     float maxDist = 6f;
-    float returnRadius = 0.6f;
+    float returnRadius = 1.6f;
 
     Vector3 startPos;
     Vector3 dir;
@@ -12,6 +12,8 @@ public class BoomerangMove : IProjectileMove
 
     public BoomerangMove(Vector3 dir, float maxDist)
     {
+        dir.y = 0f;
+        dir.Normalize();
         this.maxDist = maxDist;
         this.dir = dir;
         owner = Player.playerTransform;
@@ -32,6 +34,8 @@ public class BoomerangMove : IProjectileMove
         else
         {
             Vector3 toOwner = (owner.position - projectile.transform.position).normalized;
+            toOwner.y = 0f;
+            toOwner.Normalize();
             projectile.transform.position += toOwner * projectile.speed * Time.deltaTime;
 
             if (Vector3.Distance(owner.position, projectile.transform.position) <= returnRadius)

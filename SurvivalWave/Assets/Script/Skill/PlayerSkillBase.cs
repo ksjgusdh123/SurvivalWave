@@ -46,7 +46,7 @@ public abstract class PlayerSkillBase : IPlayerSkill
     public virtual void LevelUp() { ++level; UpgradeStat(); }
     public virtual void UpgradeStat()
     {
-        var data = SkillDataManager.GetInstance().GetSkillData((ESkillType)skillId);
+        var data = SkillDataManager.GetInstance().GetSkillData((SkillItemType)skillId);
 
         damageRatio = data.damageRatio + (data.increaseDamageRatio * (level - 1));
         cooldown = data.launchInterval - (data.decreaseLaunchInterval * (level - 1));

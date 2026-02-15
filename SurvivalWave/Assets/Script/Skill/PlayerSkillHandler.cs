@@ -51,4 +51,16 @@ public class PlayerSkillHandler : MonoBehaviour
                 break;
         }
     }
+
+    public int GetSkillLevel(int skillId)
+    {
+        foreach (var skill in skills)
+        {
+            if(skillId == skill.skillId)
+            {
+                return skill.level;
+            }
+        }
+        return -1;
+    }
 }

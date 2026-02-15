@@ -42,7 +42,6 @@ public class PlayerProjectileSkillBase : PlayerSkillBase
         return true;
     }
 
-    public override void LevelUp() { ++level; UpgradeStat(); }
     public override void UpgradeStat()
     {
         var data = SkillDataManager.GetInstance().GetSkillData((SkillItemType)skillId);

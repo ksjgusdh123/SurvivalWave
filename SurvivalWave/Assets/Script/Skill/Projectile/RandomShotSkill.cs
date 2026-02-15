@@ -25,9 +25,4 @@ public class RandomShotSkill : PlayerProjectileSkillBase
         ProjectileSpawnManager.GetInstance().SpawnRandomShot(spawnPos, dir, projectileSpeed, maxDist, 1f);
         return true;
     }
-
-    public override void LevelUp()
-    {
-        base.LevelUp();
-    }
 }

@@ -10,7 +10,7 @@ public class StrengthSkill : PlayerAbilitySkillBase
     public override void UpgradeStat()
     {
         var data = SkillDataManager.GetInstance().GetSkillData((SkillItemType)skillId);
-        abilityRatio = ++level * data.increaseDamageRatio + 1f;
+        abilityRatio = level * data.increaseDamageRatio + 1f;
         GameManager.GetInstance().UpgradeAbility(StatType.Attack, abilityRatio);
     }
 }

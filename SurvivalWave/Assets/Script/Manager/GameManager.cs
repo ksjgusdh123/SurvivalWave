@@ -39,4 +39,9 @@ public class GameManager : Singleton<GameManager>
             break;
         }
     }
+
+    public int GetSkillLevel(int skillId)
+    {
+        return skillHandler.GetSkillLevel(skillId);
+    }
 }

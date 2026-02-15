@@ -1,3 +1,5 @@
+using System.Collections;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.Rendering.DebugUI.Table;
@@ -5,9 +7,8 @@ using static UnityEngine.Rendering.DebugUI.Table;
 public class MonsterBase : MonoBehaviour
 {
     [SerializeField] Transform player;
-
     Stat stat;
-
+    MonsterDamaged damagedEventComp;
     NavMeshAgent agent;
 
     bool isCollision;
@@ -17,6 +18,7 @@ public class MonsterBase : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         stat = GetComponent<Stat>();
         player = Player.playerTransform;
+        damagedEventComp = GetComponent<MonsterDamaged>();
     }
 
     void Update()
@@ -48,6 +50,10 @@ public class MonsterBase : MonoBehaviour
         isCollision = true;
     }
 
+    public void DamagedEvent()
+    {
+        StartCoroutine(damagedEventComp.ChangeColor());
+    }
     void EndDieAnimation()
     {
         Vector3 spawnPos = transform.position + new Vector3(0f, 1f, 0f);

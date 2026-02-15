@@ -527,6 +527,7 @@ GameObject:
   - component: {fileID: 8831739189174155540}
   - component: {fileID: 7096432322572972370}
   - component: {fileID: 7078920239800031873}
+  - component: {fileID: 9124404901816153701}
   m_Layer: 7
   m_Name: TurtleShellPBR
   m_TagString: Monster
@@ -682,6 +683,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9124404901816153701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524411113276028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27b11fe172f893448e4302718dbd84e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterDamaged
 --- !u!1 &1532652994627396
 GameObject:
   m_ObjectHideFlags: 0

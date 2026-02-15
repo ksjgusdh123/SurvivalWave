@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: -3927818794647944865}
   - component: {fileID: 6684505055853320006}
   - component: {fileID: 5141132479939541813}
+  - component: {fileID: 6653754020980946525}
   m_Layer: 7
   m_Name: SlimePBR
   m_TagString: Monster
@@ -591,3 +592,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f01b989a041ac04bb7ed1a5f5506547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAnimation
+--- !u!114 &6653754020980946525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931298151966786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27b11fe172f893448e4302718dbd84e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterDamaged

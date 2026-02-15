@@ -31,6 +31,7 @@ public class ProjectileBase : MonoBehaviour
 
         Stat stat = other.GetComponent<Stat>();
         if (null == stat || !stat.TakeDamage(finalDamag)) return;
+        other.GetComponent<MonsterBase>().DamagedEvent();
 
         DestroyProjectile();
     }

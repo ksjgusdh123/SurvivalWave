@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
 public class PlayerStat : Stat
 {
+    public Action ChangeHp;
+
     PlayerController controller;
     Renderer[] renderers;
     WaitForSeconds blinkWait;
@@ -46,6 +49,7 @@ public class PlayerStat : Stat
         {
             controller.Damaged();
         }
+        ChangeHp?.Invoke();
         isInvincible = true;
         return true;
     }

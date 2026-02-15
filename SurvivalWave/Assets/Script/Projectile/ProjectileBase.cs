@@ -6,6 +6,8 @@ public class ProjectileBase : MonoBehaviour
     float finalDamag;
     protected IProjectileMove move;
 
+    public bool isPenetration { get; set; }
+
     public void Init(IProjectileMove type, float speed, float dmg)
     {
         move = type;
@@ -20,7 +22,7 @@ public class ProjectileBase : MonoBehaviour
 
     public void DestroyProjectile()
     {
-        Destroy(gameObject);
+        if(!isPenetration) Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

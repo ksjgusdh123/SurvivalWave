@@ -5,6 +5,7 @@ public enum SkillType
 { 
     RandomShot,
     Homing,
+    Boomerang,
     Max
 }
 
@@ -49,6 +50,17 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
         pb.Init(new HomingMove(target), speed, CalculateFinalDamage(dmgRatio));
+    }
+
+    public void SpawnBoomerang(Vector3 spawnPos, Vector3 dir, float speed, float maxDist, float dmgRatio)
+    {
+        Quaternion rot = Quaternion.LookRotation(dir);
+
+        GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.Boomerang], spawnPos, rot);
+        ProjectileBase pb = go.GetComponent<ProjectileBase>();
+        if (null == pb) return;
+        pb.Init(new BoomerangMove(dir, maxDist), speed, CalculateFinalDamage(dmgRatio));
+        pb.isPenetration = true;
     }
 
     float CalculateFinalDamage(float ratio)

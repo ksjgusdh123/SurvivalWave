@@ -5,7 +5,8 @@ using UnityEngine;
 public enum ESkillType
 {
     RandomShot,
-    Homing
+    Homing,
+    Boomerang,
 }
 
 public class SkillDataManager : Singleton<SkillDataManager>

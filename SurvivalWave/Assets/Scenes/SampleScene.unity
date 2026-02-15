@@ -901,7 +901,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level UP!!
+  m_text: "\uB808\uBCA8\uC5C5!!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2271,9 +2271,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1258383662443648405, guid: 82f5c86e6f9370040a9b06443dd09284, type: 3}
+      propertyPath: m_text
+      value: "\uC548\uB155\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 7058954842652415805, guid: 82f5c86e6f9370040a9b06443dd09284, type: 3}
       propertyPath: m_Name
       value: SelectSkillUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727692273434843101, guid: 82f5c86e6f9370040a9b06443dd09284, type: 3}
+      propertyPath: m_text
+      value: "\uC548\uB155\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

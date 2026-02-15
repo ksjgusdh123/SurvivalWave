@@ -3,6 +3,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
+public enum StatType
+{
+    Attack,
+}
+
 public class PlayerStat : Stat
 {
     public Action ChangeHp;

@@ -7,6 +7,8 @@ public enum SkillItemType
     RandomShot,
     Homing,
     Boomerang,
+    // ´É·ÂÄ¡
+    Strength,   
 }
 
 public class SkillDataManager : Singleton<SkillDataManager>

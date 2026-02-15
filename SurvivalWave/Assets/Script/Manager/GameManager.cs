@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    PlayerStat playerStat;
     PlayerSkillHandler skillHandler;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void InitBeforeScene()
     {
-        SkillDataManager.GetInstance().LoadData();  
+        SkillDataManager.GetInstance().LoadData();
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -19,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         skillHandler = FindFirstObjectByType<PlayerSkillHandler>();
+        playerStat = FindFirstObjectByType<PlayerStat>();
     }
 
     public void PickLevelUpUI(int skillId)
@@ -26,4 +28,15 @@ public class GameManager : Singleton<GameManager>
         skillHandler.LevelUp(skillId);
     }
 
+    public void UpgradeAbility(StatType type, float amount)
+    {
+        switch (type)
+        {
+            case StatType.Attack:
+            {
+                playerStat.attack = amount * 10f;   
+            }
+            break;
+        }
+    }
 }

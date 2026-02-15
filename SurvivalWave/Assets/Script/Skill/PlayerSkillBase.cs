@@ -19,7 +19,7 @@ public abstract class PlayerSkillBase : IPlayerSkill
         timer = 0f;
     }
 
-    public void OnEquip(GameObject ownerObj)
+    public virtual void OnEquip(GameObject ownerObj)
     {
         var player = ownerObj.GetComponent<Player>();
         if (null == player) return;

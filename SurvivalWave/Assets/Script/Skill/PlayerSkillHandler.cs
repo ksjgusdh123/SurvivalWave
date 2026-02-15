@@ -40,6 +40,12 @@ public class PlayerSkillHandler : MonoBehaviour
             case SkillItemType.Homing:
                 AddSkill(new HomingSkill(1f, 20f, 10f));
                 break;
+            case SkillItemType.Boomerang:
+                AddSkill(new BoomerangSkill(1f, 2f, 10f, 40f));
+                break;
+            case SkillItemType.Strength:
+                AddSkill(new StrengthSkill());
+                break;
             default:
                 Debug.Log("Not Yet");
                 break;

@@ -35,8 +35,23 @@ public class SelectSkill : MonoBehaviour
             skillName.text = skill.skillName + skillLevel.ToString();
         }
 
+        string[] parts = skill.description.Split('_');
+        string[] separators = { (skill.increaseDamageRatio * (skillLevel + 1) * 100).ToString(),
+            (skill.decreaseLaunchInterval * (skillLevel + 1) * 100).ToString() };
+
+        string result = parts[0];
+
+        for (int i = 1; i < parts.Length; i++)
+        {
+            if (i - 1 < separators.Length)
+            {
+                result += separators[i - 1];
+            }
+            result += parts[i];
+        }
+
         string str = skill.description;
-        string result = str.Replace("_", (skill.increaseDamageRatio * (skillLevel + 1) * 100).ToString());
+        //string result = str.Replace("_", (skill.increaseDamageRatio * (skillLevel + 1) * 100).ToString());
         skillDescription.text = result; 
         //if (skill.icon != null) skillImage.sprite = skill.icon; 
     }

@@ -17,8 +17,9 @@ public class MonsterSpawner : MonoBehaviour
     Transform player;
 
     [SerializeField] float spawnInterval = 1f;
+    [SerializeField] float decreaseSpwanInterval = 0.05f;
     float beforeInterval;
-    float difficultyInterval = 10f;
+    float difficultyInterval = 30f;
     [SerializeField] float minSpawnInterval = 0.3f;
 
     bool isFocusSpawn;
@@ -42,33 +43,40 @@ public class MonsterSpawner : MonoBehaviour
         difficultyTimer -= Time.deltaTime;
         if (spawnTimer <= 0f)
         {
-            if (isFocusSpawn) RandomSpawn();
-            else Spawn();
+            int idx = Random.Range(0, 2);
+            if (isFocusSpawn)
+            {
+                RandomSpawn(idx);
+            }
+            else
+            {
+                Spawn(monsterPrefab[idx]);
+            }
             spawnTimer = spawnInterval;
         }
 
         if (difficultyTimer <= 0f)
         {
-            spawnInterval = Mathf.Max(minSpawnInterval, spawnInterval - 0.2f);
+            if(isFocusSpawn) beforeInterval = Mathf.Max(minSpawnInterval, beforeInterval - decreaseSpwanInterval);
+            else spawnInterval = Mathf.Max(minSpawnInterval, spawnInterval - decreaseSpwanInterval);
             difficultyTimer = difficultyInterval;
         }
     }
 
-    void RandomSpawn()
+    void RandomSpawn(int idx)
     {
         float rand = Random.Range(0f, 10f);
 
         if (rand < 9f)
         {
-            Spawn();
+            Spawn(monsterPrefab[idx]);
         }
         else
         {
-            SpawnGroup();
+            SpawnGroup(monsterPrefab[idx]);
         }
     }
-
-    public void Spawn()
+    public void Spawn(GameObject prefab)
     {
         if (null == monsterPrefab) return;
 
@@ -83,7 +91,7 @@ public class MonsterSpawner : MonoBehaviour
             spawnPos = navHit.position;
         }
 
-        GameObject monster = Instantiate(monsterPrefab[Random.Range(0, 2)], spawnPos, Quaternion.identity);
+        GameObject monster = Instantiate(prefab, spawnPos, Quaternion.identity);
         if (null == monster) return;
 
         Collider col = monster.GetComponent<Collider>();
@@ -92,33 +100,7 @@ public class MonsterSpawner : MonoBehaviour
         float offset = monster.transform.position.y - col.bounds.min.y;
         monster.transform.position += Vector3.up * offset;
     }
-
-    public void SpawnBoss()
-    {
-        if (null == monsterPrefab) return;
-
-        float distance = Random.Range(minSpawnRadius, maxSpawnRadius);
-        Vector2 direction = Random.insideUnitCircle.normalized;
-
-        Vector3 spawnPos = new Vector3(player.position.x + direction.x * distance, 0f, player.position.z + direction.y * distance);
-
-        NavMeshHit navHit;
-        if (NavMesh.SamplePosition(spawnPos, out navHit, 5f, NavMesh.AllAreas))
-        {
-            spawnPos = navHit.position;
-        }
-
-        GameObject monster = Instantiate(BossPrefab, spawnPos, Quaternion.identity);
-        if (null == monster) return;
-
-        Collider col = monster.GetComponent<Collider>();
-        if (null == col) return;
-
-        float offset = monster.transform.position.y - col.bounds.min.y;
-        monster.transform.position += Vector3.up * offset;
-    }
-
-    public void SpawnGroup()
+    public void SpawnGroup(GameObject prefab)
     {
         if (null == monsterPrefab) return;
 
@@ -130,7 +112,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             if (TryPickPointNearCenterOnNavMesh(centerPos, out Vector3 pos))
             {
-                var m = Instantiate(monsterPrefab[Random.Range(0, 2)], pos, Quaternion.identity);
+                var m = Instantiate(prefab, pos, Quaternion.identity);
 
                 var col = m.GetComponent<Collider>();
                 if (col != null)
@@ -190,7 +172,7 @@ public class MonsterSpawner : MonoBehaviour
     public void StartFocusSpawn()
     {
         SetFocusSpawnState();
-        SpawnBoss();
+        Spawn(BossPrefab);
         StartCoroutine(FocusSpawnMonster());
     }
 

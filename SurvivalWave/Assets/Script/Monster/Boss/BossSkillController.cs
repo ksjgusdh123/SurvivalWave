@@ -21,7 +21,7 @@ public class BossSkillController : MonoBehaviour
     private void Update()
     {
         UpdateCooltimes();
-        if(bossCoolTimer <= 0f)
+        if(bossCoolTimer <= 0f && CanCasting())
         {
             int idx = PickRandomIndex();
             if (idx < 0) return;
@@ -59,6 +59,13 @@ public class BossSkillController : MonoBehaviour
         }
 
         return chosenIndex;
+    }
+    
+    bool CanCasting()
+    {
+        Vector3 d = transform.position - target.transform.position;
+        float dist = d.sqrMagnitude;
 
+        return dist <= range * range;
     }
 }

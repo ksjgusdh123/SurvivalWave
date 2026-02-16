@@ -6,7 +6,7 @@ using static UnityEngine.Rendering.DebugUI.Table;
 
 public class MonsterBase : MonoBehaviour
 {
-    [SerializeField] Transform player;
+    Transform player;
     Stat stat;
     MonsterDamaged damagedEventComp;
     NavMeshAgent agent;
@@ -54,7 +54,7 @@ public class MonsterBase : MonoBehaviour
     {
         if(damagedEventComp) StartCoroutine(damagedEventComp.ChangeColor());
     }
-    void EndDieAnimation()
+    protected virtual void EndDieAnimation()
     {
         Vector3 spawnPos = transform.position + new Vector3(0f, 1f, 0f);
 

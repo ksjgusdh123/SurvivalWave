@@ -1,16 +1,12 @@
 using UnityEngine;
 
-public class BossBase : MonoBehaviour
+public class BossBase : MonsterBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void EndDieAnimation()
     {
-        
-    }
+        Vector3 spawnPos = transform.position + new Vector3(0f, 1f, 0f);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/Item/Box"), spawnPos, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

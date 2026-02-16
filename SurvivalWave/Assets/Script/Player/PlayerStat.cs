@@ -119,4 +119,10 @@ public class PlayerStat : Stat
         ChangeHp?.Invoke();
     }
 
+    public void Heal(float amount)
+    {
+        hp = Math.Min(hp + amount, maxHp);
+        ChangeHp?.Invoke();
+    }
+
 }

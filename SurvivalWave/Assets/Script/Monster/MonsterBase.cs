@@ -53,14 +53,21 @@ public class MonsterBase : MonoBehaviour
     }
     protected virtual void EndDieAnimation()
     {
-        Vector3 spawnPos = transform.position + new Vector3(0f, 1f, 0f);
+        Vector3 spawnPos = transform.position;
+        PickExp(spawnPos);
+        PickRandomItem(spawnPos);
+        Destroy(gameObject);
+    }
+
+    void PickExp(Vector3 spawnPos)
+    {
+        spawnPos.y += 1f;
 
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/Item/Exp"), spawnPos, Quaternion.identity);
         Exp exp = go.GetComponent<Exp>();
         Renderer renderer = go.GetComponent<Renderer>();
 
         GetRandomExp(exp, renderer);
-        Destroy(gameObject);
     }
 
     void GetRandomExp(Exp exp, Renderer renderer)
@@ -81,6 +88,24 @@ public class MonsterBase : MonoBehaviour
         {
             renderer.material.color = Color.red;
             exp.amount = 30f;
+        }
+    }
+
+    void PickRandomItem(Vector3 spawnPos)
+    {
+        float rand = Random.Range(0f, 10f);
+
+        if (rand < 9f) return;
+
+        spawnPos.x += 5f;
+
+        if(rand < 9.7f)
+        {
+            GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/Item/HpPotion"), spawnPos, Quaternion.identity);
+        }
+        else
+        {
+
         }
     }
 }

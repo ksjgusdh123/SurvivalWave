@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 10.0f;
     public float jumpHeight = 2f;
     public float speed { get; set; }
+    public bool CanAir = true;
 
     PlayerInputHandler inputHandler;
     CharacterController characterController;
@@ -134,7 +135,7 @@ public class PlayerController : MonoBehaviour
                 velocity.y = -2f;
             }
 
-            if (isJump && PlayerState.Landing != state && PlayerState.Jumping != state && PlayerState.Damaged != state)
+            if (isJump && PlayerState.Landing != state && PlayerState.Jumping != state && PlayerState.Damaged != state && CanAir)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 inputHandler.ConsumeJump();
@@ -173,5 +174,12 @@ public class PlayerController : MonoBehaviour
     {
         ChangeState(TransitionState.Falling);
         velocity.y = 0f;
+    }
+
+    public void KickOffAir()
+    {
+        velocity.y = -2f;
+        inputHandler.ConsumeJump();
+        CanAir = false;
     }
 }

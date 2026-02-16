@@ -13,6 +13,7 @@ public enum StatType
 public class PlayerStat : Stat
 {
     public Action ChangeHp;
+    public Action ChangeStamina;
 
     PlayerController controller;
     Renderer[] renderers;
@@ -28,6 +29,8 @@ public class PlayerStat : Stat
     int level = 1;
     int maxLevel = 30;
 
+    public float maxStamina { get; private set; } = 100f;
+    public float stamina { get; private set; }
 
     void Start()
     {
@@ -36,11 +39,25 @@ public class PlayerStat : Stat
         blinkWait = new WaitForSeconds(blinkWaitTime);
         invincibleFinish = new WaitForSeconds(invincibleFinishTime);
         controller.speed = speed;
+        stamina = maxStamina;
     }
 
     void Update()
     {
-        
+        CheckStaminaEvent();
+    }
+
+    void CheckStaminaEvent()
+    {
+        if (PlayerState.Falling == controller.state)
+        {
+            stamina -= Time.deltaTime * 10f;
+            ChangeStamina();
+            if (stamina <= 0f)
+            {
+                controller.KickOffAir();
+            }
+        }
     }
 
     public override bool TakeDamage(float dmg)

@@ -43,6 +43,9 @@ public class PlayerSkillHandler : MonoBehaviour
             case SkillItemType.Boomerang:
                 AddSkill(new BoomerangSkill(1f, 2f, 10f, 40f));
                 break;
+            case SkillItemType.WideShot:
+                AddSkill(new WideShotSkill(1f, 2f, 10f, 40f, 16));
+                break;
             case SkillItemType.Strength:
                 AddSkill(new StrengthSkill());
                 break;

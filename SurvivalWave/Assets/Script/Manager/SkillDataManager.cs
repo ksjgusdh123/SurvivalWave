@@ -7,6 +7,7 @@ public enum SkillItemType
     RandomShot,
     Homing,
     Boomerang,
+    WideShot,
     // ´É·ÂÄ¡
     Strength,
     Speed,

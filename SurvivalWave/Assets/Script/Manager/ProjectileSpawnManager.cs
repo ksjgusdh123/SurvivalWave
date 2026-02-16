@@ -36,7 +36,7 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.RandomShot], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
-        pb.Init(new RandomMove(dir, maxDist, spawnPos), speed, CalculateFinalDamage(dmgRatio));
+        pb.Init(new StraightMove(dir, maxDist, spawnPos), speed, CalculateFinalDamage(dmgRatio));
     }
 
     public void SpawnHoming(Vector3 spawnPos, Transform target, float speed, float dmgRatio)

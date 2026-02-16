@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class RandomMove : IProjectileMove
+public class StraightMove : IProjectileMove
 {
     Vector3 direction;
     float maxDistanceMagnitude;
     Vector3 startPosition;
 
-    public RandomMove(Vector3 dir, float distance, Vector3 startPos)
+    public StraightMove(Vector3 dir, float distance, Vector3 startPos)
     {
         direction = dir;
         maxDistanceMagnitude = distance * distance;

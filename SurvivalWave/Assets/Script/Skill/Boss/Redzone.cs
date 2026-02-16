@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class TestSkill : BossSkillBase
+public class Redzone : BossSkillBase
 {
     public GameObject redZonePrefab;   
     public float radius = 0.5f;
@@ -12,7 +12,7 @@ public class TestSkill : BossSkillBase
 
     private void Start()
     {
-        targetMask = LayerMask.NameToLayer("Player");
+        targetMask = LayerMask.GetMask("Player");
         warningTimer = new WaitForSeconds(warningTime);
     }
 
@@ -34,7 +34,7 @@ public class TestSkill : BossSkillBase
         for (int i = 0; i < hits.Length; i++)
         {
             PlayerStat stat = hits[i].GetComponent<PlayerStat>();
-            if (null != stat) stat.TakeDamage(10f);
+            if (null != stat) stat.TakeDamage(damage);
         }
 
         Destroy(warning);

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 503807486760183593}
   - component: {fileID: 5249018479219706794}
   - component: {fileID: -8540424234894548248}
-  - component: {fileID: 6557953781663659191}
+  - component: {fileID: 1731603540465289268}
   m_Layer: 7
   m_Name: Cube
   m_TagString: Monster
@@ -204,8 +204,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossSkillController
   skills:
-  - {fileID: 6557953781663659191}
---- !u!114 &6557953781663659191
+  - {fileID: 1731603540465289268}
+--- !u!114 &1731603540465289268
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,5 +218,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestSkill
   redZonePrefab: {fileID: 1041386320337742982, guid: ea54e87cdccd5fa46be29c8c9e26e514, type: 3}
-  radius: 2.5
+  radius: 1
   warningTime: 0.8

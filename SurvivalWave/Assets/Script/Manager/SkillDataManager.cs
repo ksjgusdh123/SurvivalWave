@@ -8,7 +8,9 @@ public enum SkillItemType
     Homing,
     Boomerang,
     // ´É·ÂÄ¡
-    Strength,   
+    Strength,
+    Speed,
+    MaxHp
 }
 
 public class SkillDataManager : Singleton<SkillDataManager>

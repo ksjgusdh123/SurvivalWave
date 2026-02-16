@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
 
     public float gravity = -9.8f;
     public float rotationSpeed = 10.0f;
-    public float speed = 3.0f;
     public float jumpHeight = 2f;
+    public float speed { get; set; }
 
     PlayerInputHandler inputHandler;
     CharacterController characterController;

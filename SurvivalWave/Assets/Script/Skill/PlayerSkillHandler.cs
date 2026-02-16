@@ -46,6 +46,12 @@ public class PlayerSkillHandler : MonoBehaviour
             case SkillItemType.Strength:
                 AddSkill(new StrengthSkill());
                 break;
+            case SkillItemType.Speed:
+                AddSkill(new SpeedSkill());
+                break;
+            case SkillItemType.MaxHp:
+                AddSkill(new MaxHpSkill());
+                break;
             default:
                 Debug.Log("Not Yet");
                 break;

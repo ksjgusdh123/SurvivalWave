@@ -1,8 +1,5 @@
-using System.Collections;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class MonsterBase : MonoBehaviour
 {

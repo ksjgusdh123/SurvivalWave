@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 3797923172363463575}
   - component: {fileID: 3462452837588319722}
   - component: {fileID: 8944849414049279907}
-  - component: {fileID: 3155737755162940432}
   - component: {fileID: 503807486760183593}
   - component: {fileID: 5249018479219706794}
   - component: {fileID: -8540424234894548248}
   - component: {fileID: 1731603540465289268}
+  - component: {fileID: 4764433035664087268}
   m_Layer: 7
   m_Name: Cube
   m_TagString: Monster
@@ -139,19 +139,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3155737755162940432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2952867256385852646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34cccc06bc87b1a4f8f40e93fbca4cb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterBase
-  player: {fileID: 0}
 --- !u!114 &503807486760183593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,3 +207,15 @@ MonoBehaviour:
   redZonePrefab: {fileID: 1041386320337742982, guid: ea54e87cdccd5fa46be29c8c9e26e514, type: 3}
   radius: 1
   warningTime: 0.8
+--- !u!114 &4764433035664087268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952867256385852646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297f44e911e5b874289d58c891bc3388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossBase

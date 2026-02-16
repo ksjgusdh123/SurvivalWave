@@ -6,18 +6,16 @@ public class HpBar : MonoBehaviour
     Slider bar;
     PlayerStat stat;
 
-    float maxHp;
     void Start()
     {
         bar = GetComponent<Slider>();
         stat = Player.playerTransform.gameObject.GetComponent<PlayerStat>();
-        maxHp = stat.maxHp;
         stat.ChangeHp -= ChangeHp;
         stat.ChangeHp += ChangeHp;
     }
     public void ChangeHp()
     {
-        float ratio = stat.hp / maxHp;
+        float ratio = stat.hp / stat.maxHp;
         bar.value = ratio;
     }
 }

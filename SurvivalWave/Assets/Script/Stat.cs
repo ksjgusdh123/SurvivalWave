@@ -7,6 +7,7 @@ public class Stat : MonoBehaviour
     public float maxHp { get; set; } = 100f;
 
     public float attack { get; set; } = 10f;
+    public float speed { get; set; } = 3f;
 
     public virtual bool TakeDamage(float dmg)
     {

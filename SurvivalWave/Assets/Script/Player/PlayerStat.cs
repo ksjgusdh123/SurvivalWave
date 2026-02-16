@@ -6,6 +6,8 @@ using UnityEngine.InputSystem.XR;
 public enum StatType
 {
     Attack,
+    Speed,
+    MaxHp
 }
 
 public class PlayerStat : Stat
@@ -33,6 +35,7 @@ public class PlayerStat : Stat
         renderers = GetComponentsInChildren<Renderer>();
         blinkWait = new WaitForSeconds(blinkWaitTime);
         invincibleFinish = new WaitForSeconds(invincibleFinishTime);
+        controller.speed = speed;
     }
 
     void Update()
@@ -102,6 +105,18 @@ public class PlayerStat : Stat
             maxExp = 1; // ((level - 1) * 50)  + 100;
             UIManager.GetInstance().Show(EUIType.LevelUp);
         }
+    }
+
+    public void ChangeSpeed(float amount)
+    {
+        speed = amount;
+        controller.speed = speed;
+    }
+
+    public void UpgradeMaxHp(float amount)
+    {
+        maxHp = amount;
+        ChangeHp?.Invoke();
     }
 
 }

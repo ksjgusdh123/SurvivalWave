@@ -37,6 +37,16 @@ public class GameManager : Singleton<GameManager>
                 playerStat.attack = amount * 10f;   
             }
             break;
+            case StatType.Speed:
+            {
+                playerStat.ChangeSpeed(amount);
+            }
+            break;
+            case StatType.MaxHp:
+            {
+                playerStat.UpgradeMaxHp(amount);
+            }
+            break;
         }
     }
 

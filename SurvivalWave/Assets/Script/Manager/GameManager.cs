@@ -1,9 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
     PlayerStat playerStat;
     PlayerSkillHandler skillHandler;
+    MonsterSpawner spawner;
+    public int gameLevel = 0;
+
+    WaitForSeconds gameLevelTimerHandle;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void InitBeforeScene()
@@ -19,8 +24,25 @@ public class GameManager : Singleton<GameManager>
 
     protected override void Awake()
     {
+        spawner = FindFirstObjectByType<MonsterSpawner>();
         skillHandler = FindFirstObjectByType<PlayerSkillHandler>();
         playerStat = FindFirstObjectByType<PlayerStat>();
+    }
+
+    private void Start()
+    {
+        gameLevelTimerHandle = new WaitForSeconds(60f);
+        StartCoroutine(ChangeLevel());
+    }
+
+    IEnumerator ChangeLevel()
+    {
+        while (true)
+        {
+            yield return gameLevelTimerHandle;
+            ++gameLevel;
+            // spawn Boss
+        }
     }
 
     public void PickLevelUpUI(int skillId)

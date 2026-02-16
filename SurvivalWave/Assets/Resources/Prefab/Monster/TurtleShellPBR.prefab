@@ -520,7 +520,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4544219117696442}
-  - component: {fileID: 2897637341021089737}
   - component: {fileID: 2021137373242441489}
   - component: {fileID: 2164157411993438454}
   - component: {fileID: 2306577064259091358}
@@ -528,6 +527,7 @@ GameObject:
   - component: {fileID: 7096432322572972370}
   - component: {fileID: 7078920239800031873}
   - component: {fileID: 9124404901816153701}
+  - component: {fileID: 7707418421598719338}
   m_Layer: 7
   m_Name: TurtleShellPBR
   m_TagString: Monster
@@ -552,18 +552,6 @@ Transform:
   - {fileID: 4180181043874448}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2897637341021089737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524411113276028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9739298e806d4e843a49c78310bbb68b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Stat
 --- !u!114 &2021137373242441489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,7 +564,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34cccc06bc87b1a4f8f40e93fbca4cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterBase
-  player: {fileID: 0}
 --- !u!54 &2164157411993438454
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -695,6 +682,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27b11fe172f893448e4302718dbd84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterDamaged
+--- !u!114 &7707418421598719338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524411113276028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4b9ee33bb481b4faac9f172ac5c2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterStat
+  monsterStatSO: {fileID: 11400000, guid: d10acc0389ff0a947a8d0ba8e8265483, type: 2}
 --- !u!1 &1532652994627396
 GameObject:
   m_ObjectHideFlags: 0

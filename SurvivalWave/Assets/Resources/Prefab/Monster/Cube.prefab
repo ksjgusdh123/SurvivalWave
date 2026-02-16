@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 3155737755162940432}
   - component: {fileID: 503807486760183593}
   - component: {fileID: 5249018479219706794}
+  - component: {fileID: -8540424234894548248}
+  - component: {fileID: 6557953781663659191}
   m_Layer: 7
   m_Name: Cube
   m_TagString: Monster
@@ -150,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterBase
   player: {fileID: 0}
-  Damage: 10
 --- !u!114 &503807486760183593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,3 +191,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8540424234894548248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952867256385852646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9f349ecfe5c1d4689779f766a7eaea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossSkillController
+  skills:
+  - {fileID: 6557953781663659191}
+--- !u!114 &6557953781663659191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952867256385852646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1610ad58ea41614fae2b3d20fe42c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestSkill
+  redZonePrefab: {fileID: 1041386320337742982, guid: ea54e87cdccd5fa46be29c8c9e26e514, type: 3}
+  radius: 2.5
+  warningTime: 0.8

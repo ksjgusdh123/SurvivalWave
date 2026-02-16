@@ -52,7 +52,7 @@ public class MonsterBase : MonoBehaviour
 
     public void DamagedEvent()
     {
-        StartCoroutine(damagedEventComp.ChangeColor());
+        if(damagedEventComp) StartCoroutine(damagedEventComp.ChangeColor());
     }
     void EndDieAnimation()
     {

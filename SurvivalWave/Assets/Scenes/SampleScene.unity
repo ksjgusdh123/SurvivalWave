@@ -2001,6 +2001,7 @@ MonoBehaviour:
   monsterPrefab:
   - {fileID: 1931298151966786, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
   - {fileID: 1524411113276028, guid: e2aafa8770d34a9591b41bedf4e318ba, type: 3}
+  BossPrefab: {fileID: 3019911081063579365, guid: 8bf0c38168728c14d8c87af64bf4886b, type: 3}
   spawnInterval: 1
   minSpawnInterval: 0.3
 --- !u!1 &2035221570

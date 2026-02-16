@@ -41,6 +41,7 @@ public class GameManager : Singleton<GameManager>
         {
             yield return gameLevelTimerHandle;
             ++gameLevel;
+            spawner.StartFocusSpawn();
             // spawn Boss
         }
     }

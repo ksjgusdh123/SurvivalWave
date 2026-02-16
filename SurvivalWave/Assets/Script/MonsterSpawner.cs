@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,22 +12,28 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] float maxSpawnRadius = 200f;
     [SerializeField] float minSpawnRadius = 50f;
     [SerializeField] GameObject[] monsterPrefab;
+    [SerializeField] GameObject BossPrefab;
 
     Transform player;
 
     [SerializeField] float spawnInterval = 1f;
+    float beforeInterval;
     float difficultyInterval = 10f;
     [SerializeField] float minSpawnInterval = 0.3f;
 
+    bool isFocusSpawn;
     float spawnTimer;
     float difficultyTimer;
 
+    WaitForSeconds focusSpawnTimerHandle;
 
     void Start()
     {
         player = Player.playerTransform;
         spawnTimer = spawnInterval;
         difficultyTimer = difficultyInterval;
+
+        focusSpawnTimerHandle = new WaitForSeconds(30f);
     }
 
     void Update()
@@ -35,7 +42,8 @@ public class MonsterSpawner : MonoBehaviour
         difficultyTimer -= Time.deltaTime;
         if (spawnTimer <= 0f)
         {
-            Spawn();
+            if (isFocusSpawn) RandomSpawn();
+            else Spawn();
             spawnTimer = spawnInterval;
         }
 
@@ -43,6 +51,20 @@ public class MonsterSpawner : MonoBehaviour
         {
             spawnInterval = Mathf.Max(minSpawnInterval, spawnInterval - 0.2f);
             difficultyTimer = difficultyInterval;
+        }
+    }
+
+    void RandomSpawn()
+    {
+        float rand = Random.Range(0f, 10f);
+
+        if (rand < 9f)
+        {
+            Spawn();
+        }
+        else
+        {
+            SpawnGroup();
         }
     }
 
@@ -71,6 +93,31 @@ public class MonsterSpawner : MonoBehaviour
         monster.transform.position += Vector3.up * offset;
     }
 
+    public void SpawnBoss()
+    {
+        if (null == monsterPrefab) return;
+
+        float distance = Random.Range(minSpawnRadius, maxSpawnRadius);
+        Vector2 direction = Random.insideUnitCircle.normalized;
+
+        Vector3 spawnPos = new Vector3(player.position.x + direction.x * distance, 0f, player.position.z + direction.y * distance);
+
+        NavMeshHit navHit;
+        if (NavMesh.SamplePosition(spawnPos, out navHit, 5f, NavMesh.AllAreas))
+        {
+            spawnPos = navHit.position;
+        }
+
+        GameObject monster = Instantiate(BossPrefab, spawnPos, Quaternion.identity);
+        if (null == monster) return;
+
+        Collider col = monster.GetComponent<Collider>();
+        if (null == col) return;
+
+        float offset = monster.transform.position.y - col.bounds.min.y;
+        monster.transform.position += Vector3.up * offset;
+    }
+
     public void SpawnGroup()
     {
         if (null == monsterPrefab) return;
@@ -83,7 +130,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             if (TryPickPointNearCenterOnNavMesh(centerPos, out Vector3 pos))
             {
-                var m = Instantiate(monsterPrefab[0], pos, Quaternion.identity);
+                var m = Instantiate(monsterPrefab[Random.Range(0, 2)], pos, Quaternion.identity);
 
                 var col = m.GetComponent<Collider>();
                 if (col != null)
@@ -131,5 +178,26 @@ public class MonsterSpawner : MonoBehaviour
 
         pos = default;
         return false;
+    }
+
+    void SetFocusSpawnState()
+    {
+        beforeInterval = spawnInterval;
+        spawnInterval = minSpawnInterval;
+        isFocusSpawn = true;
+    }
+
+    public void StartFocusSpawn()
+    {
+        SetFocusSpawnState();
+        SpawnBoss();
+        StartCoroutine(FocusSpawnMonster());
+    }
+
+    IEnumerator FocusSpawnMonster()
+    {
+        yield return focusSpawnTimerHandle;
+        spawnInterval = beforeInterval;
+        isFocusSpawn = false;
     }
 }

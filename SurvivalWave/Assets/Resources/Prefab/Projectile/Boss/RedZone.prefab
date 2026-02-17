@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 948581987314741661}
   - component: {fileID: 7842171627741047508}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: RedZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

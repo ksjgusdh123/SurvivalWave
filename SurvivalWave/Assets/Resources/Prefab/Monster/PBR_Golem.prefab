@@ -117,7 +117,7 @@ Animator:
   m_GameObject: {fileID: 1067925524328404}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8b2d11d64877f0b4cad5d45ec7d53473, type: 3}
-  m_Controller: {fileID: 9100000, guid: 092eb222bad7e68469b7ae99b4f055be, type: 2}
+  m_Controller: {fileID: 9100000, guid: 76cfb17cad1f0be44ad7c2079271b303, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4b9ee33bb481b4faac9f172ac5c2b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterStat
-  monsterStatSO: {fileID: 11400000, guid: 196524d4287bfcc40abe67b0a54db2fb, type: 2}
+  monsterStatSO: {fileID: 11400000, guid: 1b641b376380d034fad1886cef7ef7a2, type: 2}
 --- !u!114 &-3602844606410032460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1610ad58ea41614fae2b3d20fe42c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Redzone
-  redZonePrefab: {fileID: 1041386320337742982, guid: ea54e87cdccd5fa46be29c8c9e26e514, type: 3}
+  redZonePrefab: {fileID: 1041386320337742982, guid: 5ce15a95fe5a73040b2a3c9084bb491d, type: 3}
   radius: 0.5
   warningTime: 0.8
 --- !u!114 &-4729128512353690388

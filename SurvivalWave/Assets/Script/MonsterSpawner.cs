@@ -25,6 +25,7 @@ public class MonsterSpawner : MonoBehaviour
     bool isFocusSpawn;
     float spawnTimer;
     float difficultyTimer;
+    int groundMask;
 
     WaitForSeconds focusSpawnTimerHandle;
 
@@ -35,6 +36,7 @@ public class MonsterSpawner : MonoBehaviour
         difficultyTimer = difficultyInterval;
 
         focusSpawnTimerHandle = new WaitForSeconds(30f);
+        groundMask = LayerMask.GetMask("Ground");
     }
 
     void Update()
@@ -83,13 +85,19 @@ public class MonsterSpawner : MonoBehaviour
         float distance = Random.Range(minSpawnRadius, maxSpawnRadius);
         Vector2 direction = Random.insideUnitCircle.normalized;
 
-        Vector3 spawnPos = new Vector3(player.position.x + direction.x * distance, 0f, player.position.z + direction.y * distance);
+        Vector3 spawnPos = new Vector3(player.position.x + direction.x * distance, player.position.y + 5f, player.position.z + direction.y * distance);
 
         NavMeshHit navHit;
         if (NavMesh.SamplePosition(spawnPos, out navHit, 5f, NavMesh.AllAreas))
         {
             spawnPos = navHit.position;
         }
+
+        if (Physics.Raycast(spawnPos + Vector3.up * 50f, Vector3.down, out RaycastHit hit, 50f, groundMask))
+        {
+            spawnPos = hit.point;
+        }
+
 
         GameObject monster = Instantiate(prefab, spawnPos, Quaternion.identity);
         if (null == monster) return;
@@ -130,7 +138,7 @@ public class MonsterSpawner : MonoBehaviour
         float dist = Random.Range(minSpawnRadius, maxSpawnRadius);
         Vector3 guess = new Vector3(playerPos.x + dir.x * dist, playerPos.y, playerPos.z + dir.y * dist);
 
-        if (NavMesh.SamplePosition(guess, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(guess, out NavMeshHit hit, 100f, NavMesh.AllAreas))
         {
             center = hit.position;
             return true;
@@ -148,7 +156,7 @@ public class MonsterSpawner : MonoBehaviour
 
         for (int i = 0; i < 5; ++i)
         {
-            if (NavMesh.SamplePosition(spawnPos, out NavMeshHit hit, 3f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(spawnPos, out NavMeshHit hit, 10f, NavMesh.AllAreas))
             {
                 //if (!Physics.CheckSphere(hit.position, 1f, monsterLayerMask))
                 {

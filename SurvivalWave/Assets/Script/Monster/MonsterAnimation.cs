@@ -17,4 +17,5 @@ public class MonsterAnimation : MonoBehaviour
     {
         animator.SetBool(isDie, stat.hp <= 0 ? true : false);
     }
+
 }

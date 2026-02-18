@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f1bb728ee05c840aab1923ae6bdc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileBase
+  muzzle: {fileID: 8582539926986480355}
 --- !u!136 &6632394429733802854
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -331,8 +332,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0.042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6219261884042101466}
+  m_Children: []
   m_Father: {fileID: 4713719514245437058}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &8087445199789049519
@@ -447,65 +447,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1825911833616084214, guid: 845a646869bbb9449b4bb2c5973d6dc7, type: 3}
---- !u!1001 &2723850484178417457
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8582539926986480355}
-    m_Modifications:
-    - target: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8327145071460190505, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-      propertyPath: m_Name
-      value: MuzzleFlashEffect
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
---- !u!4 &6219261884042101466 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8323301024866383339, guid: d4e6a7f092c61bc4dafd5de4aaad6dd5, type: 3}
-  m_PrefabInstance: {fileID: 2723850484178417457}
-  m_PrefabAsset: {fileID: 0}

@@ -9698,7 +9698,7 @@ GameObject:
   - component: {fileID: 5216673197860028166}
   - component: {fileID: 5195124411170376234}
   m_Layer: 0
-  m_Name: BigExplosionEffect
+  m_Name: RocketExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

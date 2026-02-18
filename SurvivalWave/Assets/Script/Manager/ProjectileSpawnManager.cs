@@ -37,6 +37,7 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
         pb.Init(new StraightMove(dir, maxDist, spawnPos), speed, CalculateFinalDamage(dmgRatio));
+        ParticleManager.GetInstance().SpawnParticle(pb.muzzle, ParticleType.RandomShotEffect, 1f);
     }
 
     public void SpawnHoming(Vector3 spawnPos, Transform target, float speed, float dmgRatio)
@@ -50,6 +51,7 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
         pb.Init(new HomingMove(target), speed, CalculateFinalDamage(dmgRatio));
+        ParticleManager.GetInstance().SpawnParticle(pb.muzzle, ParticleType.RocketEffect, 4f);
     }
 
     public void SpawnBoomerang(Vector3 spawnPos, Vector3 dir, float speed, float maxDist, float dmgRatio)
@@ -61,6 +63,7 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         if (null == pb) return;
         pb.Init(new BoomerangMove(dir, maxDist), speed, CalculateFinalDamage(dmgRatio));
         pb.isPenetration = true;
+        ParticleManager.GetInstance().SpawnParticle(pb.muzzle, ParticleType.BoomerangEffect, 1.5f);
     }
 
     float CalculateFinalDamage(float ratio)

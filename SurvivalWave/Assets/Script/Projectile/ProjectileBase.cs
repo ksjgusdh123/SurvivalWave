@@ -5,8 +5,14 @@ public class ProjectileBase : MonoBehaviour
     [SerializeField] public float speed { get; private set; } = 10f;
     float finalDamag;
     protected IProjectileMove move;
+    public Transform muzzle { get; private set; }
 
     public bool isPenetration { get; set; }
+
+    void Awake()
+    {
+        muzzle = transform.Find("MuzzlePos");    
+    }
 
     public void Init(IProjectileMove type, float speed, float dmg)
     {

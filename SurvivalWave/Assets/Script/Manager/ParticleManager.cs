@@ -8,6 +8,7 @@ public enum ParticleType
     RocketEffect,
     BoomerangEffect,
     RocketExplosion,
+    EarthShatter,
     Max
 }
 
@@ -28,6 +29,11 @@ public class ParticleManager : Singleton<ParticleManager>
         GameObject go = Instantiate(particlePrefabDic[type], muzzle.position, Quaternion.identity, muzzle);
         go.transform.localPosition = Vector3.zero;
         go.transform.localRotation = Quaternion.identity;
+        StartCoroutine(ParticleLifeUpdate(go, deleteTime));
+    }
+    public void SpawnParticle(Vector3 spawnPos, ParticleType type, float deleteTime)
+    {
+        GameObject go = Instantiate(particlePrefabDic[type], spawnPos, Quaternion.identity);
         StartCoroutine(ParticleLifeUpdate(go, deleteTime));
     }
 

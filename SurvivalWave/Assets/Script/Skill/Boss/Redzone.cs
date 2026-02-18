@@ -37,6 +37,8 @@ public class Redzone : BossSkillBase
             if (null != stat) stat.TakeDamage(damage);
         }
 
+        ParticleManager.GetInstance().SpawnParticle(center, ParticleType.EarthShatter, 5f);
+
         Destroy(warning);
     }
 }

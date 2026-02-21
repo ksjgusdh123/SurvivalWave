@@ -28,7 +28,11 @@ public class ProjectileBase : MonoBehaviour
 
     public void DestroyProjectile()
     {
-        if(!isPenetration) Destroy(gameObject);
+        if (!isPenetration)
+        {
+            ProjectilePool.GetInstance().ReturnObject(gameObject, move.type);
+            //Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

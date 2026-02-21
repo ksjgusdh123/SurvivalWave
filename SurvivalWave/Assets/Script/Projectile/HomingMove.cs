@@ -1,8 +1,10 @@
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class HomingMove : IProjectileMove
+public class HomingMove : MonoBehaviour, IProjectileMove
 {
+    public ProjectileType type { get; } = ProjectileType.Homing;
+
     Transform homingTarget;
     float currentSpeed = 0f;
     public HomingMove(Transform target)

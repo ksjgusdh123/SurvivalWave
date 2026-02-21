@@ -97,10 +97,6 @@ public class MonsterSpawner : MonoBehaviour
         {
             spawnPos = hit.point;
         }
-        else
-        {
-            Debug.Log("Fail");
-        }
 
 
             GameObject monster = Instantiate(prefab, spawnPos, Quaternion.identity);

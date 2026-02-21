@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class BoomerangMove : IProjectileMove
+public class BoomerangMove : MonoBehaviour, IProjectileMove
 {
+    public ProjectileType type { get; } = ProjectileType.Boomerang;
+
     float maxDist = 6f;
     float returnRadius = 0.6f;
 

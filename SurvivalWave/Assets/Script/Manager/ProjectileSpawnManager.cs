@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SkillType
+public enum ProjectileType
 { 
     RandomShot,
     Homing,
@@ -18,10 +18,10 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
 
     protected override void Awake()
     {
-        int cnt = (int)SkillType.Max;
+        int cnt = (int)ProjectileType.Max;
         for (int i = 0; i < cnt; ++i)
         {
-            ProjectilePrefab.Add(Resources.Load<GameObject>($"Prefab/Projectile/Player/{((SkillType)i).ToString()}"));
+            ProjectilePrefab.Add(Resources.Load<GameObject>($"Prefab/Projectile/Player/{((ProjectileType)i).ToString()}"));
         }
     }
 
@@ -33,7 +33,9 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
     {
         Quaternion rot = Quaternion.LookRotation(dir);
 
-        GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.RandomShot], spawnPos, rot);
+        GameObject go = ProjectilePool.GetInstance().PopObject(ProjectileType.RandomShot);
+        go.transform.SetPositionAndRotation(spawnPos, rot);
+        //GameObject go = Instantiate(ProjectilePrefab[(int)ProjectileType.RandomShot], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
         pb.Init(new StraightMove(dir, maxDist, spawnPos), speed, CalculateFinalDamage(dmgRatio));
@@ -47,10 +49,13 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         Vector3 dir = (target.position - spawnPos).normalized;
         Quaternion rot = Quaternion.LookRotation(dir);
 
-        GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.Homing], spawnPos, rot);
+        GameObject go = ProjectilePool.GetInstance().PopObject(ProjectileType.Homing);
+        go.transform.SetPositionAndRotation(spawnPos, rot);
+        //GameObject go = Instantiate(ProjectilePrefab[(int)ProjectileType.Homing], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
         pb.Init(new HomingMove(target), speed, CalculateFinalDamage(dmgRatio));
+
         ParticleManager.GetInstance().SpawnParticle(pb.muzzle, ParticleType.RocketEffect, 4f);
     }
 
@@ -58,7 +63,9 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
     {
         Quaternion rot = Quaternion.LookRotation(dir);
 
-        GameObject go = Instantiate(ProjectilePrefab[(int)SkillType.Boomerang], spawnPos, rot);
+        GameObject go = ProjectilePool.GetInstance().PopObject(ProjectileType.Boomerang);
+        go.transform.SetPositionAndRotation(spawnPos, rot);
+        //GameObject go = Instantiate(ProjectilePrefab[(int)ProjectileType.Boomerang], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         if (null == pb) return;
         pb.Init(new BoomerangMove(dir, maxDist), speed, CalculateFinalDamage(dmgRatio));

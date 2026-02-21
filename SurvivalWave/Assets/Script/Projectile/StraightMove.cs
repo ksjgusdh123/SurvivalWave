@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class StraightMove : IProjectileMove
+public class StraightMove : MonoBehaviour, IProjectileMove
 {
+    public ProjectileType type { get; } = ProjectileType.RandomShot;
+
     Vector3 direction;
     float maxDistanceMagnitude;
     Vector3 startPosition;

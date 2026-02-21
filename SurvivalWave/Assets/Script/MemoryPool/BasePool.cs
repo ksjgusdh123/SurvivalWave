@@ -60,7 +60,7 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
         }
     }
 
-    public GameObject PopObject(TypeKey type, Transform parent = null)
+    public virtual GameObject PopObject(TypeKey type, Transform parent = null)
     {
         var q = pools[type];
 
@@ -76,7 +76,7 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
         return go;
     }
 
-    public void ReturnObject(GameObject go, TypeKey type)
+    public virtual void ReturnObject(GameObject go, TypeKey type)
     {
         go.transform.SetParent(rootObject, false);
         go.SetActive(false);

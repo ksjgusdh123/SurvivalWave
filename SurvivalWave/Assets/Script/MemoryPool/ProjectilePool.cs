@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
@@ -18,5 +19,15 @@ public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
             e.go = Resources.Load<GameObject>($"Prefab/Projectile/Player/{e.type.ToString()}");
             initDatas.Add(e);
         }
+    }
+
+    public override void ReturnObject(GameObject go, ProjectileType type)
+    {
+        var tr = go.GetComponent<TrailRenderer>();
+        if (null != tr)
+        {
+            tr.Clear();
+        }
+        base.ReturnObject(go, type);
     }
 }

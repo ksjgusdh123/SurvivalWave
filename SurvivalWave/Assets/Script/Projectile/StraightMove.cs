@@ -8,12 +8,14 @@ public class StraightMove : MonoBehaviour, IProjectileMove
     float maxDistanceMagnitude;
     Vector3 startPosition;
 
-    public StraightMove(Vector3 dir, float distance, Vector3 startPos)
+    public void InitMove(Vector3 dir, float distance, Vector3 startPos)
     {
         direction = dir;
         maxDistanceMagnitude = distance * distance;
         startPosition = startPos;
     }
+
+    
 
     public void Move(ProjectileBase projectile)
     {

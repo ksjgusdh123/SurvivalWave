@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8343308098956755076}
   - component: {fileID: 6822168054628503642}
   - component: {fileID: 4986333438396830749}
+  - component: {fileID: 9078889436688160562}
   m_Layer: 0
   m_Name: Boomerang
   m_TagString: Untagged
@@ -197,6 +198,18 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &9078889436688160562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038502009376009985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca9ccadd24b8c1439c7fd9886a8d253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoomerangMove
 --- !u!1 &6749205528762850591
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class BoomerangMove : MonoBehaviour, IProjectileMove
     Transform owner;
     bool returning;
 
-    public BoomerangMove(Vector3 dir, float maxDist)
+    public void InitMove(Vector3 dir, float maxDist)
     {
         dir.y = 0f;
         dir.Normalize();

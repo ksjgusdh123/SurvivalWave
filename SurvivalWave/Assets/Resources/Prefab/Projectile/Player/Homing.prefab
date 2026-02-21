@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3725643071380854095}
   - component: {fileID: 4923470725734178491}
   - component: {fileID: 1990828302806373047}
+  - component: {fileID: 5480449621565190524}
   m_Layer: 0
   m_Name: Homing
   m_TagString: Untagged
@@ -70,6 +71,18 @@ CapsuleCollider:
   m_Height: 1.1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.06}
+--- !u!114 &5480449621565190524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017062512058489986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c7cc1659666d54db36a2d85679105a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HomingMove
 --- !u!1 &7159310496615027058
 GameObject:
   m_ObjectHideFlags: 0

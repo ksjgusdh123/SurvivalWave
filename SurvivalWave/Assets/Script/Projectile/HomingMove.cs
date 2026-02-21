@@ -7,7 +7,7 @@ public class HomingMove : MonoBehaviour, IProjectileMove
 
     Transform homingTarget;
     float currentSpeed = 0f;
-    public HomingMove(Transform target)
+    public void InitMove(Transform target)
     {
         homingTarget = target;
     }

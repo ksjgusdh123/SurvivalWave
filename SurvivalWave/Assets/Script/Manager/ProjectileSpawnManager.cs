@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public enum ProjectileType
 { 
@@ -37,8 +39,10 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         go.transform.SetPositionAndRotation(spawnPos, rot);
         //GameObject go = Instantiate(ProjectilePrefab[(int)ProjectileType.RandomShot], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
-        if (null == pb) return;
-        pb.Init(new StraightMove(dir, maxDist, spawnPos), speed, CalculateFinalDamage(dmgRatio));
+        var move = go.GetComponent<StraightMove>();
+        if (null == pb || null == move) return;
+        move.InitMove(dir, maxDist, spawnPos);
+        pb.Init(move, speed, CalculateFinalDamage(dmgRatio));
         ParticleManager.GetInstance().SpawnParticle(pb.muzzle, ParticleType.RandomShotEffect, 1f);
     }
 
@@ -53,8 +57,10 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         go.transform.SetPositionAndRotation(spawnPos, rot);
         //GameObject go = Instantiate(ProjectilePrefab[(int)ProjectileType.Homing], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
-        if (null == pb) return;
-        pb.Init(new HomingMove(target), speed, CalculateFinalDamage(dmgRatio));
+        var move = go.GetComponent<HomingMove>();
+        if (null == pb || null == move) return;
+        move.InitMove(target);
+        pb.Init(move, speed, CalculateFinalDamage(dmgRatio));
 
         ParticleManager.GetInstance().SpawnParticle(pb.muzzle, ParticleType.RocketEffect, 4f);
     }
@@ -67,8 +73,10 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         go.transform.SetPositionAndRotation(spawnPos, rot);
         //GameObject go = Instantiate(ProjectilePrefab[(int)ProjectileType.Boomerang], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
-        if (null == pb) return;
-        pb.Init(new BoomerangMove(dir, maxDist), speed, CalculateFinalDamage(dmgRatio));
+        var move = go.GetComponent<BoomerangMove>();
+        if (null == pb || null == move) return;
+        move.InitMove(dir, maxDist);
+        pb.Init(move, speed, CalculateFinalDamage(dmgRatio));
         pb.isPenetration = true;
         ParticleManager.GetInstance().SpawnParticle(pb.muzzle, ParticleType.BoomerangEffect, 1.5f);
     }

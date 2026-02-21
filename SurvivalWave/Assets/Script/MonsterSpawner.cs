@@ -88,18 +88,22 @@ public class MonsterSpawner : MonoBehaviour
         Vector3 spawnPos = new Vector3(player.position.x + direction.x * distance, player.position.y + 5f, player.position.z + direction.y * distance);
 
         NavMeshHit navHit;
-        if (NavMesh.SamplePosition(spawnPos, out navHit, 5f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(spawnPos, out navHit, 50f, NavMesh.AllAreas))
         {
             spawnPos = navHit.position;
         }
 
-        if (Physics.Raycast(spawnPos + Vector3.up * 50f, Vector3.down, out RaycastHit hit, 50f, groundMask))
+        if (Physics.Raycast(spawnPos + Vector3.up * 50f, Vector3.down, out RaycastHit hit, 500f, groundMask))
         {
             spawnPos = hit.point;
         }
+        else
+        {
+            Debug.Log("Fail");
+        }
 
 
-        GameObject monster = Instantiate(prefab, spawnPos, Quaternion.identity);
+            GameObject monster = Instantiate(prefab, spawnPos, Quaternion.identity);
         if (null == monster) return;
 
         Collider col = monster.GetComponent<Collider>();

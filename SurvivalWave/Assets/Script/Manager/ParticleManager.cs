@@ -33,5 +33,8 @@ public class ParticleManager : Singleton<ParticleManager>
     public void SpawnParticle(Vector3 spawnPos, ParticleType type, float deleteTime)
     {
         GameObject go = ParticlePool.GetInstance().PopObject(type);
+        go.transform.position = spawnPos;
+        //go.transform.localPosition = Vector3.zero;
+        //go.transform.localRotation = Quaternion.identity;
     }
 }

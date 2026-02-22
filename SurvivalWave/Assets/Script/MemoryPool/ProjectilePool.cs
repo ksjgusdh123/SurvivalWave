@@ -16,7 +16,7 @@ public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
             Entry e = new Entry();
             e.type = (ProjectileType)i;
             e.initSize = GetInitSize(e.type);
-            e.go = Resources.Load<GameObject>($"Prefab/Projectile/Player/{e.type.ToString()}");
+            e.go = Resources.Load<GameObject>($"Prefab/Projectile/{e.type.ToString()}");
             initDatas.Add(e);
         }
     }
@@ -27,6 +27,7 @@ public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
             case ProjectileType.Boomerang: return 200;
             case ProjectileType.Homing: return 200;
             case ProjectileType.RandomShot: return 600;
+            case ProjectileType.RedZone: return 20;
             default: return 0;
         }
     }

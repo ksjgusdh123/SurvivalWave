@@ -8,6 +8,7 @@ public enum ProjectileType
     RandomShot,
     Homing,
     Boomerang,
+    RedZone,
     Max
 }
 
@@ -23,7 +24,7 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
         int cnt = (int)ProjectileType.Max;
         for (int i = 0; i < cnt; ++i)
         {
-            ProjectilePrefab.Add(Resources.Load<GameObject>($"Prefab/Projectile/Player/{((ProjectileType)i).ToString()}"));
+            ProjectilePrefab.Add(Resources.Load<GameObject>($"Prefab/Projectile/{((ProjectileType)i).ToString()}"));
         }
     }
 

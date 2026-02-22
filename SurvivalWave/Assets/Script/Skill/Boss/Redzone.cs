@@ -23,9 +23,10 @@ public class Redzone : BossSkillBase
     IEnumerator RedZoneCo(Transform target)
     {
         Vector3 center = target.position;
-        center.y = 0.01f;
+        //center.y = 0.01f;
 
-        var warning = Instantiate(redZonePrefab, center, Quaternion.identity);
+        var warning = ProjectilePool.GetInstance().PopObject(ProjectileType.RedZone);
+        warning.transform.position = center;
         warning.GetComponent<BlinkRedZone>().duration = warningTime; 
 
         yield return warningTimer;
@@ -37,8 +38,8 @@ public class Redzone : BossSkillBase
             if (null != stat) stat.TakeDamage(damage);
         }
 
-        ParticleManager.GetInstance().SpawnParticle(center, ParticleType.EarthShatter, 5f);
-
+        var earth = ParticlePool.GetInstance().PopObject(ParticleType.EarthShatter);
+        earth.transform.position = center;
         Destroy(warning);
     }
 }

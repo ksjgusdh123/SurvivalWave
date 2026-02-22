@@ -21,10 +21,20 @@ public class MonsterPool : BaseObjectPool<MonsterPool, MonsterType>
         for (int i = 0; i < size; ++i)
         {
             Entry e = new Entry();
-            e.initSize = 300;
             e.type = (MonsterType)i;
+            e.initSize = GetInitSize(e.type);
             e.go = Resources.Load<GameObject>($"Prefab/Monster/{e.type.ToString()}");
             initDatas.Add(e);
+        }
+    }
+    protected override int GetInitSize(MonsterType type)
+    {
+        switch (type)
+        {
+            case MonsterType.Slime: return 500;
+            case MonsterType.Turtle: return 500;
+            case MonsterType.Boss: return 10;
+            default: return 0;
         }
     }
 }

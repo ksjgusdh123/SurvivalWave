@@ -21,10 +21,21 @@ public class ItemPool : BaseObjectPool<ItemPool, ItemType>
         for (int i = 0; i < size; ++i)
         {
             Entry e = new Entry();
-            e.initSize = 300;
             e.type = (ItemType)i;
+            e.initSize = GetInitSize(e.type);
             e.go = Resources.Load<GameObject>($"Prefab/Item/{e.type.ToString()}");
             initDatas.Add(e);
+        }
+    }
+
+    protected override int GetInitSize(ItemType type)
+    {
+        switch (type)
+        {
+            case ItemType.Box: return 10;
+            case ItemType.Exp: return 500;
+            case ItemType.HpPotion: return 10;
+            default: return 0;
         }
     }
 }

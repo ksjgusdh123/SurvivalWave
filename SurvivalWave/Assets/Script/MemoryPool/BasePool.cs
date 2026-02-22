@@ -30,6 +30,7 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
         InitPoos();
     }
     protected abstract void Init();
+    protected abstract int GetInitSize(TypeKey type);
     void InitPoos()
     {
         foreach (Entry data in initDatas)

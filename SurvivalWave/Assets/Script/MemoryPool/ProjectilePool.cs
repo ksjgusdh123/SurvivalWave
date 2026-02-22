@@ -14,10 +14,20 @@ public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
         for(int i = 0; i < size; ++i)
         {
             Entry e = new Entry();
-            e.initSize = 300;
             e.type = (ProjectileType)i;
+            e.initSize = GetInitSize(e.type);
             e.go = Resources.Load<GameObject>($"Prefab/Projectile/Player/{e.type.ToString()}");
             initDatas.Add(e);
+        }
+    }
+    protected override int GetInitSize(ProjectileType type)
+    {
+        switch (type)
+        {
+            case ProjectileType.Boomerang: return 200;
+            case ProjectileType.Homing: return 200;
+            case ProjectileType.RandomShot: return 600;
+            default: return 0;
         }
     }
 }

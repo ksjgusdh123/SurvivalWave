@@ -13,7 +13,7 @@ public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
         int size = (int)ProjectileType.Max;
         for(int i = 0; i < size; ++i)
         {
-            Entry e = new BaseObjectPool<ProjectilePool, ProjectileType>.Entry();
+            Entry e = new Entry();
             e.initSize = 300;
             e.type = (ProjectileType)i;
             e.go = Resources.Load<GameObject>($"Prefab/Projectile/Player/{e.type.ToString()}");

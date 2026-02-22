@@ -20,7 +20,7 @@ public class MonsterPool : BaseObjectPool<MonsterPool, MonsterType>
         int size = (int)MonsterType.Max;
         for (int i = 0; i < size; ++i)
         {
-            Entry e = new BaseObjectPool<MonsterPool, MonsterType>.Entry();
+            Entry e = new Entry();
             e.initSize = 300;
             e.type = (MonsterType)i;
             e.go = Resources.Load<GameObject>($"Prefab/Monster/{e.type.ToString()}");

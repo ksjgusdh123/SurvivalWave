@@ -26,21 +26,12 @@ public class ParticleManager : Singleton<ParticleManager>
 
     public void SpawnParticle(Transform muzzle, ParticleType type, float deleteTime)
     {
-        GameObject go = Instantiate(particlePrefabDic[type], muzzle.position, Quaternion.identity, muzzle);
+        GameObject go = ParticlePool.GetInstance().PopObject(type, muzzle);
         go.transform.localPosition = Vector3.zero;
         go.transform.localRotation = Quaternion.identity;
-        StartCoroutine(ParticleLifeUpdate(go, deleteTime));
     }
     public void SpawnParticle(Vector3 spawnPos, ParticleType type, float deleteTime)
     {
-        GameObject go = Instantiate(particlePrefabDic[type], spawnPos, Quaternion.identity);
-        StartCoroutine(ParticleLifeUpdate(go, deleteTime));
-    }
-
-    IEnumerator ParticleLifeUpdate(GameObject go, float deltaTime)
-    {
-        yield return new WaitForSeconds(deltaTime);
-        if (null == go) yield break;
-        Destroy(go);
+        GameObject go = ParticlePool.GetInstance().PopObject(type);
     }
 }

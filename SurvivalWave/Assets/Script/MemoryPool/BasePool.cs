@@ -69,15 +69,15 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
 
         var go = q.Dequeue();
         if (parent) go.transform.SetParent(parent, false);
-        go.GetComponent<IPoolEvent>().OnSpawnPool();
         go.SetActive(true);
+        go.GetComponent<IPoolEvent>()?.OnSpawnPool();
         return go;
     }
 
     public virtual void ReturnObject(GameObject go, TypeKey type)
     {
         go.transform.SetParent(rootObject, false);
-        go.GetComponent<IPoolEvent>().OnReturnPool();
+        go.GetComponent<IPoolEvent>()?.OnReturnPool();
         go.SetActive(false);
         pools[type].Enqueue(go);
     }

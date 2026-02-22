@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Exp : MonoBehaviour, IPickupable
 {
+    public ItemType type { get; } = ItemType.Exp;
     public float amount { get; set; }
-    
+
     void Start()
     {
 
@@ -17,6 +18,6 @@ public class Exp : MonoBehaviour, IPickupable
     public void OnGain(GameObject player)
     {   
         player.GetComponent<PlayerStat>().GainExp(amount);
-        Destroy(gameObject);
+        ItemPool.GetInstance().ReturnObject(gameObject, type);
     }
 }

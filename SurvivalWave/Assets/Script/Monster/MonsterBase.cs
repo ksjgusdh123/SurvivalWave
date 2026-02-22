@@ -63,7 +63,8 @@ public class MonsterBase : MonoBehaviour, IPoolEvent
     {
         spawnPos.y += 1f;
 
-        GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/Item/Exp"), spawnPos, Quaternion.identity);
+        GameObject go = ItemPool.GetInstance().PopObject(ItemType.Exp);
+        go.transform.position = spawnPos;
         Exp exp = go.GetComponent<Exp>();
         Renderer renderer = go.GetComponent<Renderer>();
 
@@ -101,7 +102,8 @@ public class MonsterBase : MonoBehaviour, IPoolEvent
 
         if(rand < 9.7f)
         {
-            GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/Item/HpPotion"), spawnPos, Quaternion.identity);
+            GameObject go = ItemPool.GetInstance().PopObject(ItemType.HpPotion);
+            go.transform.position = spawnPos;
         }
         else
         {

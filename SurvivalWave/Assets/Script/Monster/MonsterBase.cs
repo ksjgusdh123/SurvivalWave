@@ -1,8 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterBase : MonoBehaviour, IPoolEvent
+public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
 {
+    public Vector3 Position => transform.position;
+    public float TickInterval => 0f;
+    public UpdatePolicy Policy => UpdatePolicy.Check;
+
     public MonsterType type;
     Transform player;
     MonsterStat stat;
@@ -19,14 +23,14 @@ public class MonsterBase : MonoBehaviour, IPoolEvent
         damagedEventComp = GetComponent<MonsterDamaged>();
     }
 
-    void Update()
+    public void Tick(float delta)
     {
         if (!agent || !agent.isActiveAndEnabled) return;
         if (!agent.isOnNavMesh) return;
 
         if (stat.hp <= 0f)
         {
-            if (!agent.isStopped)   
+            if (!agent.isStopped)
             {
                 agent.enabled = false;
             }
@@ -34,6 +38,11 @@ public class MonsterBase : MonoBehaviour, IPoolEvent
         }
 
         agent.SetDestination(player.position);
+    }
+
+    void Update()
+    {
+  
     }
 
     private void OnTriggerStay(Collider other)

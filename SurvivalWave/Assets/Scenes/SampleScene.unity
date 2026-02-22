@@ -2479,7 +2479,7 @@ MonoBehaviour:
   - {fileID: 1931298151966786, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
   - {fileID: 1524411113276028, guid: e2aafa8770d34a9591b41bedf4e318ba, type: 3}
   BossPrefab: {fileID: 1067925524328404, guid: 338c0826536898946a95e485148bfe84, type: 3}
-  spawnInterval: 1
+  spawnInterval: 0.3
   decreaseSpwanInterval: 0.05
   minSpawnInterval: 0.3
 --- !u!1001 &216301820133855457

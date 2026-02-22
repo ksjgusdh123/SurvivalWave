@@ -72,6 +72,7 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
         if (parent) go.transform.SetParent(parent, false);
         go.SetActive(true);
         go.GetComponent<IPoolEvent>()?.OnSpawnPool();
+        if (go.TryGetComponent<ITickUpdate>(out var tu)) UpdateManager.GetInstance().Register(tu);
         return go;
     }
 
@@ -80,6 +81,7 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
         go.transform.SetParent(rootObject, false);
         go.GetComponent<IPoolEvent>()?.OnReturnPool();
         go.SetActive(false);
+        if (go.TryGetComponent<ITickUpdate>(out var tu)) UpdateManager.GetInstance().Unregister(tu);
         pools[type].Enqueue(go);
     }
 }

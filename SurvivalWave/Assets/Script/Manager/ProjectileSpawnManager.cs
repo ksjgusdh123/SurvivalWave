@@ -15,19 +15,7 @@ public enum ProjectileType
 
 public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
 {
-    [SerializeField] List<GameObject> ProjectilePrefab = new List<GameObject>();
-
     PlayerStat playerStat;
-
-    protected override void Awake()
-    {
-        int cnt = (int)ProjectileType.Max;
-        for (int i = 0; i < cnt; ++i)
-        {
-            ProjectilePrefab.Add(Resources.Load<GameObject>($"Prefab/Projectile/{((ProjectileType)i).ToString()}"));
-        }
-    }
-
     public void RegisterPlayerStat(PlayerStat stat)
     {
         playerStat = stat;
@@ -38,7 +26,6 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
 
         GameObject go = ProjectilePool.GetInstance().PopObject(ProjectileType.RandomShot);
         go.transform.SetPositionAndRotation(spawnPos, rot);
-        //GameObject go = Instantiate(ProjectilePrefab[(int)ProjectileType.RandomShot], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         var move = go.GetComponent<StraightMove>();
         if (null == pb || null == move) return;
@@ -56,7 +43,6 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
 
         GameObject go = ProjectilePool.GetInstance().PopObject(ProjectileType.Homing);
         go.transform.SetPositionAndRotation(spawnPos, rot);
-        //GameObject go = Instantiate(ProjectilePrefab[(int)ProjectileType.Homing], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         var move = go.GetComponent<HomingMove>();
         if (null == pb || null == move) return;
@@ -72,7 +58,6 @@ public class ProjectileSpawnManager : Singleton<ProjectileSpawnManager>
 
         GameObject go = ProjectilePool.GetInstance().PopObject(ProjectileType.Boomerang);
         go.transform.SetPositionAndRotation(spawnPos, rot);
-        //GameObject go = Instantiate(ProjectilePrefab[(int)ProjectileType.Boomerang], spawnPos, rot);
         ProjectileBase pb = go.GetComponent<ProjectileBase>();
         var move = go.GetComponent<BoomerangMove>();
         if (null == pb || null == move) return;

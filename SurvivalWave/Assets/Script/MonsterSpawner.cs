@@ -2,10 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum MonsterType
-{
-
-}
 
 public class MonsterSpawner : MonoBehaviour
 {
@@ -48,11 +44,11 @@ public class MonsterSpawner : MonoBehaviour
             int idx = Random.Range(0, 2);
             if (isFocusSpawn)
             {
-                RandomSpawn(idx);
+                RandomSpawn((MonsterType)idx);
             }
             else
             {
-                Spawn(monsterPrefab[idx]);
+                Spawn((MonsterType)idx);
             }
             spawnTimer = spawnInterval;
         }
@@ -64,24 +60,21 @@ public class MonsterSpawner : MonoBehaviour
             difficultyTimer = difficultyInterval;
         }
     }
-
-    void RandomSpawn(int idx)
+    void RandomSpawn(MonsterType type)
     {
         float rand = Random.Range(0f, 10f);
 
         if (rand < 9f)
         {
-            Spawn(monsterPrefab[idx]);
+            Spawn(type);
         }
         else
         {
-            SpawnGroup(monsterPrefab[idx]);
+            SpawnGroup(type);
         }
     }
-    public void Spawn(GameObject prefab)
+    public void Spawn(MonsterType type)
     {
-        if (null == monsterPrefab) return;
-
         float distance = Random.Range(minSpawnRadius, maxSpawnRadius);
         Vector2 direction = Random.insideUnitCircle.normalized;
 
@@ -98,17 +91,16 @@ public class MonsterSpawner : MonoBehaviour
             spawnPos = hit.point;
         }
 
-
-            GameObject monster = Instantiate(prefab, spawnPos, Quaternion.identity);
+        GameObject monster = MonsterPool.GetInstance().PopObject(type);
         if (null == monster) return;
+        monster.transform.SetPositionAndRotation(spawnPos, Quaternion.identity);
 
         Collider col = monster.GetComponent<Collider>();
         if (null == col) return;
 
-        float offset = monster.transform.position.y - col.bounds.min.y;
-        monster.transform.position += Vector3.up * offset;
+        monster.GetComponent<NavMeshAgent>().enabled = true;
     }
-    public void SpawnGroup(GameObject prefab)
+    public void SpawnGroup(MonsterType type)
     {
         if (null == monsterPrefab) return;
 
@@ -120,18 +112,12 @@ public class MonsterSpawner : MonoBehaviour
         {
             if (TryPickPointNearCenterOnNavMesh(centerPos, out Vector3 pos))
             {
-                var m = Instantiate(prefab, pos, Quaternion.identity);
-
-                var col = m.GetComponent<Collider>();
-                if (col != null)
-                {
-                    float offset = m.transform.position.y - col.bounds.min.y;
-                    m.transform.position += Vector3.up * offset;
-                }
+                var m = MonsterPool.GetInstance().PopObject(type);
+                m.transform.SetPositionAndRotation(pos, Quaternion.identity);
+                m.GetComponent<NavMeshAgent>().enabled = true;
             }
         }
     }
-
     bool TryPickGroupCenterOnNavMesh(Vector3 playerPos, out Vector3 center)
     {
         Vector2 dir = Random.insideUnitCircle;
@@ -180,7 +166,7 @@ public class MonsterSpawner : MonoBehaviour
     public void StartFocusSpawn()
     {
         SetFocusSpawnState();
-        Spawn(BossPrefab);
+        Spawn(MonsterType.Boss);
         StartCoroutine(FocusSpawnMonster());
     }
 

@@ -1,17 +1,20 @@
 using UnityEngine;
 
-public class ProjectileBase : MonoBehaviour
+public class ProjectileBase : MonoBehaviour, IPoolEvent
 {
     [SerializeField] public float speed { get; private set; } = 10f;
-    float finalDamag;
-    protected IProjectileMove move;
-    public Transform muzzle { get; private set; }
 
+    TrailRenderer trailRenderer;
+    public Transform muzzle { get; private set; }
+    protected IProjectileMove move;
+
+    float finalDamag;
     public bool isPenetration { get; set; }
 
     void Awake()
     {
-        muzzle = transform.Find("MuzzlePos");    
+        muzzle = transform.Find("MuzzlePos");
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
     public void Init(IProjectileMove type, float speed, float dmg)
@@ -26,7 +29,7 @@ public class ProjectileBase : MonoBehaviour
         move?.Move(this);
     }
 
-    public void DestroyProjectile()
+    public void ReturnProjectile()
     {
         if (!isPenetration)
         {
@@ -43,6 +46,17 @@ public class ProjectileBase : MonoBehaviour
         if (null == stat || !stat.TakeDamage(finalDamag)) return;
         other.GetComponent<MonsterBase>().DamagedEvent();
 
-        DestroyProjectile();
+        ReturnProjectile();
+    }
+
+    public void OnSpawnPool()
+    {
+    }
+    public void OnReturnPool()
+    {
+        if (null != trailRenderer)
+        {
+            trailRenderer.Clear();
+        }
     }
 }

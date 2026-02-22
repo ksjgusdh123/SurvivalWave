@@ -25,7 +25,7 @@ public class StraightMove : MonoBehaviour, IProjectileMove
 
         if (movedDistance >= maxDistanceMagnitude)
         {
-            projectile.DestroyProjectile();
+            projectile.ReturnProjectile();
         }
     }
 }

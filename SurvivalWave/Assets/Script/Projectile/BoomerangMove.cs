@@ -54,7 +54,7 @@ public class BoomerangMove : MonoBehaviour, IProjectileMove
             if (finalDist <= returnRadius)
             {
                 projectile.isPenetration = false;
-                projectile.DestroyProjectile();
+                projectile.ReturnProjectile();
             }
         }
         projectile.transform.Rotate(Vector3.up * 360f * Time.deltaTime);

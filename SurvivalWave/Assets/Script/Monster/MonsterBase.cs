@@ -1,37 +1,37 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterBase : MonoBehaviour
+public class MonsterBase : MonoBehaviour, IPoolEvent
 {
+    public MonsterType type;
     Transform player;
-    Stat stat;
+    MonsterStat stat;
     MonsterDamaged damagedEventComp;
     NavMeshAgent agent;
 
     bool isCollision;
 
-    void Start()
+    void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        stat = GetComponent<Stat>();
+        stat = GetComponent<MonsterStat>();
         player = Player.playerTransform;
         damagedEventComp = GetComponent<MonsterDamaged>();
     }
 
     void Update()
     {
-        if(stat.hp <= 0f)
+        if (!agent || !agent.isActiveAndEnabled) return;
+        if (!agent.isOnNavMesh) return;
+
+        if (stat.hp <= 0f)
         {
             if (!agent.isStopped)   
             {
-                agent.isStopped = true;
-                agent.ResetPath();
+                agent.enabled = false;
             }
             return;
         }
-
-        if (!agent || !agent.isActiveAndEnabled) return;
-        if (!agent.isOnNavMesh) return;
 
         agent.SetDestination(player.position);
     }
@@ -56,7 +56,7 @@ public class MonsterBase : MonoBehaviour
         Vector3 spawnPos = transform.position;
         PickExp(spawnPos);
         PickRandomItem(spawnPos);
-        Destroy(gameObject);
+        MonsterPool.GetInstance().ReturnObject(gameObject, type);
     }
 
     void PickExp(Vector3 spawnPos)
@@ -107,5 +107,13 @@ public class MonsterBase : MonoBehaviour
         {
 
         }
+    }
+
+    public void OnSpawnPool()
+    {
+        stat.InitStat();
+    }
+    public void OnReturnPool()
+    {
     }
 }

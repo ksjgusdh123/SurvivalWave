@@ -17,7 +17,6 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
     }
 
     [SerializeField] protected List<Entry> initDatas = new List<Entry>();
-    protected bool isPrefab = true;
     protected Transform rootObject;
     protected Dictionary<TypeKey, Queue<GameObject>> pools = new Dictionary<TypeKey, Queue<GameObject>>();
     protected Dictionary<TypeKey, GameObject> prefabs = new Dictionary<TypeKey, GameObject>();
@@ -52,9 +51,7 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
         int size = initSizes[type];
         for (int i = 0; i < size; ++i)
         {
-            GameObject go;
-            if (isPrefab) go = Instantiate(prefabs[type], rootObject);
-            else go = prefabs[type];
+            GameObject go = Instantiate(prefabs[type], rootObject);
             go.SetActive(false);
             pool.Enqueue(go);
         }
@@ -72,6 +69,7 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
 
         var go = q.Dequeue();
         if (parent) go.transform.SetParent(parent, false);
+        go.GetComponent<IPoolEvent>().OnSpawnPool();
         go.SetActive(true);
         return go;
     }
@@ -79,6 +77,7 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
     public virtual void ReturnObject(GameObject go, TypeKey type)
     {
         go.transform.SetParent(rootObject, false);
+        go.GetComponent<IPoolEvent>().OnReturnPool();
         go.SetActive(false);
         pools[type].Enqueue(go);
     }

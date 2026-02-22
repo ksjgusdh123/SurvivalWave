@@ -13,9 +13,9 @@ public class HomingMove : MonoBehaviour, IProjectileMove
     }
     public void Move(ProjectileBase projectile)
     {
-        if (homingTarget == null)
+        if (homingTarget == null || !homingTarget.gameObject.activeSelf)
         {
-            projectile.DestroyProjectile();
+            projectile.ReturnProjectile();
             return;
         }
         currentSpeed += 3f * Time.deltaTime;

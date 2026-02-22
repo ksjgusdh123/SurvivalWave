@@ -20,14 +20,4 @@ public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
             initDatas.Add(e);
         }
     }
-
-    public override void ReturnObject(GameObject go, ProjectileType type)
-    {
-        var tr = go.GetComponent<TrailRenderer>();
-        if (null != tr)
-        {
-            tr.Clear();
-        }
-        base.ReturnObject(go, type);
-    }
 }

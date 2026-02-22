@@ -23,9 +23,9 @@ public class ParticlePool : BaseObjectPool<ParticlePool, ParticleType>
     {
         switch (type)
         {
-            case ParticleType.BoomerangEffect: return 200;
-            case ParticleType.RocketEffect: return 200;
-            case ParticleType.RandomShotEffect: return 500;
+            case ParticleType.BoomerangEffect: return 2000;
+            case ParticleType.RocketEffect: return 2000;
+            case ParticleType.RandomShotEffect: return 5000;
             case ParticleType.EarthShatter: return 20;
             case ParticleType.RocketExplosion: return 0;
             default: return 0;

@@ -4,23 +4,29 @@ using UnityEngine.AI;
 public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
 {
     public Vector3 Position => transform.position;
-    public float TickInterval => 0f;
     public UpdatePolicy Policy => UpdatePolicy.Check;
+    public float TickInterval => 0f;
+    public int checkStamp { get; set; }
 
     public MonsterType type;
     Transform player;
     MonsterStat stat;
+    MonsterAnimation anim;
     MonsterDamaged damagedEventComp;
     NavMeshAgent agent;
+    PlayerStat target;
 
+    int playerLayer;
     bool isCollision;
 
     void Awake()
     {
+        anim = GetComponent<MonsterAnimation>();
         agent = GetComponent<NavMeshAgent>();
         stat = GetComponent<MonsterStat>();
         player = Player.playerTransform;
         damagedEventComp = GetComponent<MonsterDamaged>();
+        playerLayer = LayerMask.NameToLayer("Player");
     }
 
     public void Tick(float delta)
@@ -45,17 +51,27 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
   
     }
 
-    private void OnTriggerStay(Collider other)
+    private void FixedUpdate()
     {
-        if (!other.CompareTag("Player") || isCollision || stat.hp <= 0) return;
+        if (!isCollision || null == target) return;
 
-        PlayerStat player = other.GetComponent<PlayerStat>();
-        if (null == player || !player.TakeDamage(stat.attack)) return;
-            
-        
-        isCollision = true;
+        target.TakeDamage(stat.attack);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer != playerLayer) return;
+        PlayerStat player = other.GetComponent<PlayerStat>();
+        if (null == player) return;
+        target = player;
+        isCollision = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer != playerLayer) return;
+        isCollision = false;
+        target = null;
+    }
     public void DamagedEvent()
     {
         if(damagedEventComp) StartCoroutine(damagedEventComp.ChangeColor());
@@ -123,6 +139,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
     public void OnSpawnPool()
     {
         stat.InitStat();
+        anim.NotifyIsDeath(false);
     }
     public void OnReturnPool()
     {

@@ -24,9 +24,9 @@ public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
     {
         switch (type)
         {
-            case ProjectileType.Boomerang: return 200;
-            case ProjectileType.Homing: return 200;
-            case ProjectileType.RandomShot: return 600;
+            case ProjectileType.Boomerang: return 2000;
+            case ProjectileType.Homing: return 2000;
+            case ProjectileType.RandomShot: return 6000;
             case ProjectileType.RedZone: return 20;
             default: return 0;
         }

@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class UpdateManager : Singleton<UpdateManager>
 {
-    [SerializeField] float cellSize = 10f;
-    [SerializeField] int activeRadiusCells = 2;   
-    [SerializeField] float cellUpdateInterval = 0.2f;
-    [SerializeField] float farCellUpdateInterval = 0.5f;
+    [SerializeField] float cellSize = 5f;
+    [SerializeField] int activeRadiusCells = 1;   
+    [SerializeField] float cellUpdateInterval = 1f;
+    [SerializeField] float farCellUpdateInterval = 1f;
 
     readonly List<ITickUpdate> always = new();
     readonly List<ITickUpdate> checkAll = new();
@@ -46,9 +46,11 @@ public class UpdateManager : Singleton<UpdateManager>
 
         grid.PickNearCellObject(player.position, activeRadiusCells, checkActive);
 
+        int timeStamp = Time.frameCount;
         for (int i = 0; i < checkActive.Count; ++i)
         {
             TickWithInterval(checkActive[i], delta);
+            checkActive[i].checkStamp = timeStamp;
         }
 
         farCheckAcc += delta;
@@ -56,14 +58,11 @@ public class UpdateManager : Singleton<UpdateManager>
         {
             float t = farCheckAcc;
             farCheckAcc = 0f;
-            activeSet.Clear();
-            for (int i = 0; i < checkActive.Count; i++)
-                activeSet.Add(checkActive[i]);
 
             for (int i = 0; i < checkAll.Count; ++i)
             {
                 var e = checkAll[i];
-                if (activeSet.Contains(e)) continue;
+                if (checkAll[i].checkStamp == timeStamp) continue;
                 TickWithInterval(e, t);
             }
         }

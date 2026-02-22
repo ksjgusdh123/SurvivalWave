@@ -31,8 +31,8 @@ public class MonsterPool : BaseObjectPool<MonsterPool, MonsterType>
     {
         switch (type)
         {
-            case MonsterType.Slime: return 500;
-            case MonsterType.Turtle: return 500;
+            case MonsterType.Slime: return 5000;
+            case MonsterType.Turtle: return 5000;
             case MonsterType.Boss: return 10;
             default: return 0;
         }

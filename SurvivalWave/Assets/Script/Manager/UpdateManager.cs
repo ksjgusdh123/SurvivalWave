@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,12 +9,16 @@ public class UpdateManager : Singleton<UpdateManager>
     [SerializeField] float cellUpdateInterval = 1f;
     [SerializeField] float farCellUpdateInterval = 1f;
 
+    [SerializeField] int updatePerFrame = 200;
+
     readonly List<ITickUpdate> always = new();
     readonly List<ITickUpdate> checkAll = new();
     readonly List<ITickUpdate> checkActive = new();
+    readonly List<ITickUpdate> pendingAdd = new();
+    readonly List<ITickUpdate> pendingRemove = new();
     readonly Dictionary<ITickUpdate, float> acc = new();
-    HashSet<ITickUpdate> activeSet = new HashSet<ITickUpdate>();
 
+    Coroutine farTickUpdateCoroutine;
     Transform player;
     SpatialGrid grid;
 
@@ -28,6 +33,7 @@ public class UpdateManager : Singleton<UpdateManager>
 
     private void Update()
     {
+        UpdatePenddingObject();
         float delta = Time.deltaTime;
         for (int i = 0; i < always.Count; ++i)
         {
@@ -56,16 +62,32 @@ public class UpdateManager : Singleton<UpdateManager>
         farCheckAcc += delta;
         if(farCheckAcc >= farCellUpdateInterval)
         {
+            if (null != farTickUpdateCoroutine) return;
+
             float t = farCheckAcc;
             farCheckAcc = 0f;
+            farTickUpdateCoroutine = StartCoroutine(FarTickUpdate(t, timeStamp));
+        }
+    }
+    IEnumerator FarTickUpdate(float delta, int timeStamp)
+    {
+        int cnt = 0;
 
-            for (int i = 0; i < checkAll.Count; ++i)
+        for (int i = 0; i < checkAll.Count; i++)
+        {
+            var e = checkAll[i];
+            if (e.checkStamp == timeStamp) continue;
+
+            TickWithInterval(e, delta);
+
+            cnt++;
+            if (cnt >= updatePerFrame)
             {
-                var e = checkAll[i];
-                if (checkAll[i].checkStamp == timeStamp) continue;
-                TickWithInterval(e, t);
+                cnt = 0;
+                yield return null; 
             }
         }
+        farTickUpdateCoroutine = null;
     }
     void TickWithInterval(ITickUpdate e, float delta)
     {
@@ -85,23 +107,58 @@ public class UpdateManager : Singleton<UpdateManager>
     {
         if (e == null) return;
 
-        if (acc.ContainsKey(e)) return;
+        if (acc.ContainsKey(e) || pendingAdd.Contains(e)) return;
 
+        if(null == farTickUpdateCoroutine)
+        {
+            pendingAdd.Add(e);
+        }
+        else
+        {
+            RegisterDirect(e);
+        }
+    }
+    void RegisterDirect(ITickUpdate e)
+    {
         acc[e] = 0f;
 
         if (UpdatePolicy.Always == e.Policy) always.Add(e);
         else checkAll.Add(e);
         grid.Add(e);
     }
-
     public void Unregister(ITickUpdate e)
     {
-        if (e == null) return;
+        if (e == null || pendingRemove.Contains(e)) return;
 
+        if (null == farTickUpdateCoroutine)
+        {
+            pendingRemove.Add(e);
+        }
+        else
+        {
+            UnregisterDirect(e);
+        }
+    }
+    void UnregisterDirect(ITickUpdate e)
+    {
         acc.Remove(e);
 
         if (UpdatePolicy.Always == e.Policy) always.Remove(e);
         else checkAll.Remove(e);
         grid.Remove(e);
+    }
+    void UpdatePenddingObject()
+    {
+        foreach (var po in pendingRemove)
+        {
+            UnregisterDirect(po);
+        }
+        pendingRemove.Clear();
+
+        foreach (var po in pendingAdd)
+        {
+            RegisterDirect(po);
+        }
+        pendingAdd.Clear();
     }
 }

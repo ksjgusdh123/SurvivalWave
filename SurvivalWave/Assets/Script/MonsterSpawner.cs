@@ -48,7 +48,7 @@ public class MonsterSpawner : MonoBehaviour
             }
             else
             {
-                Spawn((MonsterType)idx);
+                SpawnGroup((MonsterType)idx);
             }
             spawnTimer = spawnInterval;
         }
@@ -66,7 +66,7 @@ public class MonsterSpawner : MonoBehaviour
 
         if (rand < 9f)
         {
-            Spawn(type);
+            SpawnGroup(type);
         }
         else
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UpdateManager : Singleton<UpdateManager>
 {
-    [SerializeField] float cellSize = 5f;
+    [SerializeField] float cellSize = 10f;
     [SerializeField] int activeRadiusCells = 1;
     [SerializeField] float cellUpdateInterval = 1f;
     [SerializeField] float farCellUpdateInterval = 3f;
@@ -53,7 +53,7 @@ public class UpdateManager : Singleton<UpdateManager>
         int timeStamp = Time.frameCount;
         for (int i = 0; i < checkActive.Count; ++i)
         {
-            TickWithInterval(checkActive[i], delta);
+            Tick(checkActive[i], delta);
             checkActive[i].checkStamp = timeStamp;
         }
 

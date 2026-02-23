@@ -2473,8 +2473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422e3ebb9acf21f4c8c06ebb9050857a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSpawner
-  maxSpawnRadius: 50
-  minSpawnRadius: 20
+  maxSpawnRadius: 100
+  minSpawnRadius: 50
   monsterPrefab:
   - {fileID: 1931298151966786, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
   - {fileID: 1524411113276028, guid: e2aafa8770d34a9591b41bedf4e318ba, type: 3}

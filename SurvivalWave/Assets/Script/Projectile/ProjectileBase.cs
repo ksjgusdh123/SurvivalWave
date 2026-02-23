@@ -34,6 +34,7 @@ public class ProjectileBase : MonoBehaviour, IPoolEvent, ITickUpdate
     }
     void Update()
     {
+        move?.Move(this);
     }
 
     public void ReturnProjectile()

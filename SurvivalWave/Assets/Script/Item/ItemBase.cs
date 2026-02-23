@@ -4,7 +4,7 @@ public class ItemBase : MonoBehaviour, IPickupable, ITickUpdate
 {
     public Vector3 Position => transform.position;
     public UpdatePolicy Policy => UpdatePolicy.Check;
-    public float TickInterval => 0f;
+    public virtual float TickInterval => 0f;
     public int checkStamp { get; set; }
     public virtual ItemType type { get; } = ItemType.Max;
 

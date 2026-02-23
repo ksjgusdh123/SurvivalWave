@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.ShortcutManagement;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
@@ -7,10 +6,11 @@ using static UnityEngine.GraphicsBuffer;
 public class Exp : ItemBase
 {
     public override ItemType type { get; } = ItemType.Exp;
+    public override float TickInterval => 0.1f;
     public float amount { get; set; }
     public float maxDist { get; set; } = 1f;
 
-    [SerializeField] float speed = 10f;
+    [SerializeField] float speed = 1f;
     [SerializeField] float magnetPower = 20f;
 
     Transform player;
@@ -32,11 +32,10 @@ public class Exp : ItemBase
     }
     public override void OnGain(GameObject player)
     {   
-        player.GetComponent<PlayerStat>().GainExp(amount);
+        //player.GetComponent<PlayerStat>().GainExp(amount);
         ItemPool.GetInstance().ReturnObject(gameObject, type);
     }
-
-    private void Update()
+    public override void Tick(float delta)
     {
         Vector3 pos, to;
         float dist;
@@ -45,12 +44,8 @@ public class Exp : ItemBase
         isMagent = true;
 
         Vector3 dir = to / dist;
-        Vector3 next = pos + dir * speed * Time.deltaTime;
+        Vector3 next = pos + dir * speed * delta;
         transform.position = next;
-    }
-    public override void Tick(float delta)
-    {
-
     }
     public void ChangeDistance()
     {

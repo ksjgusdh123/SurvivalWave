@@ -33,6 +33,15 @@ public class GameManager : Singleton<GameManager>
     {
         gameLevelTimerHandle = new WaitForSeconds(60f);
         StartCoroutine(ChangeLevel());
+
+        //int cnt = 1000;
+        //float y = Player.playerTransform.position.y + 1.5f;
+        //for (int i = 0; i < cnt; ++i)
+        //{
+        //    Vector3 spawnPos = new Vector3(0f, y, i);
+        //    GameObject go = ItemPool.GetInstance().PopObject(ItemType.Exp);
+        //    go.transform.position = spawnPos;
+        //}
     }
 
     IEnumerator ChangeLevel()

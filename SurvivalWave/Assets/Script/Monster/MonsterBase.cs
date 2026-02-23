@@ -123,7 +123,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
 
         if (rand < 9f) return;
 
-        spawnPos.x += 3f;
+        spawnPos.x += 5f;
 
         GameObject go;
         if (rand < 9.7f)

@@ -7,9 +7,10 @@ public class UpdateManager : Singleton<UpdateManager>
     [SerializeField] float cellSize = 5f;
     [SerializeField] int activeRadiusCells = 1;   
     [SerializeField] float cellUpdateInterval = 1f;
-    [SerializeField] float farCellUpdateInterval = 1f;
+    [SerializeField] float farCellUpdateInterval = 3f;
 
-    [SerializeField] int updatePerFrame = 200;
+    [SerializeField] int updateFarPerFrame = 200;
+    [SerializeField] int updateCellPerFrame = 200;
 
     readonly List<ITickUpdate> always = new();
     readonly List<ITickUpdate> checkAll = new();
@@ -19,11 +20,13 @@ public class UpdateManager : Singleton<UpdateManager>
     readonly Dictionary<ITickUpdate, float> acc = new();
 
     Coroutine farTickUpdateCoroutine;
+    Coroutine updateCellCorouinte;
     Transform player;
     SpatialGrid grid;
 
     float cellAcc;
     float farCheckAcc;
+
 
     protected override void Awake()
     {
@@ -33,7 +36,6 @@ public class UpdateManager : Singleton<UpdateManager>
 
     private void Update()
     {
-        UpdatePenddingObject();
         float delta = Time.deltaTime;
         for (int i = 0; i < always.Count; ++i)
         {
@@ -43,11 +45,7 @@ public class UpdateManager : Singleton<UpdateManager>
         cellAcc += delta;
         if (cellAcc >= cellUpdateInterval)
         {
-            cellAcc = 0f;
-            for (int i = 0; i < checkAll.Count; ++i)
-            {
-                grid.UpdateCell(checkAll[i]);
-            }
+            if(null == updateCellCorouinte) updateCellCorouinte = StartCoroutine(UpdateCell());
         }
 
         grid.PickNearCellObject(player.position, activeRadiusCells, checkActive);
@@ -69,6 +67,23 @@ public class UpdateManager : Singleton<UpdateManager>
             farTickUpdateCoroutine = StartCoroutine(FarTickUpdate(t, timeStamp));
         }
     }
+    IEnumerator UpdateCell()
+    {
+        int cnt = 0;
+        cellAcc = 0f;
+        for (int i = 0; i < checkAll.Count; ++i)
+        {
+            grid.UpdateCell(checkAll[i]);
+            cnt++;
+            if (cnt >= updateCellPerFrame)
+            {
+                cnt = 0;
+                yield return null;
+            }
+        }
+        UpdatePenddingObject();
+        updateCellCorouinte = null;
+    }
     IEnumerator FarTickUpdate(float delta, int timeStamp)
     {
         int cnt = 0;
@@ -81,7 +96,7 @@ public class UpdateManager : Singleton<UpdateManager>
             TickWithInterval(e, delta);
 
             cnt++;
-            if (cnt >= updatePerFrame)
+            if (cnt >= updateFarPerFrame)
             {
                 cnt = 0;
                 yield return null; 

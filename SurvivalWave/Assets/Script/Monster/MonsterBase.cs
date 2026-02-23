@@ -5,7 +5,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
 {
     public Vector3 Position => transform.position;
     public UpdatePolicy Policy => UpdatePolicy.Check;
-    public float TickInterval => 0f;
+    public float TickInterval => 0.2f;
     public int checkStamp { get; set; }
 
     public MonsterType type;
@@ -48,7 +48,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
 
     void Update()
     {
-  
+        
     }
 
     private void FixedUpdate()

@@ -1,14 +1,18 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
-public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
+public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate, IShadowCast
 {
     public Vector3 Position => transform.position;
     public UpdatePolicy Policy => UpdatePolicy.Check;
     public float TickInterval => 0.2f;
     public int checkStamp { get; set; }
+    public bool isOn { get; set; }
 
     public MonsterType type;
+    Renderer[] renderers;
     Transform player;
     MonsterStat stat;
     MonsterAnimation anim;
@@ -21,6 +25,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
 
     void Awake()
     {
+        renderers = GetComponentsInChildren<Renderer>(true);
         anim = GetComponent<MonsterAnimation>();
         agent = GetComponent<NavMeshAgent>();
         stat = GetComponent<MonsterStat>();
@@ -144,5 +149,18 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
     }
     public void OnReturnPool()
     {
+    }
+
+    public void SetNearShadow(bool on)
+    {
+        if (on == isOn) return;
+        isOn = on;
+
+        var mode = on ? ShadowCastingMode.On : ShadowCastingMode.Off;
+        for (int i = 0; i < renderers.Length; ++i)
+        {
+            if (renderers[i] == null) continue;
+            renderers[i].shadowCastingMode = mode;
+        }
     }
 }

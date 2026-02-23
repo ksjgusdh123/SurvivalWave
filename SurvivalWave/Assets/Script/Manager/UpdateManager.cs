@@ -5,12 +5,12 @@ using UnityEngine;
 public class UpdateManager : Singleton<UpdateManager>
 {
     [SerializeField] float cellSize = 10f;
-    [SerializeField] int activeRadiusCells = 1;
-    [SerializeField] float cellUpdateInterval = 1f;
+    [SerializeField] int activeRadiusCells = 2;
+    [SerializeField] float cellUpdateInterval = 0.5f;
     [SerializeField] float farCellUpdateInterval = 3f;
 
     [SerializeField] int updateFarPerFrame = 200;
-    [SerializeField] int updateCellPerFrame = 200;
+    [SerializeField] int updateCellPerFrame = 300;
 
     readonly List<ITickUpdate> always = new();
     readonly List<ITickUpdate> checkAll = new();
@@ -53,8 +53,14 @@ public class UpdateManager : Singleton<UpdateManager>
         int timeStamp = Time.frameCount;
         for (int i = 0; i < checkActive.Count; ++i)
         {
-            Tick(checkActive[i], delta);
-            checkActive[i].checkStamp = timeStamp;
+            var e = checkActive[i];
+            Tick(e, delta);
+            e.checkStamp = timeStamp;
+
+            if(e is IShadowCast s)
+            {
+                s.SetNearShadow(true);
+            }
         }
 
         farCheckAcc += delta;
@@ -92,6 +98,11 @@ public class UpdateManager : Singleton<UpdateManager>
         {
             var e = checkAll[i];
             if (e.checkStamp == timeStamp) continue;
+
+            if (e is IShadowCast s)
+            {
+                s.SetNearShadow(false);
+            }
 
             TickWithInterval(e, delta);
 

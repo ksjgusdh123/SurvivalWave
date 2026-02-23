@@ -1,7 +1,11 @@
 using UnityEngine;
 
-public class ProjectileBase : MonoBehaviour, IPoolEvent
+public class ProjectileBase : MonoBehaviour, IPoolEvent, ITickUpdate
 {
+    public Vector3 Position => transform.position;
+    public UpdatePolicy Policy => UpdatePolicy.Always;
+    public float TickInterval => 0f;
+    public int checkStamp { get; set; }
     [SerializeField] public float speed { get; private set; } = 10f;
 
     TrailRenderer trailRenderer;
@@ -24,9 +28,12 @@ public class ProjectileBase : MonoBehaviour, IPoolEvent
         finalDamag = dmg;
     }
 
-    void Update()
+    public void Tick(float delta)
     {
         move?.Move(this);
+    }
+    void Update()
+    {
     }
 
     public void ReturnProjectile()

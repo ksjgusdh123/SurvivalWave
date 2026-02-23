@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class Box : ItemBase
+public class Magnet : ItemBase
 {
-    public override ItemType type { get; } = ItemType.Box;
+    public override ItemType type { get; } = ItemType.Magnet;
 
     public override void OnGain(GameObject player)
     {
-        UIManager.GetInstance().Show(EUIType.LevelUp);
+        player.GetComponent<Player>().GetMagnetItem();
         ItemPool.GetInstance().ReturnObject(gameObject, type);
     }
+
 }

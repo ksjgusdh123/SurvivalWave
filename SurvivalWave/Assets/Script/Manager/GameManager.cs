@@ -77,4 +77,8 @@ public class GameManager : Singleton<GameManager>
     {
         return skillHandler.GetSkillLevel(skillId);
     }
+    public void GetMagnet()
+    {
+
+    }
 }

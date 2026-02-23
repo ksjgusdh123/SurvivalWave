@@ -5,6 +5,7 @@ public enum ItemType
     Exp,
     Box,
     HpPotion,
+    Magnet,
     Max
 }
 
@@ -35,6 +36,7 @@ public class ItemPool : BaseObjectPool<ItemPool, ItemType>
             case ItemType.Box: return 10;
             case ItemType.Exp: return 500;
             case ItemType.HpPotion: return 10;
+            case ItemType.Magnet: return 10;
             default: return 0;
         }
     }

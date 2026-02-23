@@ -5,7 +5,7 @@ using UnityEngine;
 public class UpdateManager : Singleton<UpdateManager>
 {
     [SerializeField] float cellSize = 5f;
-    [SerializeField] int activeRadiusCells = 1;   
+    [SerializeField] int activeRadiusCells = 1;
     [SerializeField] float cellUpdateInterval = 1f;
     [SerializeField] float farCellUpdateInterval = 3f;
 
@@ -39,13 +39,13 @@ public class UpdateManager : Singleton<UpdateManager>
         float delta = Time.deltaTime;
         for (int i = 0; i < always.Count; ++i)
         {
-            TickWithInterval(always[i], delta);
+            Tick(always[i], delta);
         }
 
         cellAcc += delta;
         if (cellAcc >= cellUpdateInterval)
         {
-            if(null == updateCellCorouinte) updateCellCorouinte = StartCoroutine(UpdateCell());
+            if (null == updateCellCorouinte) updateCellCorouinte = StartCoroutine(UpdateCell());
         }
 
         grid.PickNearCellObject(player.position, activeRadiusCells, checkActive);
@@ -58,7 +58,7 @@ public class UpdateManager : Singleton<UpdateManager>
         }
 
         farCheckAcc += delta;
-        if(farCheckAcc >= farCellUpdateInterval)
+        if (farCheckAcc >= farCellUpdateInterval)
         {
             if (null != farTickUpdateCoroutine) return;
 
@@ -99,10 +99,14 @@ public class UpdateManager : Singleton<UpdateManager>
             if (cnt >= updateFarPerFrame)
             {
                 cnt = 0;
-                yield return null; 
+                yield return null;
             }
         }
         farTickUpdateCoroutine = null;
+    }
+    void Tick(ITickUpdate e, float delta)
+    {
+        e.Tick(delta);
     }
     void TickWithInterval(ITickUpdate e, float delta)
     {
@@ -112,10 +116,9 @@ public class UpdateManager : Singleton<UpdateManager>
 
         if (t >= interval)
         {
-            e.Tick(t);   
+            e.Tick(t);
             t = 0f;
         }
-
         acc[e] = t;
     }
     public void Register(ITickUpdate e)
@@ -124,7 +127,11 @@ public class UpdateManager : Singleton<UpdateManager>
 
         if (acc.ContainsKey(e) || pendingAdd.Contains(e)) return;
 
-        if(null == farTickUpdateCoroutine)
+        if (UpdatePolicy.Always == e.Policy)
+        {
+            RegisterDirect(e);
+        }
+        else if (null != farTickUpdateCoroutine)
         {
             pendingAdd.Add(e);
         }
@@ -137,15 +144,26 @@ public class UpdateManager : Singleton<UpdateManager>
     {
         acc[e] = 0f;
 
-        if (UpdatePolicy.Always == e.Policy) always.Add(e);
-        else checkAll.Add(e);
-        grid.Add(e);
+        if (UpdatePolicy.Always == e.Policy)
+        {
+            always.Add(e);
+        }
+        else
+        {
+            checkAll.Add(e);
+            grid.Add(e);
+        }
     }
     public void Unregister(ITickUpdate e)
     {
-        if (e == null || pendingRemove.Contains(e)) return;
+        if (e == null || pendingRemove.Contains(e))
+            return;
 
-        if (null == farTickUpdateCoroutine)
+        if (UpdatePolicy.Always == e.Policy)
+        {
+            UnregisterDirect(e);
+        }
+        else if (null != farTickUpdateCoroutine)
         {
             pendingRemove.Add(e);
         }
@@ -158,9 +176,15 @@ public class UpdateManager : Singleton<UpdateManager>
     {
         acc.Remove(e);
 
-        if (UpdatePolicy.Always == e.Policy) always.Remove(e);
-        else checkAll.Remove(e);
-        grid.Remove(e);
+        if (UpdatePolicy.Always == e.Policy)
+        {
+            always.Remove(e);
+        }
+        else
+        {
+            checkAll.Remove(e);
+            grid.Remove(e);
+        }
     }
     void UpdatePenddingObject()
     {

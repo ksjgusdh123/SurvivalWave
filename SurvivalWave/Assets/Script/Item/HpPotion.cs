@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class HpPotion : MonoBehaviour, IPickupable
+public class HpPotion : ItemBase
 {
-    public ItemType type { get; } = ItemType.HpPotion;
+    public override ItemType type { get; } = ItemType.HpPotion;
     public float amount { get; set; } = 20f;
 
-    public void OnGain(GameObject player)
+    public override void OnGain(GameObject player)
     {
         player.GetComponent<PlayerStat>().Heal(amount);
         ItemPool.GetInstance().ReturnObject(gameObject, type);

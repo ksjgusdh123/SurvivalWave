@@ -14,14 +14,14 @@ public class StraightMove : MonoBehaviour, IProjectileMove
         maxDistanceMagnitude = distance * distance;
         startPosition = startPos;
     }
-
-    
-
     public void Move(ProjectileBase projectile)
     {
-        projectile.transform.position += direction * projectile.speed * Time.deltaTime;
+        Transform transform = projectile.transform;
+        Vector3 pos = transform.position;
+        pos += direction * projectile.speed * Time.deltaTime;
+        transform.position = pos;
 
-        float movedDistance = (projectile.transform.position - startPosition).sqrMagnitude;
+        float movedDistance = (pos - startPosition).sqrMagnitude;
 
         if (movedDistance >= maxDistanceMagnitude)
         {

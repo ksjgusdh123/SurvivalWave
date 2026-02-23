@@ -48,7 +48,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
 
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -74,7 +74,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
     }
     public void DamagedEvent()
     {
-        if(damagedEventComp) StartCoroutine(damagedEventComp.ChangeColor());
+        if (damagedEventComp) StartCoroutine(damagedEventComp.ChangeColor());
     }
     protected virtual void EndDieAnimation()
     {
@@ -123,17 +123,18 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate
 
         if (rand < 9f) return;
 
-        spawnPos.x += 5f;
+        spawnPos.x += 3f;
 
-        if(rand < 9.7f)
+        GameObject go;
+        if (rand < 9.7f)
         {
-            GameObject go = ItemPool.GetInstance().PopObject(ItemType.HpPotion);
-            go.transform.position = spawnPos;
+            go = ItemPool.GetInstance().PopObject(ItemType.HpPotion);
         }
         else
         {
-
+            go = ItemPool.GetInstance().PopObject(ItemType.Magnet);
         }
+        go.transform.position = spawnPos;
     }
 
     public void OnSpawnPool()

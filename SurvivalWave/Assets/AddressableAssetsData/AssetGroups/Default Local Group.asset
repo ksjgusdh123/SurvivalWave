@@ -18,82 +18,98 @@ MonoBehaviour:
   - m_GUID: 08abec9145be80946b720f727c032f48
     m_Address: Prefab/Particle/RocketExplosion
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 092f91ff30808534983deda9ed1b7665
     m_Address: Prefab/Monster/Slime
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0e5f0d54f82d51f44a1b5068118fe6ee
     m_Address: Prefab/Projectile/RedZone
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 116bc4c27baad4542ba6f99f2c9999dd
     m_Address: Prefab/Projectile/Boomerang
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 219fb32475b76324aa9c6af0ea3d2462
     m_Address: Prefab/Item/HpPotion
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 21e7c8dcfa435564591ef936f457273c
     m_Address: Prefab/Item/Exp
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 35b1926620d04154196b4713ecd14085
     m_Address: Prefab/Monster/Turtle
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54fc2fd249a4c434c9713a8ba2e49477
     m_Address: Prefab/Monster/Boss
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 862d9139361e7454a81c9a63a009ddce
     m_Address: Prefab/Projectile/Homing
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 89bf88f3079435e48be938423a1a42c4
     m_Address: Prefab/Item/Magnet
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8e402691af4e3ed4fbaf5e0d84a15b28
     m_Address: Prefab/Particle/RocketEffect
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a9405d507448466438b7f974eb4f5227
     m_Address: Prefab/Particle/RandomShotEffect
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bbd1fa26c3b23ec4790ddb43d6973fa7
     m_Address: Prefab/Particle/BoomerangEffect
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c641288b3ffa504448b0e2ee4656973b
     m_Address: Prefab/Projectile/RandomShot
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e175b7f31db480b4086395ab959c273d
     m_Address: Prefab/Item/Box
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e45f11a7b6238e644ac26d75f5b0f74e
     m_Address: Prefab/Particle/EarthShatter
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Test
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c65bd5796f6dbbe4c91753fef8fbef03, type: 2}

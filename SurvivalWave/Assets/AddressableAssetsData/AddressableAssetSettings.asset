@@ -15,9 +15,9 @@ MonoBehaviour:
   m_DefaultGroup: d20bd78847f7ccd4babd6ef4985d8ef5
   m_currentHash:
     serializedVersion: 2
-    Hash: 9ebe40ee727b0b8cf3b734fc1ef4a28f
+    Hash: edaa0da54881c258ca75a44d1a581b8f
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 0
+  m_BuildRemoteCatalog: 1
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
   m_InternalIdNamingMode: 0
@@ -51,9 +51,9 @@ MonoBehaviour:
   m_CheckForContentUpdateRestrictionsOption: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: 6ef2009b7d31bed43a6e895bbdaf4100
   m_RemoteCatalogLoadPath:
-    m_Id: 
+    m_Id: 23d0609212defaf40bfd3eebba43ae37
   m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
@@ -87,7 +87,7 @@ MonoBehaviour:
       - m_Id: 1f0621d0e8cbcb946a08752489481adf
         m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
       - m_Id: 23d0609212defaf40bfd3eebba43ae37
-        m_Value: <undefined>
+        m_Value: 'https://ksjgusdh123.github.io/TestPage/[BuildTarget]'
       - m_Id: 6ef2009b7d31bed43a6e895bbdaf4100
         m_Value: 'ServerData/[BuildTarget]'
       - m_Id: 7ea4a2dbd2f4a66409e3eb95df5b67a6
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - Test
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 419681a5f967c0042b26a06522942220, type: 2}

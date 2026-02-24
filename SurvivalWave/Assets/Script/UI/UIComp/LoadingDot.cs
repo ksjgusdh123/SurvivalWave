@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class LoadingDot : MonoBehaviour
 {
+    public string baseText { get; set; } = "DownLoading";
     [SerializeField] TMP_Text text;
     [SerializeField] float interval = 0.25f;
     [SerializeField] int maxDots = 3;
-    [SerializeField] string baseText = "Loading";
 
     Coroutine coroutine;
 

@@ -8,7 +8,7 @@ public class LobbyBootStrapper : MonoBehaviour
     [SerializeField] private string nextSceneName = "Game";
     [SerializeField] Slider progressbar;
     float multiNum = 0.25f;
-    private async void Start()
+    public async void Init()
     {
         float total = 0f;
         await ProjectilePool.GetInstance().Init(p => { SetUIProgress(ref total, p); });

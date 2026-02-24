@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -14,7 +15,7 @@ public enum ItemType
 
 public class ItemPool : BaseObjectPool<ItemPool, ItemType>
 {
-    protected override async Task Init()
+    public override async Task Init(Action<float> action)
     {
         GameObject go = GameObject.Find("[ItemPool]");
         if (null == go) go = new GameObject("[ItemPool]");
@@ -31,6 +32,11 @@ public class ItemPool : BaseObjectPool<ItemPool, ItemType>
 
             //e.go = Resources.Load<GameObject>($"Prefab/Item/{e.type.ToString()}");
             initDatas.Add(e);
+
+            float percent = (i + 1) / (float)size;
+            action?.Invoke(percent);
+
+            await Task.Yield();
         }
     }
 

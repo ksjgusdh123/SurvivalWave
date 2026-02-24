@@ -1,10 +1,11 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 public class ParticlePool : BaseObjectPool<ParticlePool, ParticleType>
 {
-    protected override async Task Init()
+    public override async Task Init(Action<float> action)
     {
         GameObject go = GameObject.Find("[ParticlePool]");
         if (null == go) go = new GameObject("[ParticlePool]");
@@ -19,6 +20,11 @@ public class ParticlePool : BaseObjectPool<ParticlePool, ParticleType>
             e.initSize = GetInitSize(e.type);
             e.go = await Addressables.LoadAssetAsync<GameObject>($"Prefab/Particle/{e.type.ToString()}").Task;
             initDatas.Add(e);
+
+            float percent = (i + 1) / (float)size;
+            action?.Invoke(percent);
+
+            await Task.Yield();
         }
     }
     protected override int GetInitSize(ParticleType type)

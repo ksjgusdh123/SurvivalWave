@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -12,7 +13,7 @@ public enum MonsterType
 
 public class MonsterPool : BaseObjectPool<MonsterPool, MonsterType>
 {
-    protected override async Task Init()
+    public override async Task Init(Action<float> action)
     {
         GameObject go = GameObject.Find("[MonsterPool]");
         if (null == go) go = new GameObject("[MonsterPool]");
@@ -27,6 +28,11 @@ public class MonsterPool : BaseObjectPool<MonsterPool, MonsterType>
             e.initSize = GetInitSize(e.type);
             e.go = await Addressables.LoadAssetAsync<GameObject>($"Prefab/Monster/{e.type.ToString()}").Task;
             initDatas.Add(e);
+
+            float percent = (i + 1) / (float)size;
+            action?.Invoke(percent);
+
+            await Task.Yield();
         }
     }
     protected override int GetInitSize(MonsterType type)

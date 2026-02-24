@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.AddressableAssets;
 
 public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
 {
-    protected override async Task Init()
+    public override async Task Init(Action<float> action)
     {
         GameObject go = GameObject.Find("[ProjectilePool]");
         if (null == go) go = new GameObject("[ProjectilePool]");
@@ -20,6 +21,11 @@ public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
             e.initSize = GetInitSize(e.type);
             e.go = await Addressables.LoadAssetAsync<GameObject>($"Prefab/Projectile/{e.type.ToString()}").Task;
             initDatas.Add(e);
+
+            float percent = (i + 1) / (float)size;
+            action?.Invoke(percent);
+
+            await Task.Yield();
         }
     }
     protected override int GetInitSize(ProjectileType type)

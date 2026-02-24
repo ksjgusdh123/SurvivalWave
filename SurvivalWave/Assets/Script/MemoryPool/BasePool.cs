@@ -27,15 +27,15 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
         pools.Clear();
         prefabs.Clear();
     }
-    public async Task InitLoadAsset()
-    {
-        await Init();
-    }
+    //public async Task InitLoadAsset()
+    //{
+    //    await Init();
+    //}
     public void InstantiatePrefab()
     {
         InitPoos();
     }
-    protected abstract Task Init();
+    public abstract Task Init(Action<float> action);
     protected abstract int GetInitSize(TypeKey type);
     void InitPoos()
     {

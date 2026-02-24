@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,15 +22,20 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
     protected Dictionary<TypeKey, Queue<GameObject>> pools = new Dictionary<TypeKey, Queue<GameObject>>();
     protected Dictionary<TypeKey, GameObject> prefabs = new Dictionary<TypeKey, GameObject>();
     protected Dictionary<TypeKey, int> initSizes = new Dictionary<TypeKey, int>();
-    protected override void Awake()
+    protected void Start()
     {
         pools.Clear();
         prefabs.Clear();
-
-        Init();
+    }
+    public async Task InitLoadAsset()
+    {
+        await Init();
+    }
+    public void InstantiatePrefab()
+    {
         InitPoos();
     }
-    protected abstract void Init();
+    protected abstract Task Init();
     protected abstract int GetInitSize(TypeKey type);
     void InitPoos()
     {

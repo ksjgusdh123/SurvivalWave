@@ -1,9 +1,11 @@
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
 {
-    protected override void Init()
+    protected override async Task Init()
     {
         GameObject go = GameObject.Find("[ProjectilePool]");
         if (null == go) go = new GameObject("[ProjectilePool]");
@@ -16,7 +18,7 @@ public class ProjectilePool : BaseObjectPool<ProjectilePool, ProjectileType>
             Entry e = new Entry();
             e.type = (ProjectileType)i;
             e.initSize = GetInitSize(e.type);
-            e.go = Resources.Load<GameObject>($"Prefab/Projectile/{e.type.ToString()}");
+            e.go = await Addressables.LoadAssetAsync<GameObject>($"Prefab/Projectile/{e.type.ToString()}").Task;
             initDatas.Add(e);
         }
     }

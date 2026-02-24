@@ -1922,6 +1922,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1686021177304871604, guid: ebee340de387f334f9ac44e044abd8fb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2075457497}
+    - targetCorrespondingSourceObject: {fileID: 1686021177304871604, guid: ebee340de387f334f9ac44e044abd8fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2075457498}
   m_SourcePrefab: {fileID: 100100000, guid: ebee340de387f334f9ac44e044abd8fb, type: 3}
 --- !u!4 &1620761241 stripped
 Transform:
@@ -2482,6 +2485,18 @@ MonoBehaviour:
   spawnInterval: 0.3
   decreaseSpwanInterval: 0.05
   minSpawnInterval: 0.3
+--- !u!114 &2075457498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075457492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d36c934eb39e34e9c6693467788672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameBootStrapper
 --- !u!1001 &216301820133855457
 PrefabInstance:
   m_ObjectHideFlags: 0

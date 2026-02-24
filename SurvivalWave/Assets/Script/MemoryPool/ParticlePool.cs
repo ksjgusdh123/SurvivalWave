@@ -1,8 +1,10 @@
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class ParticlePool : BaseObjectPool<ParticlePool, ParticleType>
 {
-    protected override void Init()
+    protected override async Task Init()
     {
         GameObject go = GameObject.Find("[ParticlePool]");
         if (null == go) go = new GameObject("[ParticlePool]");
@@ -15,7 +17,7 @@ public class ParticlePool : BaseObjectPool<ParticlePool, ParticleType>
             Entry e = new Entry();
             e.type = (ParticleType)i;
             e.initSize = GetInitSize(e.type);
-            e.go = Resources.Load<GameObject>($"Prefab/Particle/{e.type.ToString()}");
+            e.go = await Addressables.LoadAssetAsync<GameObject>($"Prefab/Particle/{e.type.ToString()}").Task;
             initDatas.Add(e);
         }
     }

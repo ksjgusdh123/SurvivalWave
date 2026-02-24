@@ -10,18 +10,6 @@ public class GameManager : Singleton<GameManager>
 
     WaitForSeconds gameLevelTimerHandle;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    public static void InitBeforeScene()
-    {
-        SkillDataManager.GetInstance().LoadData();
-    }
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    public static void InitAfterScene()
-    {
-        UIManager.GetInstance().Show(EUIType.Main);
-    }
-
     protected override void Awake()
     {
         spawner = FindFirstObjectByType<MonsterSpawner>();

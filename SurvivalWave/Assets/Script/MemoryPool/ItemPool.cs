@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public enum ItemType
 {
@@ -11,7 +14,7 @@ public enum ItemType
 
 public class ItemPool : BaseObjectPool<ItemPool, ItemType>
 {
-    protected override void Init()
+    protected override async Task Init()
     {
         GameObject go = GameObject.Find("[ItemPool]");
         if (null == go) go = new GameObject("[ItemPool]");
@@ -24,7 +27,9 @@ public class ItemPool : BaseObjectPool<ItemPool, ItemType>
             Entry e = new Entry();
             e.type = (ItemType)i;
             e.initSize = GetInitSize(e.type);
-            e.go = Resources.Load<GameObject>($"Prefab/Item/{e.type.ToString()}");
+            e.go = await Addressables.LoadAssetAsync<GameObject>($"Prefab/Item/{e.type.ToString()}").Task;
+
+            //e.go = Resources.Load<GameObject>($"Prefab/Item/{e.type.ToString()}");
             initDatas.Add(e);
         }
     }

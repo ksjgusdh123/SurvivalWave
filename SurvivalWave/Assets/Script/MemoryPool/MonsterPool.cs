@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public enum MonsterType
 {
@@ -10,7 +12,7 @@ public enum MonsterType
 
 public class MonsterPool : BaseObjectPool<MonsterPool, MonsterType>
 {
-    protected override void Init()
+    protected override async Task Init()
     {
         GameObject go = GameObject.Find("[MonsterPool]");
         if (null == go) go = new GameObject("[MonsterPool]");
@@ -23,7 +25,7 @@ public class MonsterPool : BaseObjectPool<MonsterPool, MonsterType>
             Entry e = new Entry();
             e.type = (MonsterType)i;
             e.initSize = GetInitSize(e.type);
-            e.go = Resources.Load<GameObject>($"Prefab/Monster/{e.type.ToString()}");
+            e.go = await Addressables.LoadAssetAsync<GameObject>($"Prefab/Monster/{e.type.ToString()}").Task;
             initDatas.Add(e);
         }
     }

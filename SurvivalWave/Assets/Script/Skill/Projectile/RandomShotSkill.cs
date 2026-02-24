@@ -22,7 +22,7 @@ public class RandomShotSkill : PlayerProjectileSkillBase
         Vector3 spawnPos = pos + new Vector3(distance.x, 0f, distance.y) * spawnRadius;
         Vector3 dir = (spawnPos - pos).normalized;
 
-        ProjectileSpawnManager.GetInstance().SpawnRandomShot(spawnPos, dir, projectileSpeed, maxDist, 1f);
+        ProjectileSpawnManager.GetInstance().SpawnRandomShot(spawnPos, dir, projectileSpeed, maxDist, 1f);  
         return true;
     }
 }

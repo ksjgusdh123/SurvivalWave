@@ -11,6 +11,8 @@ public class LobbyBootStrapper : MonoBehaviour
     public async void Init()
     {
         float total = 0f;
+        progressbar.gameObject.SetActive(true);
+        progressbar.value = 0f;
         await ProjectilePool.GetInstance().Init(p => { SetUIProgress(ref total, p); });
         await ParticlePool.GetInstance().Init(p => { SetUIProgress(ref total, p); });
         await MonsterPool.GetInstance().Init(p => { SetUIProgress(ref total, p); });

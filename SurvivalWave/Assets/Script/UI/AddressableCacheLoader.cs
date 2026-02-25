@@ -50,7 +50,7 @@ public class AddressableCacheLoader : MonoBehaviour
 
         StartCoroutine(Show());
         yield return handle;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
 
         NextShow();
         Addressables.Release(handle);
@@ -67,8 +67,14 @@ public class AddressableCacheLoader : MonoBehaviour
     }
     public void NextShow()
     {
+        StartCoroutine(StartLoading());
+    }
+    IEnumerator StartLoading()
+    {
+        mainText.GetComponent<LoadingDot>().baseText = "Loding";
+        yield return new WaitForSeconds(1f);
         strapper.Init();
-        //StartCoroutine(GoNextMap());
+        percentText.gameObject.SetActive(false);
     }
     IEnumerator GoNextMap()
     {

@@ -32,6 +32,7 @@ class MyEditorScript
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)
             throw new Exception("AddressableAssetSettingsDefaultObject.Settings is null");
+
         AddressableAssetSettings.CleanPlayerContent(settings.ActivePlayerDataBuilder);
 
         AddressablesPlayerBuildResult result;
@@ -41,13 +42,7 @@ class MyEditorScript
             throw new Exception("Addressables build failed: " + result.Error);
 
         Debug.Log("[JenkinsBuild] Addressables build success.");
-
-        if (!ok || !string.IsNullOrEmpty(result.Error))
-            throw new Exception("Addressables build failed: " + (result.Error ?? "unknown error"));
-
-        Debug.Log("[JenkinsBuild] Addressables build success.");
     }
-
     static void BuildPlayerOrThrow()
     {
         var scenes = EditorBuildSettings.scenes

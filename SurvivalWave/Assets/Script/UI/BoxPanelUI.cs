@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BoxPanelUI : UIBase
 {
+    [SerializeField] GameObject itemImage;
+
     BoxAnimation boxAnimation;
     Animator animator;
     BoxPanelUI()
@@ -12,6 +14,9 @@ public class BoxPanelUI : UIBase
     {
         boxAnimation = FindAnyObjectByType<BoxAnimation>();
         animator = GetComponent<Animator>();
+
+        boxAnimation.pickRandomItem -= PickRandomItemAnimation;
+        boxAnimation.pickRandomItem += PickRandomItemAnimation;
     }
     public override void Show()
     {
@@ -23,10 +28,25 @@ public class BoxPanelUI : UIBase
     public override void Hide()
     {
         base.Hide();
+        itemImage.SetActive(false);
+        boxAnimation.Hide();
         Time.timeScale = 1f;
+    }
+    public void StartShakeBox()
+    {
+        boxAnimation.StartBoxShakeAnimation();
+    }
+    public void StopShakeBox()
+    {
+        boxAnimation.FinishBoxShake();
     }
     public void EndBoxPanelUIAnimation()
     {
         boxAnimation.StartBoxAnimation();
+    }
+    void PickRandomItemAnimation()
+    {
+        animator.Play("RandomSkillSpawn", 0, 0f);
+        itemImage.SetActive(true);
     }
 }

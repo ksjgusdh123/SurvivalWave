@@ -18,7 +18,7 @@ public class AddressableCacheLoader : MonoBehaviour
 
     public void Start()
     {
-        Caching.ClearCache();
+        //Caching.ClearCache();
         StartCoroutine(StartFunc());
     }
 

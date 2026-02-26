@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class SkillPanel : MonoBehaviour
@@ -13,7 +14,7 @@ public class SkillPanel : MonoBehaviour
        slotArray = GetComponentsInChildren<SkillSlot>(true);
         slotArray = slotArray.OrderBy(s => s.transform.GetSiblingIndex()).ToArray();
     }
-    public void UpdateSkillPanel(SkillData skillData, int level)
+    public async Task UpdateSkillPanel(SkillData skillData, int level)
     {
         if(slots.TryGetValue(skillData.skillId, out var slot))
         {
@@ -21,13 +22,13 @@ public class SkillPanel : MonoBehaviour
         }
         else
         {
-            Register(skillData);
+            await Register(skillData);
         }
     }
-    public void Register(SkillData skillData)
+    public async Task Register(SkillData skillData)
     {
         var slot = slotArray[nextSlotIndex++];
-        slot.SetSkillData(skillData);
+        await slot.SetSkillData(skillData);
         slots[skillData.skillId] = slot;
     }
 }

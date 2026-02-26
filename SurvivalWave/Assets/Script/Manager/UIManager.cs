@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public enum EUIType
@@ -41,8 +42,8 @@ public class UIManager : Singleton<UIManager>
             ui.Hide();
         }
     }
-    public void UpdateSkillPanel(SkillData skillData, int level)
+    public async void UpdateSkillPanel(SkillData skillData, int level)
     {
-        skillPanel.UpdateSkillPanel(skillData, level);
+        await skillPanel.UpdateSkillPanel(skillData, level);
     }
 }

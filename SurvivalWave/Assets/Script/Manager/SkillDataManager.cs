@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public enum SkillItemType
 {
@@ -18,11 +20,9 @@ public class SkillDataManager : Singleton<SkillDataManager>
 {
     List<SkillData> datas = new List<SkillData>();
 
-    public void LoadData()
+    public async Task LoadData()
     {
-        string path = "Data/SkillData";
-
-        TextAsset csvFile = Resources.Load<TextAsset>(path);
+        TextAsset csvFile = await Addressables.LoadAssetAsync<TextAsset>("Data/SkillData.csv").Task;
 
         string[] lines = csvFile.text.Split('\n');
 

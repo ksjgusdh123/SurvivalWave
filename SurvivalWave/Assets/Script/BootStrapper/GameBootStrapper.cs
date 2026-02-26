@@ -4,7 +4,7 @@ public class GameBootStrapper : MonoBehaviour
 {
     private void Awake()
     {
-        SkillDataManager.GetInstance().LoadData();
+        //SkillDataManager.GetInstance().LoadData();
         ProjectilePool.GetInstance().InstantiatePrefab();
         ParticlePool.GetInstance().InstantiatePrefab();
         MonsterPool.GetInstance().InstantiatePrefab();

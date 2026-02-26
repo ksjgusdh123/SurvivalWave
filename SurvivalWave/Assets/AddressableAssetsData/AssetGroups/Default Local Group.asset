@@ -27,6 +27,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b12756849c43f64aab42294a5c223ff
+    m_Address: TestKita.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0e5f0d54f82d51f44a1b5068118fe6ee
     m_Address: Prefab/Projectile/RedZone
     m_ReadOnly: 0
@@ -59,6 +65,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54fc2fd249a4c434c9713a8ba2e49477
     m_Address: Prefab/Monster/Boss
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 825f2b92340282f45a0665056941183c
+    m_Address: Kita
     m_ReadOnly: 0
     m_SerializedLabels:
     - Test
@@ -107,6 +119,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e45f11a7b6238e644ac26d75f5b0f74e
     m_Address: Prefab/Particle/EarthShatter
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: effaf3a675210a94e94b0cd110a443bf
+    m_Address: Data/SkillData.csv
     m_ReadOnly: 0
     m_SerializedLabels:
     - Test

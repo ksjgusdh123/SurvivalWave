@@ -13,7 +13,7 @@ public class SkillSlot : MonoBehaviour
     public async Task SetSkillData(SkillData skillData)
     {
         skillId = skillData.skillId;
-        skillImage.sprite = await Addressables.LoadAssetAsync<Sprite>("Kita").Task;
+        skillImage.sprite = await Addressables.LoadAssetAsync<Sprite>(skillData.imagePath).Task;
         ChangeLevel(1);
         cg.alpha = 1;
     }

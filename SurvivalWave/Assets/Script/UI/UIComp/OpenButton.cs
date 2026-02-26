@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class OpenButton : MonoBehaviour
 {
     [SerializeField] BoxPanelUI ui;
-    [SerializeField] GameObject closeButton;
     Button button;
 
 
@@ -16,8 +15,7 @@ public class OpenButton : MonoBehaviour
     }
     void ClickedButton()
     {
-        ui.EndBoxPanelUIAnimation();
-        closeButton.SetActive(true);
+        ui.StartBoxAnimation();
         gameObject.SetActive(false);
     }
 }

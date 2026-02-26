@@ -99,6 +99,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b958869b082e1ad4094787755981def5
+    m_Address: Nigika
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bbd1fa26c3b23ec4790ddb43d6973fa7
     m_Address: Prefab/Particle/BoomerangEffect
     m_ReadOnly: 0

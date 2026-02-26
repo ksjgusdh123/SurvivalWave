@@ -13,7 +13,8 @@ public enum SkillItemType
     // ´É·ÂÄ¡
     Strength,
     Speed,
-    MaxHp
+    MaxHp,
+    Max
 }
 
 public class SkillDataManager : Singleton<SkillDataManager>
@@ -43,7 +44,7 @@ public class SkillDataManager : Singleton<SkillDataManager>
             skill.damageRatio = float.Parse(values[4]);
             skill.decreaseLaunchInterval = float.Parse(values[5]);
             skill.increaseDamageRatio = float.Parse(values[6]);
-            skill.imagePath = values[7];
+            skill.imagePath = values[7].Trim();
 
             datas.Add(skill);
         }

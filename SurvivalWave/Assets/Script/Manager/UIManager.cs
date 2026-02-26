@@ -5,7 +5,8 @@ using UnityEngine;
 public enum EUIType
 {
     Main,
-    LevelUp
+    LevelUp,
+    BoxPanel
 }
 
 public class UIManager : Singleton<UIManager>
@@ -41,6 +42,10 @@ public class UIManager : Singleton<UIManager>
         {
             ui.Hide();
         }
+    }
+    public void StartBoxAnimation()
+    {
+
     }
     public async void UpdateSkillPanel(SkillData skillData, int level)
     {

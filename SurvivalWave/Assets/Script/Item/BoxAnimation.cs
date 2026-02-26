@@ -15,20 +15,19 @@ public class BoxAnimation : MonoBehaviour
     float openSpeed;
     float spinDuration = 2f;
     float openDuration = 1f;
-    WaitForSeconds spinCoroutine;
-    WaitForSeconds openCoroutine;
+    WaitForSecondsRealtime spinCoroutine;
+    WaitForSecondsRealtime openCoroutine;
     void Start()
     {
         originPosition = cap.position;
         oringRotation = cap.rotation;
-        openCoroutine = new WaitForSeconds(openDuration);
-        spinCoroutine = new WaitForSeconds(spinDuration);
+        openCoroutine = new WaitForSecondsRealtime(openDuration);
+        spinCoroutine = new WaitForSecondsRealtime(spinDuration);
         openSpeed = originSpeed * 2f;
-        StartBoxAnimation();
     }
     void Update()
     {
-        float t = Time.deltaTime;
+        float t = Time.unscaledDeltaTime;
         if (isSpin)
         {
             spinSpeed += t;
@@ -59,7 +58,7 @@ public class BoxAnimation : MonoBehaviour
     IEnumerator OpenEvent()
     {
         yield return openCoroutine;
-        UIManager.GetInstance().Show(EUIType.LevelUp);
+        //UIManager.GetInstance().Show(EUIType.LevelUp);
         isOpen = false;
     }
 }

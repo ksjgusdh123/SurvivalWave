@@ -6,7 +6,7 @@ public class Box : ItemBase
 
     public override void OnGain(GameObject player)
     {
-        UIManager.GetInstance().Show(EUIType.LevelUp);
+        UIManager.GetInstance().Show(EUIType.BoxPanel);
         ItemPool.GetInstance().ReturnObject(gameObject, type);
     }
 }

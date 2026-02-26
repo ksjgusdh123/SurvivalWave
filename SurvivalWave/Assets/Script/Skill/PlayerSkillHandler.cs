@@ -10,6 +10,7 @@ public class PlayerSkillHandler : MonoBehaviour
     {
         skill.OnEquip(gameObject);
         skills.Add(skill);
+        UIManager.GetInstance().UpdateSkillPanel(skill.skillData, 1);
     }
 
     void Update()

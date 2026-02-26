@@ -6,7 +6,7 @@ public abstract class PlayerSkillBase : IPlayerSkill
 {
     public int skillId { get; protected set; }
     public int level { get; protected set; } = 1;
-
+    public SkillData skillData { get; protected set; } 
     //protected Transform ownerFirePosition;
     //protected float cooldown;
     //float timer;
@@ -15,6 +15,7 @@ public abstract class PlayerSkillBase : IPlayerSkill
     protected PlayerSkillBase(int id)
     {
         skillId = id;
+        skillData = SkillDataManager.GetInstance().GetSkillData(id);
     }
 
     public abstract void OnEquip(GameObject ownerObj);
@@ -22,6 +23,10 @@ public abstract class PlayerSkillBase : IPlayerSkill
     public abstract void TickEvent(float deltaTime);
 
     protected abstract bool TryFire();
-    public virtual void LevelUp() { ++level; UpgradeStat(); }
+    public virtual void LevelUp() 
+    {
+        UIManager.GetInstance().UpdateSkillPanel(skillData, ++level);
+        UpgradeStat();
+    }
     public abstract void UpgradeStat();
 }

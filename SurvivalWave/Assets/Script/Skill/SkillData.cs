@@ -9,4 +9,5 @@ public class SkillData
     public float damageRatio;
     public float decreaseLaunchInterval;
     public float increaseDamageRatio;
+    public string imagePath;
 }

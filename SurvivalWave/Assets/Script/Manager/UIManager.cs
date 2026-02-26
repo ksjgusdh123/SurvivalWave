@@ -9,10 +9,12 @@ public enum EUIType
 
 public class UIManager : Singleton<UIManager>
 {
+    SkillPanel skillPanel;
     Dictionary<EUIType, UIBase> uiDic = new Dictionary<EUIType, UIBase>();
 
     protected override void Awake()
     {
+        skillPanel = FindAnyObjectByType<SkillPanel>();
         UIBase[] uiList = FindObjectsByType<UIBase>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (var ui in uiList)
         {
@@ -38,5 +40,9 @@ public class UIManager : Singleton<UIManager>
         {
             ui.Hide();
         }
+    }
+    public void UpdateSkillPanel(SkillData skillData, int level)
+    {
+        skillPanel.UpdateSkillPanel(skillData, level);
     }
 }

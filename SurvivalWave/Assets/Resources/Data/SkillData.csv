@@ -1,8 +1,8 @@
-﻿skillId,skillName,description,launchTime,damageRatio,decreaseLaunchTime,increaseDamageRatio
-0,random,랜덤한 방향으로 총알을 발사한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5
-1,homing,적을 추적하는 미사일을 발사한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5
-2,boomerang,부메랑을 투척한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5
-3,wide,모든 주변에 발사한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5
-4,strength,공격력이 _%증가,0,0,0,0.2
-5,speed,이동속도 _% 증가,0,0,0,0.1
-6,hp,최대체력 _% 증가,0,0,0,0.1
+﻿skillId,skillName,description,launchTime,damageRatio,decreaseLaunchTime,increaseDamageRatio,imagePath
+0,random,랜덤한 방향으로 총알을 발사한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5,Kita
+1,homing,적을 추적하는 미사일을 발사한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5,Kita
+2,boomerang,부메랑을 투척한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5,Kita
+3,wide,모든 주변에 발사한다\n데미지 _% 증가\n발사시간 _%감소,1,1,0.2,0.5,Kita
+4,strength,공격력이 _%증가,0,0,0,0.2,Kita
+5,speed,이동속도 _% 증가,0,0,0,0.1,Kita
+6,hp,최대체력 _% 증가,0,0,0,0.1,Kita

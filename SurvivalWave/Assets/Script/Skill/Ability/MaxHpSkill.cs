@@ -9,8 +9,7 @@ public class MaxHpSkill : PlayerAbilitySkillBase
     }
     public override void UpgradeStat()
     {
-        var data = SkillDataManager.GetInstance().GetSkillData((SkillItemType)skillId);
-        abilityRatio = level * data.increaseDamageRatio * 100f + 100f;
+        abilityRatio = level * skillData.increaseDamageRatio * 100f + 100f;
         GameManager.GetInstance().UpgradeAbility(StatType.MaxHp, abilityRatio);
     }
 }

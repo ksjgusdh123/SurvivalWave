@@ -9,8 +9,7 @@ public class SpeedSkill : PlayerAbilitySkillBase
     }
     public override void UpgradeStat()
     {
-        var data = SkillDataManager.GetInstance().GetSkillData((SkillItemType)skillId);
-        abilityRatio = level * data.increaseDamageRatio * 3f + 3f;
+        abilityRatio = level * skillData.increaseDamageRatio * 3f + 3f;
         GameManager.GetInstance().UpgradeAbility(StatType.Speed, abilityRatio);
     }
 }

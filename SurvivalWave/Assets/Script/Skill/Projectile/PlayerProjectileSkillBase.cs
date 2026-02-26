@@ -44,9 +44,8 @@ public class PlayerProjectileSkillBase : PlayerSkillBase
 
     public override void UpgradeStat()
     {
-        var data = SkillDataManager.GetInstance().GetSkillData((SkillItemType)skillId);
 
-        damageRatio = data.damageRatio + (data.increaseDamageRatio * (level - 1));
-        cooldown = data.launchInterval - (data.decreaseLaunchInterval * (level - 1));
+        damageRatio = skillData.damageRatio + (skillData.increaseDamageRatio * (level - 1));
+        cooldown = skillData.launchInterval - (skillData.decreaseLaunchInterval * (level - 1));
     }
 }

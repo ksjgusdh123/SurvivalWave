@@ -14,6 +14,7 @@ public class PlayerStat : Stat
 {
     public Action ChangeHp;
     public Action ChangeStamina;
+    public Action ChangeExp;
 
     PlayerController controller;
     Renderer[] renderers;
@@ -24,8 +25,8 @@ public class PlayerStat : Stat
     [SerializeField] float invincibleFinishTime = 1f;
     bool isInvincible;
 
-    float exp;
-    [SerializeField] float maxExp = 100;
+    public float exp;
+    public float maxExp = 100;
     int level = 1;
     int maxLevel = 30;
 
@@ -119,9 +120,10 @@ public class PlayerStat : Stat
         if(exp >= maxExp && maxLevel > level)
         {
             exp -= maxExp;
-            maxExp = 1; // ((level - 1) * 50)  + 100;
+            maxExp = ((level - 1) * 50)  + 100;
             UIManager.GetInstance().Show(EUIType.LevelUp);
         }
+        ChangeExp.Invoke();
     }
 
     public void ChangeSpeed(float amount)

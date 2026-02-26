@@ -43,6 +43,7 @@ public class SkillDataManager : Singleton<SkillDataManager>
             skill.damageRatio = float.Parse(values[4]);
             skill.decreaseLaunchInterval = float.Parse(values[5]);
             skill.increaseDamageRatio = float.Parse(values[6]);
+            skill.imagePath = values[7];
 
             datas.Add(skill);
         }
@@ -64,8 +65,8 @@ public class SkillDataManager : Singleton<SkillDataManager>
         return result;
     }
 
-    public SkillData GetSkillData(SkillItemType type)
+    public SkillData GetSkillData(int id)
     {
-        return datas[(int)type];
+        return datas[id];
     }
 }

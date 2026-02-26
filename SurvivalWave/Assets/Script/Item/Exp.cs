@@ -31,8 +31,8 @@ public class Exp : ItemBase
         if(null != player) player.GetComponent<Player>().GetMagnet -= ChangeDistance;
     }
     public override void OnGain(GameObject player)
-    {   
-        //player.GetComponent<PlayerStat>().GainExp(amount);
+    {
+        player.GetComponent<PlayerStat>().GainExp(amount);
         ItemPool.GetInstance().ReturnObject(gameObject, type);
     }
     public override void Tick(float delta)

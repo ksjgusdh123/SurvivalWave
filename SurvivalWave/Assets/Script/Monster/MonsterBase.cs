@@ -24,7 +24,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate, IShadowCast
     int playerLayer;
     bool isCollision;
 
-    void Awake()
+    protected virtual void Awake()
     {
         renderers = GetComponentsInChildren<Renderer>(true);
         anim = GetComponent<MonsterAnimation>();

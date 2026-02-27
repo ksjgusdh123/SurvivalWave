@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 public enum PlayerState
 {
     Idle,
@@ -24,8 +26,8 @@ public enum TransitionState
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] MainCamera mainCamera;
     public bool wasGrounded { get; private set; }
-
     public PlayerState state { get; private set; } = PlayerState.Idle;
 
     public float gravity = -9.8f;
@@ -54,7 +56,6 @@ public class PlayerController : MonoBehaviour
         bool isGrounded = characterController.isGrounded;
         bool isJump = inputHandler.isJump;
 
-        HandleMove(ref move);
         HandleJump(isGrounded, isJump);
 
         if (PlayerState.Falling != state)
@@ -62,14 +63,20 @@ public class PlayerController : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
         }
 
+        HandleMove(ref move);
+        HandleMoveDirection(move);
+
         Vector3 finalMove = move * speed + velocity;
         characterController.Move(finalMove * Time.deltaTime);
 
         wasGrounded = isGrounded;
 
         if (isJump) inputHandler.ConsumeJump();
+        HandleLook();
     }
-
+    private void LateUpdate()
+    {
+    }
     void InitStateTransitionDic()
     {
         foreach (PlayerState ps in System.Enum.GetValues(typeof(PlayerState)))
@@ -107,12 +114,23 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     void HandleMove(ref Vector3 move)
+    {
+        Vector3 forward = mainCamera.transform.forward;
+        forward.y = 0f;
+        forward.Normalize();
+
+        Vector3 right = mainCamera.transform.right;
+        right.y = 0f;
+        right.Normalize();
+
+        move = (right * inputHandler.moveInput.x + forward * inputHandler.moveInput.y);
+        move.Normalize();
+    }
+    void HandleMoveDirection(Vector3 move)
     {
         if (PlayerState.Landing != state && PlayerState.Damaged != state)
         {
-            move = new Vector3(inputHandler.moveInput.x, 0, inputHandler.moveInput.y);
             if (Vector3.zero != move)
             {
                 Quaternion targetRot = Quaternion.LookRotation(move);
@@ -125,7 +143,11 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    void HandleLook()
+    {
+        Vector2 look = inputHandler.lookInput;
+        mainCamera.UpdateCamera(look);
+    }
     void HandleJump(bool isGrounded, bool isJump)
     {
         if (isGrounded)

@@ -10,7 +10,7 @@ public class Exp : ItemBase
     public float amount { get; set; }
     public float maxDist { get; set; } = 1f;
 
-    [SerializeField] float speed = 1f;
+    float speed = 10f;
     [SerializeField] float magnetPower = 20f;
 
     Transform player;

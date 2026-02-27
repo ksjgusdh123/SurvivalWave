@@ -28,7 +28,7 @@ public class BoxPanelUI : UIBase
     {
         base.Hide();
         itemImage.gameObject.SetActive(false);
-        boxAnimation.Hide();
+        boxAnimation?.Hide();
         Time.timeScale = 1f;
     }
     public void StartShakeBox()

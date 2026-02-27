@@ -12,7 +12,7 @@ public class ProjectileBase : MonoBehaviour, IPoolEvent, ITickUpdate
     public Transform muzzle { get; private set; }
     protected IProjectileMove move;
 
-    float finalDamag;
+    float finalDamage;
     public bool isPenetration { get; set; }
 
     void Awake()
@@ -25,7 +25,7 @@ public class ProjectileBase : MonoBehaviour, IPoolEvent, ITickUpdate
     {
         move = type;
         this.speed = speed;
-        finalDamag = dmg;
+        finalDamage = dmg;
     }
 
     public void Tick(float delta)
@@ -51,8 +51,8 @@ public class ProjectileBase : MonoBehaviour, IPoolEvent, ITickUpdate
         if (LayerMask.NameToLayer("Monster") != other.gameObject.layer) return;
 
         Stat stat = other.GetComponent<Stat>();
-        if (null == stat || !stat.TakeDamage(finalDamag)) return;
-        other.GetComponent<MonsterBase>().DamagedEvent();
+        if (null == stat || stat.hp <= 0f || !stat.TakeDamage(finalDamage)) return;
+        other.GetComponent<MonsterBase>().DamagedEvent(finalDamage);
 
         ReturnProjectile();
     }

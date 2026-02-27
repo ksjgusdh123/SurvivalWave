@@ -9,6 +9,7 @@ public class GameBootStrapper : MonoBehaviour
         ParticlePool.GetInstance().InstantiatePrefab();
         MonsterPool.GetInstance().InstantiatePrefab();
         ItemPool.GetInstance().InstantiatePrefab();
+        DamageTextPool.GetInstance().StartGameScene();
     }
     private void Start()
     {

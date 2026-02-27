@@ -63,6 +63,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4973a76e893cbf44e9d1e84387712249
+    m_Address: Prefab/UI/DamageText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54fc2fd249a4c434c9713a8ba2e49477
     m_Address: Prefab/Monster/Boss
     m_ReadOnly: 0

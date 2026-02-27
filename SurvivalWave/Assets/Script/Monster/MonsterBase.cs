@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
@@ -77,9 +78,11 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate, IShadowCast
         isCollision = false;
         target = null;
     }
-    public void DamagedEvent()
+    public void DamagedEvent(float damage)
     {
         if (damagedEventComp) StartCoroutine(damagedEventComp.ChangeColor());
+        var go = DamageTextPool.GetInstance().PopObject(DamageTextEnum.DamageText);
+        go.GetComponent<DamageText>().SpawnDamageText(transform.position, damage);
     }
     protected virtual void EndDieAnimation()
     {

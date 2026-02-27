@@ -14,14 +14,8 @@ public enum ParticleType
 
 public class ParticleManager : Singleton<ParticleManager>
 {
-    Dictionary<ParticleType, GameObject> particlePrefabDic = new Dictionary<ParticleType, GameObject>();
     protected override void Awake()
     {
-        int cnt = (int)ParticleType.Max;
-        for (int i = 0; i < cnt; ++i)
-        {
-            particlePrefabDic[(ParticleType)i] = Resources.Load<GameObject>($"Prefab/Particle/{((ParticleType)i).ToString()}");
-        }
     }
 
     public void SpawnParticle(Transform muzzle, ParticleType type, float deleteTime)

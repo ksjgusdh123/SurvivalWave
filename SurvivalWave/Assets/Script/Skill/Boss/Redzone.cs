@@ -41,6 +41,7 @@ public class Redzone : BossSkillBase
         var earth = ParticlePool.GetInstance().PopObject(ParticleType.EarthShatter);
         earth.transform.position = center;
         ProjectilePool.GetInstance().ReturnObject(warning, ProjectileType.RedZone);
+        SoundManager.GetInstance().PlaySFX(SFXType.BossAttack);
         //Destroy(warning);
     }
 }

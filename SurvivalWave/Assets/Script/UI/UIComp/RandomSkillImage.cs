@@ -16,7 +16,7 @@ public class RandomSkillImage : MonoBehaviour
 
     WaitForSecondsRealtime rollingTotalCoroutine;
     WaitForSecondsRealtime rollingItemCoroutine;
-    float rollingDuration = 1f;
+    float rollingDuration = 3.2f;
     float rollingInterval = 0.1f;
 
     int targetIdx;

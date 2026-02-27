@@ -13,6 +13,7 @@ public class GameBootStrapper : MonoBehaviour
     }
     private void Start()
     {
+        SoundManager.GetInstance().PlayBGM(BGMType.Game);
         UIManager.GetInstance().Show(EUIType.Main);
     }
 }

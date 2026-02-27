@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: d20bd78847f7ccd4babd6ef4985d8ef5
   m_SerializeEntries:
+  - m_GUID: 04854e543d553ba429b277dcea44e7f1
+    m_Address: Sound/SFX/BossAttack
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 08abec9145be80946b720f727c032f48
     m_Address: Prefab/Particle/RocketExplosion
     m_ReadOnly: 0
@@ -45,6 +51,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cff061dafae3eb449fad177df282069
+    m_Address: Sound/SFX/BoxShake
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 219fb32475b76324aa9c6af0ea3d2462
     m_Address: Prefab/Item/HpPotion
     m_ReadOnly: 0
@@ -63,6 +75,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 39dc92a0c176a13459f2facce37aea55
+    m_Address: Sound/SFX/SlimeDie
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 39fcbda7387b0f443960a7c9dda5a939
+    m_Address: Sound/SFX/HpPotion
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41fabfd17774b15418edcb2f036f2114
+    m_Address: Sound/SFX/BoxOpen
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4973a76e893cbf44e9d1e84387712249
     m_Address: Prefab/UI/DamageText
     m_ReadOnly: 0
@@ -71,6 +101,30 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54fc2fd249a4c434c9713a8ba2e49477
     m_Address: Prefab/Monster/Boss
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e481242e52f488468c394048f95b22c
+    m_Address: Sound/SFX/Jump
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f81e54a58cdfb447acd5798457d9da0
+    m_Address: Sound/BGM/Game
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70189040868f8bc469a06a0c6fe7f67c
+    m_Address: Sound/SFX/BossDie
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 730eaf10b467aba49ae8ba43151faffd
+    m_Address: Sound/SFX/PlayerDie
     m_ReadOnly: 0
     m_SerializedLabels:
     - Test
@@ -105,6 +159,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8e106cd6b8fd8941898d63104815a43
+    m_Address: Sound/SFX/PlayerDamaged
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b958869b082e1ad4094787755981def5
     m_Address: Nigika
     m_ReadOnly: 0
@@ -117,8 +177,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bcbce297935c07f4784fc113b8e5b7dc
+    m_Address: Sound/SFX/TurtleDie
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c641288b3ffa504448b0e2ee4656973b
     m_Address: Prefab/Projectile/RandomShot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd2216b4d2fb36440ada0efa7a731b69
+    m_Address: Sound/SFX/Exp
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dac775d0c39c6fe4b9ff87b445c1889e
+    m_Address: Sound/SFX/Magnet
     m_ReadOnly: 0
     m_SerializedLabels:
     - Test
@@ -129,8 +207,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e21a9298896e5414db43040fecf8a16e
+    m_Address: Sound/SFX/LevelUp
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e45f11a7b6238e644ac26d75f5b0f74e
     m_Address: Prefab/Particle/EarthShatter
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9d28937326094d46bbe7c26a6dd30ac
+    m_Address: Sound/SFX/BoxSpin
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef0df5f903ab2bc4daa148ccfe83d17c
+    m_Address: Sound/SFX/BoxOpening
     m_ReadOnly: 0
     m_SerializedLabels:
     - Test

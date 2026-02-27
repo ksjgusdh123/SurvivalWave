@@ -162,6 +162,7 @@ public class PlayerController : MonoBehaviour
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 inputHandler.ConsumeJump();
                 ChangeState(TransitionState.JumpPressed);
+                SoundManager.GetInstance().PlaySFX(SFXType.Jump);
             }
             else if (!wasGrounded)
             {
@@ -182,6 +183,7 @@ public class PlayerController : MonoBehaviour
     public void Damaged()
     {
         ChangeState(TransitionState.Damaged);
+        SoundManager.GetInstance().PlaySFX(SFXType.PlayerDamaged);
     }
 
     public void FinishLanded()

@@ -8,6 +8,7 @@ public class HpPotion : ItemBase
     public override void OnGain(GameObject player)
     {
         player.GetComponent<PlayerStat>().Heal(amount);
+        SoundManager.GetInstance().PlaySFX(SFXType.HpPotion);
         ItemPool.GetInstance().ReturnObject(gameObject, type);
     }
 }

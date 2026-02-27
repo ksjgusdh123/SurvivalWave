@@ -7,6 +7,7 @@ public class Magnet : ItemBase
     public override void OnGain(GameObject player)
     {
         player.GetComponent<Player>().GetMagnetItem();
+        SoundManager.GetInstance().PlaySFX(SFXType.Magnet);
         ItemPool.GetInstance().ReturnObject(gameObject, type);
     }
 

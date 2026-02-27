@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -6,9 +7,11 @@ public class MonsterStat : Stat
 {
     [SerializeField] MonsterStatSO monsterStatSO;
     MonsterAnimation anim;
+    MonsterType type;
     private void Awake()
     {
         anim = GetComponent<MonsterAnimation>();
+        type = GetComponent<MonsterBase>().type;
         InitStat();
     }
 
@@ -21,7 +24,13 @@ public class MonsterStat : Stat
     {
         if (hp <= 0) return true;
         base.TakeDamage(dmg);
-        if (hp <= 0) anim.NotifyIsDeath(true);
+        if (hp <= 0)
+        {
+            anim.NotifyIsDeath(true);
+            string name = type.ToString() + "Die";
+            SFXType sound = Enum.Parse<SFXType>(name);
+            SoundManager.GetInstance().PlaySFX(sound);
+        }
         return true;
     }
 }   

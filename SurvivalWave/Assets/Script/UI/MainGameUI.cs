@@ -18,11 +18,13 @@ public class MainGameUI : UIBase
     {
         base.Show();
         input.SwitchCurrentActionMap("Player");
+        SoundManager.GetInstance().UnPauseBGM();
     }
 
     public override void Hide()
     {
         base.Hide();
         input.SwitchCurrentActionMap("UI");
+        SoundManager.GetInstance().PauseBGM();
     }
 }

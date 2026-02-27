@@ -27,8 +27,8 @@ public class BoxAnimation : MonoBehaviour
     float openSpeed;
     float shakeDuration = 1f;
     float pauseDuration = 0.25f;
-    float spinDuration = 2f;
-    float openDuration = 1f;
+    float spinDuration = 1.5f;
+    float openDuration = 3.2f;
     float shakeTimer = 0f;
     WaitForSecondsRealtime spinCoroutine;
     WaitForSecondsRealtime openCoroutine;
@@ -52,7 +52,8 @@ public class BoxAnimation : MonoBehaviour
                 if (shakeTimer >= pauseDuration)
                 {
                     shakeTimer = 0f;
-                    isWait = false; 
+                    isWait = false;
+                    SoundManager.GetInstance().PlaySFX(SFXType.BoxShake);
                 }
                 return;
             }
@@ -86,6 +87,7 @@ public class BoxAnimation : MonoBehaviour
     public void StartBoxShakeAnimation()
     {
         isShake = true;
+        SoundManager.GetInstance().PlaySFX(SFXType.BoxShake);
         cap.rotation = oringCapRotation;
         cap.position = originCapPosition;
     }
@@ -101,6 +103,7 @@ public class BoxAnimation : MonoBehaviour
         spinSpeed = originSpeed;
         isSpin = true;
         isOpen = false;
+        SoundManager.GetInstance().PlaySFX(SFXType.BoxSpin);
         StartCoroutine(FinishSpin());
     }
     IEnumerator FinishSpin()
@@ -110,11 +113,13 @@ public class BoxAnimation : MonoBehaviour
         isSpin = false;
         pickRandomItem?.Invoke();
         bar.gameObject.SetActive(true);
+        SoundManager.GetInstance().PlaySFX(SFXType.BoxOpening);
         StartCoroutine(OpenEvent());
     }
     IEnumerator OpenEvent()
     {
         yield return openCoroutine;
+        SoundManager.GetInstance().PlaySFX(SFXType.BoxOpen);
         isOpen = false;
     }
     public void Hide()

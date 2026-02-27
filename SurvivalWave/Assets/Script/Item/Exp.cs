@@ -33,6 +33,7 @@ public class Exp : ItemBase
     public override void OnGain(GameObject player)
     {
         player.GetComponent<PlayerStat>().GainExp(amount);
+        SoundManager.GetInstance().PlaySFX(SFXType.Exp);
         ItemPool.GetInstance().ReturnObject(gameObject, type);
     }
     public override void Tick(float delta)

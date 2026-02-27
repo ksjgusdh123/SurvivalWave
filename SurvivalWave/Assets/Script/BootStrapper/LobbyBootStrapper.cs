@@ -19,6 +19,7 @@ public class LobbyBootStrapper : MonoBehaviour
         await ItemPool.GetInstance().Init(p => { SetUIProgress(ref total, p); });
         await DamageTextPool.GetInstance().Init(p => { SetUIProgress(ref total, p); });
         await SkillDataManager.GetInstance().LoadData();
+        await SoundManager.GetInstance().InitSound();
         await SceneManager.LoadSceneAsync(nextSceneName);
     }
     void SetUIProgress(ref float total, float value)

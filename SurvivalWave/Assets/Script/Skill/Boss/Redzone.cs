@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Redzone : BossSkillBase
 {
-    public GameObject redZonePrefab;   
+    public GameObject redZonePrefab;
     public float radius = 0.5f;
     public float warningTime = 0.8f;
     LayerMask targetMask;
@@ -27,7 +27,7 @@ public class Redzone : BossSkillBase
 
         var warning = ProjectilePool.GetInstance().PopObject(ProjectileType.RedZone);
         warning.transform.position = center;
-        warning.GetComponent<BlinkRedZone>().duration = warningTime; 
+        warning.GetComponent<BlinkRedZone>().duration = warningTime;
 
         yield return warningTimer;
 
@@ -40,6 +40,7 @@ public class Redzone : BossSkillBase
 
         var earth = ParticlePool.GetInstance().PopObject(ParticleType.EarthShatter);
         earth.transform.position = center;
-        Destroy(warning);
+        ProjectilePool.GetInstance().ReturnObject(warning, ProjectileType.RedZone);
+        //Destroy(warning);
     }
 }

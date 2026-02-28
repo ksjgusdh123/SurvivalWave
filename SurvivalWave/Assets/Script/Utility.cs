@@ -24,4 +24,23 @@ public static class Utility
 
         return nearest;
     }
+
+    static public Vector3 FixPositionOnGround(Vector3 spawnPos, LayerMask groundMask, float rayStartHeight = 5f, float rayLength = 10f)
+    {
+        Vector3 result = spawnPos;
+
+        GameObject go = ItemPool.GetInstance().PopObject(ItemType.Box);
+        Vector3 rayStart = spawnPos + Vector3.up * rayStartHeight;
+
+        if (Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, rayStartHeight + rayLength, groundMask, QueryTriggerInteraction.Ignore))
+        {
+            result = hit.point;
+        }
+        return result;
+    }
+    static public void MouseCursorOnOff(bool isOn)
+    {
+        Cursor.visible = isOn;
+        Cursor.lockState = isOn ? CursorLockMode.Confined : CursorLockMode.Locked;
+    }
 }

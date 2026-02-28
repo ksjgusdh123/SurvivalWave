@@ -20,6 +20,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate, IShadowCast
     MonsterDamaged damagedEventComp;
     NavMeshAgent agent;
     PlayerStat target;
+    LayerMask groundMask;
 
     int playerLayer;
     bool isCollision;
@@ -33,6 +34,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate, IShadowCast
         player = Player.playerTransform;
         damagedEventComp = GetComponent<MonsterDamaged>();
         playerLayer = LayerMask.NameToLayer("Player");
+        groundMask = LayerMask.GetMask("Ground");
     }
 
     public void Tick(float delta)
@@ -129,12 +131,11 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate, IShadowCast
     {
         float rand = Random.Range(0f, 10f);
 
-        if (rand < 9f) return;
+        //if (rand < 9f) return;
 
-        spawnPos.x += 5f;
 
         GameObject go;
-        if (rand < 9.7f)
+        if (rand < 5f)
         {
             go = ItemPool.GetInstance().PopObject(ItemType.HpPotion);
         }
@@ -142,7 +143,9 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate, IShadowCast
         {
             go = ItemPool.GetInstance().PopObject(ItemType.Magnet);
         }
-        go.transform.position = spawnPos;
+        Vector3 finalPos = Utility.FixPositionOnGround(spawnPos, groundMask);
+        finalPos.y += 0.5f;
+        go.transform.position = finalPos;
     }
 
     public void OnSpawnPool()

@@ -19,6 +19,7 @@ public class MainGameUI : UIBase
         base.Show();
         input.SwitchCurrentActionMap("Player");
         SoundManager.GetInstance().UnPauseBGM();
+        Utility.MouseCursorOnOff(false);
     }
 
     public override void Hide()
@@ -26,5 +27,6 @@ public class MainGameUI : UIBase
         base.Hide();
         input.SwitchCurrentActionMap("UI");
         SoundManager.GetInstance().PauseBGM();
+        Utility.MouseCursorOnOff(true);
     }
 }

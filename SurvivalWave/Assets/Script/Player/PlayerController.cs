@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector3 move = Vector3.zero;
+        //Vector3 move = Vector3.zero;
         bool isGrounded = characterController.isGrounded;
         bool isJump = inputHandler.isJump;
 
@@ -63,8 +63,8 @@ public class PlayerController : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
         }
 
-        HandleMove(ref move);
-        HandleMoveDirection(move);
+        //HandleMove(ref move);
+        Vector3 move = HandleMoveDirection();
 
         Vector3 finalMove = move * speed + velocity;
         characterController.Move(finalMove * Time.deltaTime);
@@ -127,10 +127,12 @@ public class PlayerController : MonoBehaviour
         move = (right * inputHandler.moveInput.x + forward * inputHandler.moveInput.y);
         move.Normalize();
     }
-    void HandleMoveDirection(Vector3 move)
+    Vector3 HandleMoveDirection()
     {
         if (PlayerState.Landing != state && PlayerState.Damaged != state)
         {
+            Vector3 move = Vector3.zero;
+            HandleMove(ref move);
             if (Vector3.zero != move)
             {
                 Quaternion targetRot = Quaternion.LookRotation(move);
@@ -141,7 +143,9 @@ public class PlayerController : MonoBehaviour
             {
                 ChangeState(TransitionState.Stop);
             }
+            return move;
         }
+        return Vector3.zero;
     }
     void HandleLook()
     {

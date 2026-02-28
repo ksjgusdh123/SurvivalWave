@@ -15,17 +15,9 @@ public class BossBase : MonsterBase
         Vector3 spawnPos = transform.position + new Vector3(0f, 1f, 0f);
 
         GameObject go = ItemPool.GetInstance().PopObject(ItemType.Box);
-        Vector3 rayStart = spawnPos + Vector3.up * rayStartHeight;
 
-        if (Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, rayStartHeight + rayLength, groundMask, QueryTriggerInteraction.Ignore))
-        {
-            go.transform.position = hit.point;
-        }
-        else
-        {
-            go.transform.position = spawnPos;
-        }
-
+        Vector3 finalPos = Utility.FixPositionOnGround(spawnPos, groundMask, rayStartHeight, rayLength);
+        go.transform.position = finalPos;
 
         MonsterPool.GetInstance().ReturnObject(gameObject, type);
     }

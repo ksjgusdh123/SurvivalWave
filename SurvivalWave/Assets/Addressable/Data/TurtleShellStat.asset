@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TurtleShellStat
   m_EditorClassIdentifier: Assembly-CSharp::MonsterStatSO
   maxHp: 100
-  attack: 50
+  attack: 10
   speed: 3
-  increaseHpAmount: 10
-  increaseAttackAmount: 5
+  increaseHpAmount: 50
+  increaseAttackAmount: 3

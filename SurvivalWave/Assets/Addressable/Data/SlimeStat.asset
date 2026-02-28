@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede7fe0c832cd9c46b0cc49ac5a6ef5d, type: 3}
   m_Name: SlimeStat
   m_EditorClassIdentifier: Assembly-CSharp::MonsterStatSO
-  maxHp: 10
-  attack: 10
+  maxHp: 50
+  attack: 15
   speed: 3
-  increaseHpAmount: 10
+  increaseHpAmount: 30
   increaseAttackAmount: 5

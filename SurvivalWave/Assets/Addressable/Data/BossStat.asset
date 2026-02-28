@@ -15,5 +15,5 @@ MonoBehaviour:
   maxHp: 200
   attack: 10
   speed: 3
-  increaseHpAmount: 100
-  increaseAttackAmount: 10
+  increaseHpAmount: 400
+  increaseAttackAmount: 30

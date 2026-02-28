@@ -30,7 +30,7 @@ public class RandomSkillImage : MonoBehaviour
         for (int i = 0; i < skillCount; ++i)
         {
             var data = SkillDataManager.GetInstance().GetSkillData(i);
-            var sprite = await Addressables.LoadAssetAsync<Sprite>(data.imagePath).Task;
+            var sprite = await Addressables.LoadAssetAsync<Sprite>("Texture/" + data.imagePath).Task;
             sprites.Add(sprite);
         }
     }

@@ -22,12 +22,12 @@ public class LevelUpUI : UIBase
         }
     }
 
-    public void ShowOptions()
+    public async void ShowOptions()
     {
         List<SkillData> skills = SkillDataManager.GetInstance().PickRandomSkill(3);
         for (int i = 0; i < options.Length; ++i)
         {
-            options[i].SetSkillData(skills[i]);
+            await options[i].SetSkillData(skills[i]);
         }
     }
     void OnPickSkill(int skillId)

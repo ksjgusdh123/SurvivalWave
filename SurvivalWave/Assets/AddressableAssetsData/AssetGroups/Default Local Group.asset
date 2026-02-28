@@ -51,6 +51,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19b392c11784a954593fc73d0b36ba5e
+    m_Address: Texture/Power
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1cff061dafae3eb449fad177df282069
     m_Address: Sound/SFX/BoxShake
     m_ReadOnly: 0
@@ -68,6 +73,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34641ac1916f614449ad672523cd70ba
+    m_Address: Texture/Speed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 35b1926620d04154196b4713ecd14085
     m_Address: Prefab/Monster/Turtle
@@ -153,11 +163,21 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a437a2dd5d077534dbaae4aea15f06e1
+    m_Address: Texture/Boomerang
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a9405d507448466438b7f974eb4f5227
     m_Address: Prefab/Particle/RandomShotEffect
     m_ReadOnly: 0
     m_SerializedLabels:
     - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab9cbe0fef05c694a99ee0366a16a68b
+    m_Address: Texture/WideShot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b8e106cd6b8fd8941898d63104815a43
     m_Address: Sound/SFX/PlayerDamaged
@@ -171,11 +191,21 @@ MonoBehaviour:
     m_SerializedLabels:
     - Test
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9ac047ad64ac0a449e6e96ec5081311
+    m_Address: Texture/Single
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bbd1fa26c3b23ec4790ddb43d6973fa7
     m_Address: Prefab/Particle/BoomerangEffect
     m_ReadOnly: 0
     m_SerializedLabels:
     - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc566560c4de9a74aa8ff318d4e78350
+    m_Address: Texture/Rocket
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bcbce297935c07f4784fc113b8e5b7dc
     m_Address: Sound/SFX/TurtleDie
@@ -194,6 +224,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Test
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd9d55487ba6e234aa127a320553a652
+    m_Address: Texture/Heart
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dac775d0c39c6fe4b9ff87b445c1889e
     m_Address: Sound/SFX/Magnet

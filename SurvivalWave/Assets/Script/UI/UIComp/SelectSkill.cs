@@ -1,7 +1,9 @@
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 public class SelectSkill : MonoBehaviour
@@ -21,7 +23,7 @@ public class SelectSkill : MonoBehaviour
         button.onClick.AddListener(() => onClick?.Invoke(skillId));
     }   
 
-    public void SetSkillData(SkillData skill)
+    public async Task SetSkillData(SkillData skill)
     {
         skillId = skill.skillId;
         int skillLevel = GameManager.GetInstance().GetSkillLevel(skillId);
@@ -52,7 +54,7 @@ public class SelectSkill : MonoBehaviour
 
         string str = skill.description;
         //string result = str.Replace("_", (skill.increaseDamageRatio * (skillLevel + 1) * 100).ToString());
-        skillDescription.text = result; 
-        //if (skill.icon != null) skillImage.sprite = skill.icon; 
+        skillDescription.text = result;
+        skillImage.sprite = await Addressables.LoadAssetAsync<Sprite>("Texture/" + skill.imagePath).Task;
     }
 }

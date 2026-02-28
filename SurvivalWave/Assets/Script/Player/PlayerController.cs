@@ -22,6 +22,7 @@ public enum TransitionState
     Falling,
     Landed,
     Damaged,
+    Die
 }
 
 public class PlayerController : MonoBehaviour
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (PlayerState.Die == state) return;
         //Vector3 move = Vector3.zero;
         bool isGrounded = characterController.isGrounded;
         bool isJump = inputHandler.isJump;
@@ -88,11 +90,13 @@ public class PlayerController : MonoBehaviour
         stateTransitionDic[PlayerState.Idle][TransitionState.JumpPressed] = PlayerState.Jumping;
         //stateTransitionDic[PlayerState.Idle][TransitionState.Falling] = PlayerState.Falling;
         stateTransitionDic[PlayerState.Idle][TransitionState.Damaged] = PlayerState.Damaged;
+        stateTransitionDic[PlayerState.Idle][TransitionState.Die] = PlayerState.Die;
 
         //stateTransitionDic[PlayerState.Run][TransitionState.Falling] = PlayerState.Falling;
         stateTransitionDic[PlayerState.Run][TransitionState.JumpPressed] = PlayerState.Jumping;
         stateTransitionDic[PlayerState.Run][TransitionState.Stop] = PlayerState.Idle;
         stateTransitionDic[PlayerState.Run][TransitionState.Damaged] = PlayerState.Damaged;
+        stateTransitionDic[PlayerState.Run][TransitionState.Die] = PlayerState.Die;
 
         stateTransitionDic[PlayerState.Jumping][TransitionState.Landed] = PlayerState.Landing;
         stateTransitionDic[PlayerState.Jumping][TransitionState.Falling] = PlayerState.Falling;
@@ -102,6 +106,7 @@ public class PlayerController : MonoBehaviour
         stateTransitionDic[PlayerState.Landing][TransitionState.Stop] = PlayerState.Idle;
 
         stateTransitionDic[PlayerState.Damaged][TransitionState.Stop] = PlayerState.Idle;
+        stateTransitionDic[PlayerState.Damaged][TransitionState.Die] = PlayerState.Die;
     }
 
     void ChangeState(TransitionState transitionState)
@@ -183,7 +188,11 @@ public class PlayerController : MonoBehaviour
             //ChangeState(TransitionState.Falling);
         }
     }
-
+    public void Die()
+    {
+        ChangeState(TransitionState.Die);
+        SoundManager.GetInstance().PlaySFX(SFXType.PlayerDie);
+    }
     public void Damaged()
     {
         ChangeState(TransitionState.Damaged);
@@ -209,5 +218,9 @@ public class PlayerController : MonoBehaviour
         velocity.y = -2f;
         inputHandler.ConsumeJump();
         CanAir = false;
+    }
+    public void EndDeathAnimation()
+    {
+        GameManager.GetInstance().EndGame();
     }
 }

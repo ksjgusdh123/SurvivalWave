@@ -43,6 +43,7 @@ public class LevelUpUI : UIBase
         base.Show();
         ShowOptions();
         animator.Play("OpenAnim", 0, 0f);
+        SoundManager.GetInstance().PlaySFX(SFXType.LevelUp);
     }
 
     public override void Hide()

@@ -63,20 +63,21 @@ public class PlayerStat : Stat
 
     public override bool TakeDamage(float dmg)
     {
-        if (isInvincible) return false;
+        if (isInvincible || hp <= 0) return false;
 
         base.TakeDamage(dmg);
 
-        if (hp < 0)
+        if (hp <= 0)
         {
-
+            controller.Die();
+            isInvincible = false;
         }
         else
         {
             controller.Damaged();
+            isInvincible = true;
         }
         ChangeHp?.Invoke();
-        isInvincible = true;
         return true;
     }
 
@@ -121,6 +122,7 @@ public class PlayerStat : Stat
         {
             exp -= maxExp;
             maxExp = ((level - 1) * 50)  + 100;
+            ++level;
             UIManager.GetInstance().Show(EUIType.LevelUp);
         }
         ChangeExp.Invoke();

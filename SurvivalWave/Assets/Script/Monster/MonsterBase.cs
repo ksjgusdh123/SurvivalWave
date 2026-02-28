@@ -13,6 +13,7 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate, IShadowCast
     public bool isOn { get; set; }
 
     public MonsterType type;
+    protected LayerMask groundMask;
     Renderer[] renderers;
     Transform player;
     MonsterStat stat;
@@ -20,7 +21,6 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate, IShadowCast
     MonsterDamaged damagedEventComp;
     NavMeshAgent agent;
     PlayerStat target;
-    LayerMask groundMask;
 
     int playerLayer;
     bool isCollision;

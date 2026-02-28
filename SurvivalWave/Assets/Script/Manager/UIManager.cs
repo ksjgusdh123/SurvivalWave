@@ -6,7 +6,8 @@ public enum EUIType
 {
     Main,
     LevelUp,
-    BoxPanel
+    BoxPanel,
+    Result
 }
 
 public class UIManager : Singleton<UIManager>

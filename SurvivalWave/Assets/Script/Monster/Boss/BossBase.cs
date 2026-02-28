@@ -4,11 +4,9 @@ public class BossBase : MonsterBase
 {
     float rayStartHeight = 5f;
     float rayLength = 10f;
-    LayerMask groundMask;
     protected override void Awake()
     {
         base.Awake();
-        groundMask = LayerMask.GetMask("Ground");
     }
     protected override void EndDieAnimation()
     {

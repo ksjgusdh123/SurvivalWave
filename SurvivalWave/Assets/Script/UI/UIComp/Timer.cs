@@ -5,7 +5,7 @@ public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timeText;
 
-    float survivalTime;
+    public float survivalTime { get; private set; }
 
     private void Awake()
     {

@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
     PlayerSkillHandler skillHandler;
     MonsterSpawner spawner;
     public int gameLevel = 0;
-
+    public float survivalTime { get; private set; }
     WaitForSeconds gameLevelTimerHandle;
 
     protected override void Awake()
@@ -74,8 +74,10 @@ public class GameManager : Singleton<GameManager>
     {
         return skillHandler.GetSkillLevel(skillId);
     }
-    public void GetMagnet()
+    public void EndGame()
     {
-
+        var go = GameObject.FindFirstObjectByType<Timer>();
+        survivalTime = go.survivalTime;
+        UIManager.GetInstance().Show(EUIType.Result);
     }
 }

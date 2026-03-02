@@ -47,6 +47,7 @@ public class SpatialGrid
         updateList.Clear();
         var cellCenterPos = WorldToCell(playerPos);
 
+        // nearRadius - 검사하려는 주변 셀의 크기 절반
         for (int z = -nearRadius; z <= nearRadius; ++z)
         {
             for (int x = -nearRadius; x <= nearRadius; ++x)

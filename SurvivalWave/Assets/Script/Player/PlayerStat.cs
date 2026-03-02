@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
@@ -35,6 +36,7 @@ public class PlayerStat : Stat
 
     void Start()
     {
+        attack = 30f;
         controller = GetComponent<PlayerController>();
         renderers = GetComponentsInChildren<Renderer>();
         blinkWait = new WaitForSeconds(blinkWaitTime);

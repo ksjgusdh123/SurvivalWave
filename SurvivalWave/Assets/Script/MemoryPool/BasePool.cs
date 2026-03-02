@@ -10,7 +10,7 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
     where TypeKey : Enum
 {
     [Serializable]
-    public class Entry
+    public class Entry // 데이터 초기화 데이터 클래스
     {
         public TypeKey type;
         public GameObject go;
@@ -27,10 +27,6 @@ public abstract class BaseObjectPool<T, TypeKey> : Singleton<T>
         pools.Clear();
         prefabs.Clear();
     }
-    //public async Task InitLoadAsset()
-    //{
-    //    await Init();
-    //}
     public void InstantiatePrefab()
     {
         InitPoos();

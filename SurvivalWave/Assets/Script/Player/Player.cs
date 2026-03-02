@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         //skillHandler.AddSkill(new RandomShotSkill(1f, 2f, 10f, 40f));
         //skillHandler.AddSkill(new HomingSkill(1f, 20f, 10f));
         //skillHandler.AddSkill(new BoomerangSkill(1f, 2f, 10f, 40f));
-        //skillHandler.AddSkill(new WideShotSkill(1f, 2f, 10f, 40f, 16));
+        skillHandler.AddSkill(new WideShotSkill(1f, 2f, 10f, 40f, 16));
         //skillHandler.AddSkill(new StrengthSkill());
         //skillHandler.LevelUp(0);
         //skillHandler.LevelUp(0);

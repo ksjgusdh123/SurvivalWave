@@ -54,7 +54,7 @@ public class GameManager : Singleton<GameManager>
         {
             case StatType.Attack:
             {
-                playerStat.attack = amount * 10f;   
+                playerStat.attack += amount * 30f;   
             }
             break;
             case StatType.Speed:

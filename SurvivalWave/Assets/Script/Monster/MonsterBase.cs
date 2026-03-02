@@ -131,11 +131,11 @@ public class MonsterBase : MonoBehaviour, IPoolEvent, ITickUpdate, IShadowCast
     {
         float rand = Random.Range(0f, 10f);
 
-        //if (rand < 9f) return;
+        if (rand < 9f) return;
 
 
         GameObject go;
-        if (rand < 5f)
+        if (rand < 9.7f)
         {
             go = ItemPool.GetInstance().PopObject(ItemType.HpPotion);
         }

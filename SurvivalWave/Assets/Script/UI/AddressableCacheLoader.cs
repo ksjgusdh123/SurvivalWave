@@ -18,7 +18,7 @@ public class AddressableCacheLoader : MonoBehaviour
 
     public void Start()
     {
-        //Caching.ClearCache();
+        Caching.ClearCache();
         StartCoroutine(StartFunc());
     }
 
@@ -45,12 +45,10 @@ public class AddressableCacheLoader : MonoBehaviour
 
     IEnumerator DownFunc()
     {
-
         handle = Addressables.DownloadDependenciesAsync("Test");
 
-        StartCoroutine(Show());
+        StartCoroutine(Show()); // ม๘วเทü UI
         yield return handle;
-        yield return new WaitForSeconds(1f);
 
         NextShow();
         Addressables.Release(handle);

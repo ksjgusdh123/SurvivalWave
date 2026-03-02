@@ -6654,7 +6654,7 @@ PrefabInstance:
       objectReference: {fileID: 330585548}
     - target: {fileID: 9083238737573123096, guid: 7dc923b4c4812f147ba42a507e5507bd, type: 3}
       propertyPath: maxExp
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8726,10 +8726,10 @@ MonoBehaviour:
   maxSpawnRadius: 100
   minSpawnRadius: 50
   monsterPrefab:
-  - {fileID: 1931298151966786, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
-  - {fileID: 1524411113276028, guid: e2aafa8770d34a9591b41bedf4e318ba, type: 3}
-  BossPrefab: {fileID: 1067925524328404, guid: 338c0826536898946a95e485148bfe84, type: 3}
-  spawnInterval: 0.3
+  - {fileID: 1931298151966786, guid: 092f91ff30808534983deda9ed1b7665, type: 3}
+  - {fileID: 1524411113276028, guid: 35b1926620d04154196b4713ecd14085, type: 3}
+  BossPrefab: {fileID: 1067925524328404, guid: 54fc2fd249a4c434c9713a8ba2e49477, type: 3}
+  spawnInterval: 0.5
   decreaseSpwanInterval: 0.05
   minSpawnInterval: 0.3
 --- !u!114 &2075457498

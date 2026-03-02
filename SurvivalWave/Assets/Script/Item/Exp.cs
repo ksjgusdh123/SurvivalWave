@@ -21,6 +21,7 @@ public class Exp : ItemBase
     }
     private void OnEnable()
     {
+        if (null == player) return;
         player.GetComponent<Player>().GetMagnet -= ChangeDistance;
         player.GetComponent<Player>().GetMagnet += ChangeDistance;
         maxDist = 1f;

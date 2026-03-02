@@ -12,11 +12,17 @@ public class UpdateManager : Singleton<UpdateManager>
     [SerializeField] int updateFarPerFrame = 200;
     [SerializeField] int updateCellPerFrame = 300;
 
+    // 거리 상관없이 항상 업데이트 해야하는 오브젝트
     readonly List<ITickUpdate> always = new();
+    // 거리검사하여 업데이트 해야하는 모든 오브젝트
     readonly List<ITickUpdate> checkAll = new();
+    // 거리검사 결과 인접한 결과물 검사
     readonly List<ITickUpdate> checkActive = new();
+    // 추가된 오브젝트 임시보관
     readonly List<ITickUpdate> pendingAdd = new();
+    // 삭제할 오브젝트 임시보관
     readonly List<ITickUpdate> pendingRemove = new();
+    // 모든 오브젝트 등록되어있는지 여부 및 업데이트를 위한 시간 경과 체크 타이머
     readonly Dictionary<ITickUpdate, float> acc = new();
 
     Coroutine farTickUpdateCoroutine;
@@ -50,7 +56,8 @@ public class UpdateManager : Singleton<UpdateManager>
 
         grid.PickNearCellObject(player.position, activeRadiusCells, checkActive);
 
-        int timeStamp = Time.frameCount;
+
+        int timeStamp = Time.frameCount; // 스탬프를 찍어 어느 프레임에서 업데이트 조건을 만족한지 표시
         for (int i = 0; i < checkActive.Count; ++i)
         {
             var e = checkActive[i];
@@ -121,6 +128,7 @@ public class UpdateManager : Singleton<UpdateManager>
     }
     void TickWithInterval(ITickUpdate e, float delta)
     {
+        // 멀리 있는 오브젝트 개별 업데이트 함수
         float interval = e.TickInterval;
         float t = acc[e];
         t += delta;
@@ -138,18 +146,19 @@ public class UpdateManager : Singleton<UpdateManager>
 
         if (acc.ContainsKey(e) || pendingAdd.Contains(e)) return;
 
-        if (UpdatePolicy.Always == e.Policy)
+        if (e.Policy == UpdatePolicy.Always)
         {
             RegisterDirect(e);
+            return;
         }
-        else if (null != farTickUpdateCoroutine)
+
+        if (farTickUpdateCoroutine != null)
         {
             pendingAdd.Add(e);
+            return;
         }
-        else
-        {
-            RegisterDirect(e);
-        }
+
+        RegisterDirect(e);
     }
     void RegisterDirect(ITickUpdate e)
     {

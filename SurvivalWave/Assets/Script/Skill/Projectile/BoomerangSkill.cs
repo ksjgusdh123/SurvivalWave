@@ -22,7 +22,7 @@ public class BoomerangSkill : PlayerProjectileSkillBase
         Vector3 spawnPos = pos + new Vector3(distance.x, 0f, distance.y) * spawnRadius;
         Vector3 dir = (spawnPos - pos).normalized;
 
-        ProjectileSpawnManager.GetInstance().SpawnBoomerang(spawnPos, dir, projectileSpeed, maxDist, 1f);
+        ProjectileSpawnManager.GetInstance().SpawnBoomerang(spawnPos, dir, projectileSpeed, maxDist, damageRatio);
         return true;
     }
 
